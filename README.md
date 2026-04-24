@@ -1,6 +1,6 @@
 # RV Automóviles — proyecto
 
-La aplicación web (Next.js, PWA, panel admin, **catálogo público** y **ficha por enlace** `/v/slug`) está en **`web/`**.
+La aplicación web (Next.js, PWA, panel admin, **catálogo público** y **ficha por enlace** `/v/slug`) está disponible en la **raíz del repo** para simplificar deploy en Vercel.
 
 ## Qué incluye la interfaz
 
@@ -33,8 +33,7 @@ npm run dev
 ## Deploy en Vercel
 
 1. **Add New Project** → repo **RVAutomoviles**.
-2. **Root Directory**: **`web`** (carpeta donde está `package.json` de Next).  
-   Si lo dejás vacío o en la raíz del monorepo, el deploy puede terminar “bien” pero la URL devuelve **404** porque Vercel no está sirviendo la app Next.
+2. **Root Directory**: dejar por defecto (vacío) para usar la raíz del repo.
 3. Variables de entorno: ver **`web/.env.example`** y la tabla abajo.
 4. **Storage → Postgres (Neon)** y **Storage → Blob**, conectados al proyecto.
 5. Deploy.
