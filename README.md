@@ -43,6 +43,16 @@ npm run dev
    - `https://TU_URL/catalogo` debe abrir catálogo (aunque esté vacío).
    - `https://TU_URL/api/health` debe devolver JSON con `ok: true`.
 
+### Si Vercel dice "All checks have failed"
+
+1. Confirmá que el proyecto en Vercel tenga **Root Directory = `web`**.
+2. En **Settings → Build & Development Settings**, dejá:
+   - Framework Preset: **Next.js**
+   - Build Command: vacío (default)
+   - Output Directory: vacío (default)
+3. Redeploy con **Clear build cache**.
+4. Si sigue fallando, revisá el log de la check "Vercel" (no GitHub Actions): suele indicar variable faltante o root directory incorrecto.
+
 ## Variables de entorno (resumen)
 
 | Variable | Obligatoria en Vercel | Notas |
