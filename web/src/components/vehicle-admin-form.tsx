@@ -61,6 +61,7 @@ export function VehicleAdminForm(props: Props) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
   const [form, setForm] = useState(() =>
     isEdit ? fromVehicle(props.initial) : emptyForm(),
   );
@@ -150,6 +151,26 @@ export function VehicleAdminForm(props: Props) {
     });
     const data = (await res.json().catch(() => ({}))) as { error?: string };
     if (!res.ok) throw new Error(data.error || "No se pudo guardar la media");
+  }
+
+  async function removePhoto(url: string) {
+    const nextPhotos = form.photos.filter((p) => p !== url);
+    setForm((f) => ({ ...f, photos: nextPhotos }));
+    setImageErrors((prev) => {
+      const copy = { ...prev };
+      delete copy[url];
+      return copy;
+    });
+    if (!isEdit || !vehicleId) return;
+    setError(null);
+    setNotice(null);
+    try {
+      await persistMedia({ photos: nextPhotos });
+      setNotice("Foto eliminada y cambios guardados.");
+      router.refresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "No se pudo eliminar la foto");
+    }
   }
 
   async function uploadFiles(files: File[]) {
@@ -252,9 +273,10 @@ export function VehicleAdminForm(props: Props) {
         </section>
       ) : null}
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-4">
-        <h2 className="text-sm font-semibold text-slate-900">Datos del vehículo</h2>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-4">
+          <h2 className="text-sm font-semibold text-slate-900">Datos del vehículo</h2>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <label className="block text-xs font-medium text-slate-700">
             Marca
             <input
@@ -332,9 +354,9 @@ export function VehicleAdminForm(props: Props) {
               USD (dólares)
             </div>
           </div>
-        </div>
+          </div>
 
-        <fieldset className="rounded-xl border border-slate-200 bg-slate-50/60 p-3">
+          <fieldset className="rounded-xl border border-slate-200 bg-slate-50/60 p-3">
           <legend className="px-1 text-xs font-semibold uppercase tracking-wide text-slate-700">
             Checklist de equipamiento
           </legend>
@@ -357,9 +379,9 @@ export function VehicleAdminForm(props: Props) {
               </label>
             ))}
           </div>
-        </fieldset>
+          </fieldset>
 
-        <label className="block text-xs font-medium text-slate-700">
+          <label className="block text-xs font-medium text-slate-700">
           Slug de URL (opcional)
           <input
             className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
@@ -373,27 +395,27 @@ export function VehicleAdminForm(props: Props) {
             Solo letras minúsculas, números y guiones. Si lo cambiás, los enlaces viejos dejan de
             funcionar.
           </span>
-        </label>
+          </label>
 
-        <label className="flex items-center gap-2 text-sm text-slate-800">
+          <label className="flex items-center gap-2 text-sm text-slate-800">
           <input
             type="checkbox"
             checked={form.published}
             onChange={(e) => setForm((f) => ({ ...f, published: e.target.checked }))}
           />
           Publicado (visible para clientes)
-        </label>
+          </label>
 
-        <label className="block text-xs font-medium text-slate-700">
+          <label className="block text-xs font-medium text-slate-700">
           Descripción
           <textarea
             className="mt-1 min-h-[120px] w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
             value={form.description}
             onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
           />
-        </label>
+          </label>
 
-        <label className="block text-xs font-medium text-slate-700">
+          <label className="block text-xs font-medium text-slate-700">
           Destacados (uno por línea)
           <textarea
             className="mt-1 min-h-[80px] w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
@@ -401,88 +423,102 @@ export function VehicleAdminForm(props: Props) {
             onChange={(e) => setForm((f) => ({ ...f, highlightsText: e.target.value }))}
             placeholder={"Airbags\nÚnico dueño\nService oficial…"}
           />
-        </label>
-      </section>
+          </label>
+        </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-3">
-        <h2 className="text-sm font-semibold text-slate-900">Fotos</h2>
-        <p className="text-xs text-slate-600">
-          {isEdit
-            ? "Subí todas las imágenes que quieras; se guardan automáticamente."
-            : "Guardá el vehículo primero para habilitar la subida de fotos."}
-        </p>
-        <input
-          type="file"
-          accept="image/*"
-          multiple
-          disabled={!vehicleId || uploading}
-          onChange={(e) => {
-            const selected = Array.from(e.target.files || []);
-            e.target.value = "";
-            if (selected.length) void uploadFiles(selected);
-          }}
-          className="block w-full text-sm"
-        />
-        <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-          {form.photos.map((url) => (
-            <li key={url} className="relative overflow-hidden rounded-xl border border-slate-200">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={url} alt="" className="aspect-[4/3] w-full object-cover" />
-              <button
-                type="button"
-                className="absolute right-1 top-1 rounded-full bg-black/60 px-2 py-0.5 text-xs text-white"
-                onClick={() => setForm((f) => ({ ...f, photos: f.photos.filter((p) => p !== url) }))}
-              >
-                Quitar
-              </button>
-            </li>
-          ))}
-        </ul>
-      </section>
+        <div className="space-y-6">
+          <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-3">
+            <h2 className="text-sm font-semibold text-slate-900">Fotos</h2>
+            <p className="text-xs text-slate-600">
+              {isEdit
+                ? "Subí todas las imágenes que quieras; se guardan automáticamente."
+                : "Guardá el vehículo primero para habilitar la subida de fotos."}
+            </p>
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              disabled={!vehicleId || uploading}
+              onChange={(e) => {
+                const selected = Array.from(e.target.files || []);
+                e.target.value = "";
+                if (selected.length) void uploadFiles(selected);
+              }}
+              className="block w-full rounded-lg border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-sm"
+            />
+            <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {form.photos.map((url, index) => (
+                <li key={`${url}-${index}`} className="relative overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                  {imageErrors[url] ? (
+                    <div className="flex aspect-[4/3] items-center justify-center px-3 text-center text-xs text-slate-500">
+                      No se pudo cargar esta foto. Podés eliminarla y volver a subirla.
+                    </div>
+                  ) : (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={url}
+                      alt={`Foto ${index + 1}`}
+                      className="aspect-[4/3] w-full object-cover"
+                      onError={() => setImageErrors((prev) => ({ ...prev, [url]: true }))}
+                    />
+                  )}
+                  <button
+                    type="button"
+                    className="absolute right-2 top-2 rounded-full bg-black/70 px-2 py-0.5 text-xs text-white"
+                    onClick={() => void removePhoto(url)}
+                  >
+                    Quitar
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-3">
-        <h2 className="text-sm font-semibold text-slate-900">Documentación</h2>
-        <p className="text-xs text-slate-600">PDF o imágenes (seguro, informe, título, etc.).</p>
-        <button
-          type="button"
-          disabled={!vehicleId || uploading}
-          className="rounded-lg border border-slate-200 px-3 py-2 text-sm hover:bg-slate-50 disabled:opacity-50"
-          onClick={() => {
-            const name = window.prompt("Nombre que verá el cliente (ej. Informe de dominio)") || "";
-            const input = document.createElement("input");
-            input.type = "file";
-            input.accept = "application/pdf,image/*";
-            input.onchange = () => {
-              const f = input.files?.[0];
-              if (f) void uploadDoc(f, name);
-            };
-            input.click();
-          }}
-        >
-          Agregar documento
-        </button>
-        <ul className="space-y-2 text-sm">
-          {form.documents.map((d) => (
-            <li
-              key={d.url}
-              className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 px-3 py-2"
+          <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-3">
+            <h2 className="text-sm font-semibold text-slate-900">Documentación</h2>
+            <p className="text-xs text-slate-600">PDF o imágenes (seguro, informe, título, etc.).</p>
+            <button
+              type="button"
+              disabled={!vehicleId || uploading}
+              className="rounded-lg border border-slate-200 px-3 py-2 text-sm hover:bg-slate-50 disabled:opacity-50"
+              onClick={() => {
+                const name = window.prompt("Nombre que verá el cliente (ej. Informe de dominio)") || "";
+                const input = document.createElement("input");
+                input.type = "file";
+                input.accept = "application/pdf,image/*";
+                input.onchange = () => {
+                  const f = input.files?.[0];
+                  if (f) void uploadDoc(f, name);
+                };
+                input.click();
+              }}
             >
-              <a className="truncate text-sky-700 underline" href={d.url} target="_blank" rel="noreferrer">
-                {d.name}
-              </a>
-              <button
-                type="button"
-                className="shrink-0 text-xs text-red-700"
-                onClick={() =>
-                  setForm((f) => ({ ...f, documents: f.documents.filter((x) => x.url !== d.url) }))
-                }
-              >
-                Quitar
-              </button>
-            </li>
-          ))}
-        </ul>
-      </section>
+              Agregar documento
+            </button>
+            <ul className="space-y-2 text-sm">
+              {form.documents.map((d) => (
+                <li
+                  key={d.url}
+                  className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 px-3 py-2"
+                >
+                  <a className="truncate text-sky-700 underline" href={d.url} target="_blank" rel="noreferrer">
+                    {d.name}
+                  </a>
+                  <button
+                    type="button"
+                    className="shrink-0 text-xs text-red-700"
+                    onClick={() =>
+                      setForm((f) => ({ ...f, documents: f.documents.filter((x) => x.url !== d.url) }))
+                    }
+                  >
+                    Quitar
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </div>
 
       <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
         <button
