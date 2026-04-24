@@ -19,6 +19,9 @@ const allowedImageExt = [
   "heif",
   "jfif",
 ] as const;
+const maxUploadBytesPerPhoto = 12 * 1024 * 1024;
+const compressThresholdBytes = 3 * 1024 * 1024;
+const uploadTimeoutMs = 45000;
 
 type Props =
   | { mode: "create" }
@@ -64,6 +67,35 @@ function fromVehicle(v: Vehicle) {
     published: v.published,
     urlSlug: v.urlSlug,
   };
+}
+
+async function compressImageForUpload(file: File): Promise<File> {
+  if (!file.type.startsWith("image/")) return file;
+  if (file.size <= compressThresholdBytes) return file;
+
+  const bitmap = await createImageBitmap(file);
+  const maxDimension = 1920;
+  const scale = Math.min(1, maxDimension / Math.max(bitmap.width, bitmap.height));
+  const width = Math.max(1, Math.round(bitmap.width * scale));
+  const height = Math.max(1, Math.round(bitmap.height * scale));
+
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return file;
+  ctx.drawImage(bitmap, 0, 0, width, height);
+  bitmap.close();
+
+  const preferredType = file.type === "image/png" ? "image/png" : "image/jpeg";
+  const blob = await new Promise<Blob | null>((resolve) =>
+    canvas.toBlob(resolve, preferredType, 0.82),
+  );
+  if (!blob) return file;
+
+  const ext = preferredType === "image/png" ? "png" : "jpg";
+  const nameWithoutExt = file.name.replace(/\.[^.]+$/, "");
+  return new File([blob], `${nameWithoutExt}.${ext}`, { type: preferredType });
 }
 
 export function VehicleAdminForm(props: Props) {
@@ -148,9 +180,10 @@ export function VehicleAdminForm(props: Props) {
       if (!res.ok) throw new Error(data.error || "No se pudo guardar");
       if (!isEdit && data.vehicle) {
         if (pendingPhotos.length > 0) {
+          const preparedPending = await prepareUploadFiles(pendingPhotos.map((photo) => photo.file));
           const uploadedUrls = await uploadFilesForVehicle(
             data.vehicle.id,
-            pendingPhotos.map((photo) => photo.file),
+            preparedPending,
           );
           if (uploadedUrls.length > 0) {
             const patchRes = await fetch(`/api/admin/vehicles/${data.vehicle.id}`, {
@@ -191,15 +224,40 @@ export function VehicleAdminForm(props: Props) {
   async function uploadFilesForVehicle(targetVehicleId: string, files: File[]): Promise<string[]> {
     const uploadedUrls: string[] = [];
     for (const file of files) {
-      const fd = new FormData();
-      fd.set("vehicleId", targetVehicleId);
-      fd.set("file", file);
-      const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
-      const data = (await res.json().catch(() => ({}))) as { error?: string; url?: string };
-      if (!res.ok || !data.url) throw new Error(data.error || `Falló la subida de ${file.name}`);
-      uploadedUrls.push(data.url);
+      const url = await uploadSingleWithRetry(targetVehicleId, file);
+      uploadedUrls.push(url);
     }
     return uploadedUrls;
+  }
+
+  async function uploadSingleWithRetry(targetVehicleId: string, file: File): Promise<string> {
+    let lastError = `Falló la subida de ${file.name}`;
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), uploadTimeoutMs);
+      try {
+        const fd = new FormData();
+        fd.set("vehicleId", targetVehicleId);
+        fd.set("file", file);
+        const res = await fetch("/api/admin/upload", {
+          method: "POST",
+          body: fd,
+          signal: controller.signal,
+        });
+        const data = (await res.json().catch(() => ({}))) as { error?: string; url?: string };
+        if (!res.ok || !data.url) throw new Error(data.error || `Falló la subida de ${file.name}`);
+        return data.url;
+      } catch (e) {
+        lastError =
+          e instanceof Error ? e.message : `Falló la subida de ${file.name} (intento ${attempt}/3)`;
+        if (attempt < 3) {
+          await new Promise((r) => setTimeout(r, attempt * 800));
+        }
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+    throw new Error(lastError);
   }
 
   function queuePendingPhotos(files: File[]) {
@@ -224,6 +282,25 @@ export function VehicleAdminForm(props: Props) {
       setError("Algunos archivos no son imágenes compatibles. Se ignoraron automáticamente.");
     }
     return valid;
+  }
+
+  async function prepareUploadFiles(files: File[]): Promise<File[]> {
+    const prepared: File[] = [];
+    for (const file of files) {
+      let candidate = file;
+      try {
+        candidate = await compressImageForUpload(file);
+      } catch {
+        candidate = file;
+      }
+      if (candidate.size > maxUploadBytesPerPhoto) {
+        throw new Error(
+          `La foto ${file.name} sigue siendo muy pesada. Intentá con otra más liviana (máx. 12 MB por foto).`,
+        );
+      }
+      prepared.push(candidate);
+    }
+    return prepared;
   }
 
   async function removePhoto(url: string) {
@@ -255,15 +332,34 @@ export function VehicleAdminForm(props: Props) {
     setError(null);
     setNotice(null);
     try {
-      const uploadedUrls = await uploadFilesForVehicle(vehicleId, files);
+      const preparedFiles = await prepareUploadFiles(files);
+      const uploadedUrls: string[] = [];
+      const failed: string[] = [];
+      for (const file of preparedFiles) {
+        try {
+          const url = await uploadSingleWithRetry(vehicleId, file);
+          uploadedUrls.push(url);
+        } catch {
+          failed.push(file.name);
+        }
+      }
+      if (!uploadedUrls.length) {
+        throw new Error("No se pudo subir ninguna foto. Revisá conexión e intentá nuevamente.");
+      }
       const nextPhotos = [...form.photos, ...uploadedUrls];
       setForm((f) => ({ ...f, photos: nextPhotos }));
       await persistMedia({ photos: nextPhotos });
-      setNotice(
-        uploadedUrls.length > 1
-          ? `${uploadedUrls.length} fotos subidas y guardadas.`
-          : "Foto subida y guardada.",
-      );
+      if (failed.length > 0) {
+        setNotice(
+          `${uploadedUrls.length} foto(s) subida(s). ${failed.length} fallaron y podés reintentarlas.`,
+        );
+      } else {
+        setNotice(
+          uploadedUrls.length > 1
+            ? `${uploadedUrls.length} fotos subidas y guardadas.`
+            : "Foto subida y guardada.",
+        );
+      }
       router.refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Error de subida");
@@ -495,8 +591,8 @@ export function VehicleAdminForm(props: Props) {
             <h2 className="text-sm font-semibold text-slate-900">Fotos</h2>
             <p className="text-xs text-slate-600">
               {isEdit
-                ? "Subí archivos de imagen en cualquier formato; se guardan automáticamente."
-                : "Elegí archivos de imagen ahora; se subirán automáticamente cuando guardes el vehículo."}
+                ? "Podés subir varias fotos juntas. Si son pesadas, se optimizan automáticamente para evitar fallos."
+                : "Elegí varias fotos ahora; se optimizan y se subirán al guardar el vehículo."}
             </p>
             <input
               type="file"

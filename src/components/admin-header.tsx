@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { BrandLogo } from "@/components/brand-logo";
 
 export function AdminHeader() {
   const router = useRouter();
@@ -15,12 +16,7 @@ export function AdminHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-sky-200/40 bg-white/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 lg:px-6">
-        <Link href="/admin" className="inline-flex items-center gap-2">
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-cyan-400 text-xs font-black text-white">
-            RV
-          </span>
-          <span className="text-sm font-semibold text-slate-900">Panel RV</span>
-        </Link>
+        <BrandLogo href="/admin" compact />
         <nav className="flex flex-1 items-center justify-end gap-2 text-sm sm:gap-4">
           <Link
             href="/admin/vehicles"
