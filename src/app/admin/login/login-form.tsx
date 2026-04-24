@@ -37,7 +37,7 @@ export function LoginForm() {
         <input
           type="password"
           autoComplete="current-password"
-          className="mt-2 w-full rounded-xl border border-slate-200 px-3 py-3 text-base"
+          className="rv-input text-base"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -46,7 +46,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-xl bg-slate-900 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-50"
+        className="rv-btn-primary w-full py-3 disabled:opacity-50"
       >
         {pending ? "Entrando…" : "Entrar"}
       </button>
