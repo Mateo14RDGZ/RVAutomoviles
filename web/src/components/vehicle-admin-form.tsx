@@ -467,12 +467,12 @@ export function VehicleAdminForm(props: Props) {
             <h2 className="text-sm font-semibold text-slate-900">Fotos</h2>
             <p className="text-xs text-slate-600">
               {isEdit
-                ? "Subí todas las imágenes que quieras; se guardan automáticamente."
-                : "Elegí fotos ahora; se subirán automáticamente cuando guardes el vehículo."}
+                ? "Subí archivos de imagen en cualquier formato; se guardan automáticamente."
+                : "Elegí archivos de imagen ahora; se subirán automáticamente cuando guardes el vehículo."}
             </p>
             <input
               type="file"
-              accept="image/*"
+              accept="*/*"
               multiple
               disabled={uploading}
               onChange={(e) => {

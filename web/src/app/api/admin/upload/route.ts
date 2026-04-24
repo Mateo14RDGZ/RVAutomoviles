@@ -7,7 +7,7 @@ import { getVehicleById } from "@/lib/vehicle-store";
 
 export const runtime = "nodejs";
 
-const maxBytes = 15 * 1024 * 1024;
+const maxBytes = 40 * 1024 * 1024;
 
 export async function POST(request: Request) {
   if (!(await isAdminSessionValid())) {
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Vehículo inexistente" }, { status: 404 });
   }
   if (file.size > maxBytes) {
-    return NextResponse.json({ error: "Archivo demasiado grande (máx. 15 MB)" }, { status: 400 });
+    return NextResponse.json({ error: "Archivo demasiado grande (máx. 40 MB)" }, { status: 400 });
   }
 
   const rawName = file.name || "archivo";
