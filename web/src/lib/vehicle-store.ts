@@ -41,14 +41,25 @@ async function ensureDbTable(): Promise<void> {
 }
 
 function readFileFs(): StoreFile {
-  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
-  if (!fs.existsSync(dataFile)) {
-    fs.writeFileSync(dataFile, JSON.stringify({ vehicles: [] }, null, 2), "utf-8");
+  try {
+    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+    if (!fs.existsSync(dataFile)) {
+      fs.writeFileSync(dataFile, JSON.stringify({ vehicles: [] }, null, 2), "utf-8");
+    }
+    return JSON.parse(fs.readFileSync(dataFile, "utf-8")) as StoreFile;
+  } catch {
+    // En runtimes serverless (ej. Vercel) el filesystem puede ser read-only.
+    // Para páginas públicas devolvemos catálogo vacío en vez de romper toda la app.
+    return { vehicles: [] };
   }
-  return JSON.parse(fs.readFileSync(dataFile, "utf-8")) as StoreFile;
 }
 
 function writeFileFs(store: StoreFile): void {
+  if (process.env.VERCEL) {
+    throw new Error(
+      "Falta Postgres en Vercel. Configurá DATABASE_URL/POSTGRES_URL para persistir vehículos.",
+    );
+  }
   if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
   fs.writeFileSync(dataFile, JSON.stringify(store, null, 2), "utf-8");
 }

@@ -38,6 +38,10 @@ npm run dev
 3. Variables de entorno: ver **`web/.env.example`** y la tabla abajo.
 4. **Storage → Postgres (Neon)** y **Storage → Blob**, conectados al proyecto.
 5. Deploy.
+6. Validación rápida post-deploy:
+   - `https://TU_URL/` debe abrir inicio.
+   - `https://TU_URL/catalogo` debe abrir catálogo (aunque esté vacío).
+   - `https://TU_URL/api/health` debe devolver JSON con `ok: true`.
 
 ## Variables de entorno (resumen)
 
@@ -50,6 +54,14 @@ npm run dev
 | `NEXT_PUBLIC_APP_URL` | No | URL pública fija; si falta, se usa `VERCEL_URL`. |
 
 `VERCEL_URL` la define Vercel automáticamente.
+
+### Diagnóstico rápido de producción
+
+- `GET /api/health` devuelve:
+  - `env`: `vercel` o `local`
+  - `storage`: `postgres` o `filesystem`
+  - `hasBlob`: `true/false`
+- Si en Vercel ves `storage: filesystem`, faltan variables de Postgres (`DATABASE_URL`, `POSTGRES_URL` o `POSTGRES_PRISMA_URL`).
 
 ## Ejemplo de valores (copiar y adaptar)
 
