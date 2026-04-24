@@ -99,7 +99,7 @@ export function VehicleAdminForm(props: Props) {
       transmission: form.transmission.trim(),
       color: form.color.trim(),
       price: Number.isFinite(price as number) ? (price as number) : null,
-      currency: form.currency.trim() || "USD",
+      currency: "USD",
       description: form.description,
       highlights,
       features: form.features,
@@ -326,14 +326,12 @@ export function VehicleAdminForm(props: Props) {
               placeholder="Opcional"
             />
           </label>
-          <label className="block text-xs font-medium text-slate-700">
+          <div className="block text-xs font-medium text-slate-700">
             Moneda
-            <input
-              className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-              value={form.currency}
-              onChange={(e) => setForm((f) => ({ ...f, currency: e.target.value }))}
-            />
-          </label>
+            <div className="mt-1 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800">
+              USD (dólares)
+            </div>
+          </div>
         </div>
 
         <fieldset className="rounded-xl border border-slate-200 bg-slate-50/60 p-3">
