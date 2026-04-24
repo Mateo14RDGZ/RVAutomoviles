@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { VehicleAdminForm } from "@/components/vehicle-admin-form";
-import { DeleteVehicleButton } from "./delete-vehicle-button";
+import { DeleteVehicleButton, MarkVehicleSoldButton } from "./delete-vehicle-button";
 import { getVehicleById } from "@/lib/vehicle-store";
 
 export const dynamic = "force-dynamic";
@@ -28,6 +28,7 @@ export default async function EditVehiclePage({ params }: { params: Promise<{ id
           <Link href="/admin/vehicles" className="text-sm text-slate-600 underline">
             Listado
           </Link>
+          <MarkVehicleSoldButton id={vehicle.id} />
           <DeleteVehicleButton id={vehicle.id} />
         </div>
       </div>

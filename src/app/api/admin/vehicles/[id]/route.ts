@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { isAdminSessionValid } from "@/lib/admin-session";
 import { deleteVehicle, getVehicleById, updateVehicle } from "@/lib/vehicle-store";
 import { vehiclePatchSchema } from "@/lib/vehicle-schemas";
+import { cleanupVehicleAssets } from "@/lib/vehicle-media";
 
 export const runtime = "nodejs";
 
@@ -50,7 +51,14 @@ export async function DELETE(_request: Request, context: Ctx) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
   const { id } = await context.params;
+  const vehicle = await getVehicleById(id);
+  if (!vehicle) return NextResponse.json({ error: "No encontrado" }, { status: 404 });
   const ok = await deleteVehicle(id);
   if (!ok) return NextResponse.json({ error: "No encontrado" }, { status: 404 });
+  try {
+    await cleanupVehicleAssets(vehicle);
+  } catch {
+    // Si la limpieza de assets falla, no revertimos la venta/eliminación del registro.
+  }
   return NextResponse.json({ ok: true });
 }

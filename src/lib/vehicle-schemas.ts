@@ -17,7 +17,7 @@ export const vehicleCreateSchema = z.object({
   currency: z.string().min(1).max(8).default("ARS"),
   description: z.string().max(20000).default(""),
   highlights: z.array(z.string().max(300)).max(30).default([]),
-  photos: z.array(z.string().max(2000)).max(40).default([]),
+  photos: z.array(z.string().max(2000)).default([]),
   documents: z.array(docSchema).max(20).default([]),
   published: z.boolean().default(true),
   urlSlug: z.string().min(3).max(32).regex(/^[a-z0-9-]+$/).optional(),
