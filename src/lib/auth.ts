@@ -40,6 +40,47 @@ export function verifyAdminSessionToken(
   }
 }
 
+/**
+ * Versión compatible con Edge Runtime (middleware de Next).
+ */
+export async function verifyAdminSessionTokenEdge(
+  token: string | undefined,
+  secret: string,
+): Promise<boolean> {
+  if (!token || !secret) return false;
+  const dot = token.indexOf(".");
+  if (dot < 0) return false;
+  const payload = token.slice(0, dot);
+  const sig = token.slice(dot + 1);
+
+  try {
+    const enc = new TextEncoder();
+    const key = await crypto.subtle.importKey(
+      "raw",
+      enc.encode(secret),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign"],
+    );
+    const signed = await crypto.subtle.sign("HMAC", key, enc.encode(payload));
+    const bytes = new Uint8Array(signed);
+    const expected = Buffer.from(bytes).toString("base64url");
+    if (sig.length !== expected.length) return false;
+    if (!crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected))) return false;
+  } catch {
+    return false;
+  }
+
+  try {
+    const data = JSON.parse(Buffer.from(payload, "base64url").toString("utf8")) as {
+      exp: number;
+    };
+    return typeof data.exp === "number" && data.exp > Date.now();
+  } catch {
+    return false;
+  }
+}
+
 export function verifyAdminPassword(
   password: string,
   expected: string | undefined,

@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getAdminCookieName, verifyAdminSessionToken } from "@/lib/auth";
+import { getAdminCookieNameEdge, verifyAdminSessionTokenEdge } from "@/lib/auth-edge";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   if (!pathname.startsWith("/admin")) return NextResponse.next();
   if (pathname.startsWith("/admin/login")) return NextResponse.next();
@@ -11,8 +11,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/admin/login?err=config", request.url));
   }
 
-  const token = request.cookies.get(getAdminCookieName())?.value;
-  if (!verifyAdminSessionToken(token, secret)) {
+  const token = request.cookies.get(getAdminCookieNameEdge())?.value;
+  if (!(await verifyAdminSessionTokenEdge(token, secret))) {
     const url = new URL("/admin/login", request.url);
     url.searchParams.set("next", pathname);
     return NextResponse.redirect(url);
