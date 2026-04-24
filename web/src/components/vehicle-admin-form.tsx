@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Vehicle } from "@/lib/vehicle-types";
 
@@ -77,6 +77,10 @@ export function VehicleAdminForm(props: Props) {
   const [notice, setNotice] = useState<string | null>(null);
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
   const [pendingPhotos, setPendingPhotos] = useState<Array<{ file: File; previewUrl: string }>>([]);
+  const [docModalOpen, setDocModalOpen] = useState(false);
+  const [docName, setDocName] = useState("");
+  const [docFile, setDocFile] = useState<File | null>(null);
+  const docInputRef = useRef<HTMLInputElement | null>(null);
   const [form, setForm] = useState(() =>
     isEdit ? fromVehicle(props.initial) : emptyForm(),
   );
@@ -302,6 +306,22 @@ export function VehicleAdminForm(props: Props) {
     }
   }
 
+  function resetDocModal() {
+    setDocName("");
+    setDocFile(null);
+    if (docInputRef.current) docInputRef.current.value = "";
+  }
+
+  async function handleDocSubmit() {
+    if (!docFile) {
+      setError("Seleccioná un archivo para continuar.");
+      return;
+    }
+    await uploadDoc(docFile, docName);
+    setDocModalOpen(false);
+    resetDocModal();
+  }
+
   return (
     <div className="vehicle-form space-y-6">
       {error ? (
@@ -316,7 +336,7 @@ export function VehicleAdminForm(props: Props) {
       ) : null}
 
       {isEdit ? (
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <section className="rv-surface p-4">
           <h2 className="text-sm font-semibold text-slate-900">Enlace para clientes</h2>
           <p className="mt-1 text-xs text-slate-600">
             Compartí esta URL en Instagram, WhatsApp o donde quieras. Solo se muestra si el vehículo
@@ -338,7 +358,7 @@ export function VehicleAdminForm(props: Props) {
       ) : null}
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-4">
+        <section className="rv-surface space-y-4 p-4">
           <h2 className="text-sm font-semibold text-slate-900">Datos del vehículo</h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <label className="block text-xs font-medium text-slate-700">
@@ -491,7 +511,7 @@ export function VehicleAdminForm(props: Props) {
         </section>
 
         <div className="space-y-6">
-          <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-3">
+          <section className="rv-surface space-y-3 p-4">
             <h2 className="text-sm font-semibold text-slate-900">Fotos</h2>
             <p className="text-xs text-slate-600">
               {isEdit
@@ -578,23 +598,16 @@ export function VehicleAdminForm(props: Props) {
             </ul>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-3">
+          <section className="rv-surface space-y-3 p-4">
             <h2 className="text-sm font-semibold text-slate-900">Documentación</h2>
             <p className="text-xs text-slate-600">PDF o imágenes (seguro, informe, título, etc.).</p>
             <button
               type="button"
               disabled={!vehicleId || uploading}
-              className="rounded-lg border border-slate-200 px-3 py-2 text-sm hover:bg-slate-50 disabled:opacity-50"
+              className="rounded-lg border border-slate-200 bg-slate-900 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800 disabled:opacity-50"
               onClick={() => {
-                const name = window.prompt("Nombre que verá el cliente (ej. Informe de dominio)") || "";
-                const input = document.createElement("input");
-                input.type = "file";
-                input.accept = "application/pdf,image/*";
-                input.onchange = () => {
-                  const f = input.files?.[0];
-                  if (f) void uploadDoc(f, name);
-                };
-                input.click();
+                setError(null);
+                setDocModalOpen(true);
               }}
             >
               Agregar documento
@@ -623,6 +636,75 @@ export function VehicleAdminForm(props: Props) {
           </section>
         </div>
       </div>
+
+      {docModalOpen ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <button
+            type="button"
+            aria-label="Cerrar modal"
+            className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"
+            onClick={() => {
+              setDocModalOpen(false);
+              resetDocModal();
+            }}
+          />
+          <div className="relative z-10 w-full max-w-md rounded-2xl border border-white/30 bg-white p-5 shadow-[0_30px_80px_rgba(15,23,42,0.35)] animate-soft-fade-up">
+            <h3 className="text-base font-semibold text-slate-900">Agregar documento</h3>
+            <p className="mt-1 text-xs text-slate-600">
+              Cargá un archivo y definí el nombre que verá el cliente en la ficha del vehículo.
+            </p>
+
+            <div className="mt-4 space-y-3">
+              <label className="block text-xs font-medium text-slate-700">
+                Nombre visible
+                <input
+                  className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                  value={docName}
+                  onChange={(e) => setDocName(e.target.value)}
+                  placeholder="Ej. Informe de dominio"
+                />
+              </label>
+
+              <label className="block text-xs font-medium text-slate-700">
+                Archivo (PDF o imagen)
+                <input
+                  ref={docInputRef}
+                  type="file"
+                  accept="application/pdf,image/*"
+                  className="mt-1 block w-full rounded-lg border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-sm"
+                  onChange={(e) => setDocFile(e.target.files?.[0] ?? null)}
+                />
+              </label>
+              {docFile ? (
+                <p className="text-xs text-slate-500">
+                  Archivo seleccionado: <span className="font-medium text-slate-700">{docFile.name}</span>
+                </p>
+              ) : null}
+            </div>
+
+            <div className="mt-5 flex justify-end gap-2">
+              <button
+                type="button"
+                className="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                onClick={() => {
+                  setDocModalOpen(false);
+                  resetDocModal();
+                }}
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                disabled={uploading || !docFile}
+                className="rounded-lg bg-slate-900 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800 disabled:opacity-50"
+                onClick={() => void handleDocSubmit()}
+              >
+                {uploading ? "Subiendo..." : "Subir documento"}
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
         <button

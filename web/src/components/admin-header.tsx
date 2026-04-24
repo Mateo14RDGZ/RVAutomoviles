@@ -13,22 +13,31 @@ export function AdminHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-3">
-        <Link href="/admin" className="text-sm font-semibold text-slate-900">
-          Panel
+    <header className="sticky top-0 z-30 border-b border-sky-200/40 bg-white/80 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 lg:px-6">
+        <Link href="/admin" className="inline-flex items-center gap-2">
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-cyan-400 text-xs font-black text-white">
+            RV
+          </span>
+          <span className="text-sm font-semibold text-slate-900">Panel RV</span>
         </Link>
-        <nav className="flex flex-1 items-center justify-end gap-4 text-sm">
-          <Link href="/admin/vehicles" className="text-slate-600 hover:text-slate-900">
+        <nav className="flex flex-1 items-center justify-end gap-2 text-sm sm:gap-4">
+          <Link
+            href="/admin/vehicles"
+            className="rounded-lg px-3 py-1.5 text-slate-700 transition hover:bg-slate-100 hover:text-slate-900"
+          >
             Vehículos
           </Link>
-          <Link href="/catalogo" className="text-slate-600 hover:text-slate-900">
+          <Link
+            href="/catalogo"
+            className="rounded-lg px-3 py-1.5 text-slate-700 transition hover:bg-slate-100 hover:text-slate-900"
+          >
             Ver catálogo
           </Link>
           <button
             type="button"
             onClick={() => void logout()}
-            className="rounded-lg border border-slate-200 px-3 py-1.5 text-slate-700 hover:bg-slate-50"
+            className="rv-btn-secondary px-3 py-1.5"
           >
             Salir
           </button>

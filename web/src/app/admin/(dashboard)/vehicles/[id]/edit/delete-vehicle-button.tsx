@@ -25,7 +25,7 @@ export function DeleteVehicleButton({ id }: { id: string }) {
       type="button"
       disabled={pending}
       onClick={() => void onDelete()}
-      className="rounded-lg border border-red-200 px-3 py-2 text-sm text-red-800 hover:bg-red-50 disabled:opacity-50"
+      className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm font-medium text-red-800 transition hover:bg-red-100 disabled:opacity-50"
     >
       {pending ? "Eliminando…" : "Eliminar"}
     </button>
@@ -60,7 +60,7 @@ export function MarkVehicleSoldButton({ id }: { id: string }) {
       type="button"
       disabled={pending}
       onClick={() => void onMarkSold()}
-      className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900 hover:bg-amber-100 disabled:opacity-50"
+      className="rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-sm font-medium text-amber-900 transition hover:bg-amber-100 disabled:opacity-50"
     >
       {pending ? "Procesando…" : "Marcar como vendido"}
     </button>

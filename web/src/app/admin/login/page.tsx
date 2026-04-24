@@ -15,10 +15,12 @@ export default async function AdminLoginPage({
   const configError = sp.err === "config";
 
   return (
-    <div className="mx-auto max-w-md px-4 py-16">
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="relative mx-auto max-w-md px-4 py-16">
+      <div className="pointer-events-none absolute -left-14 top-10 h-36 w-36 rounded-full bg-sky-300/40 blur-3xl" />
+      <div className="pointer-events-none absolute -right-14 bottom-10 h-36 w-36 rounded-full bg-cyan-300/30 blur-3xl" />
+      <div className="rv-surface relative p-6 sm:p-7">
         <h1 className="text-lg font-semibold text-slate-900">Panel de administración</h1>
-        <p className="mt-2 text-sm text-slate-600">
+        <p className="mt-2 rv-muted">
           Ingresá la contraseña configurada en el servidor para gestionar vehículos.
         </p>
         {configError ? (
@@ -35,7 +37,7 @@ export default async function AdminLoginPage({
           </Suspense>
         </div>
         <p className="mt-6 text-center text-xs text-slate-500">
-          <Link href="/" className="underline">
+          <Link href="/" className="font-medium text-sky-700 hover:text-sky-800">
             Volver al inicio
           </Link>
         </p>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PublicChrome } from "@/components/public-chrome";
+import { PublicVehicleGallery } from "@/components/public-vehicle-gallery";
 import { getVehicleBySlug } from "@/lib/vehicle-store";
 
 export const dynamic = "force-dynamic";
@@ -29,49 +30,24 @@ export default async function PublicVehiclePage({ params }: Props) {
 
   return (
     <PublicChrome>
-      <div className="min-h-dvh bg-white text-slate-900">
-        <main className="mx-auto max-w-3xl px-4 pb-10 pt-8">
+      <div className="min-h-dvh bg-gradient-to-b from-slate-100 via-white to-slate-100 text-slate-900">
+        <main className="mx-auto max-w-4xl px-4 pb-12 pt-10">
           <div className="mb-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
               Ficha del vehículo
             </p>
           </div>
 
-          {v.photos[0] ? (
-            <div className="mt-3 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={v.photos[0]}
-                alt={`${v.brand} ${v.model}`}
-                className="aspect-[4/3] w-full object-cover"
-              />
-            </div>
-          ) : (
-            <div className="mt-3 flex aspect-[4/3] items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
-              Fotos próximamente
-            </div>
-          )}
+          <PublicVehicleGallery photos={v.photos} alt={`${v.brand} ${v.model}`} />
 
-          {v.photos.length > 1 ? (
-            <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
-              {v.photos.slice(1).map((url) => (
-                <div
-                  key={url}
-                  className="h-20 w-28 shrink-0 overflow-hidden rounded-lg border border-slate-200"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={url} alt="" className="h-full w-full object-cover" />
-                </div>
-              ))}
-            </div>
-          ) : null}
-
-          <section className="mt-6 space-y-2">
-            <h1 className="text-2xl font-semibold leading-tight">
+          <section className="mt-8 rounded-3xl border border-white bg-white/85 p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)] backdrop-blur-sm">
+            <h1 className="text-3xl font-semibold leading-tight text-slate-900">
               {v.brand} {v.model}
             </h1>
-            <p className="text-sm text-slate-600">{v.year}</p>
-            <p className="text-lg font-semibold text-emerald-700">{priceLabel}</p>
+            <p className="mt-1 text-sm text-slate-600">{v.year}</p>
+            <p className="mt-4 inline-flex rounded-full bg-emerald-100 px-4 py-1.5 text-lg font-semibold text-emerald-800">
+              {priceLabel}
+            </p>
           </section>
 
           <section className="mt-6 grid grid-cols-2 gap-3 text-sm">

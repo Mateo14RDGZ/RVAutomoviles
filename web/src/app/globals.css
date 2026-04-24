@@ -21,6 +21,40 @@ body {
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
 }
 
+@layer components {
+  .rv-surface {
+    @apply rounded-2xl border border-white/60 bg-white/85 shadow-[0_12px_35px_rgba(2,6,23,0.08)] backdrop-blur-sm;
+  }
+
+  .rv-surface-dark {
+    @apply rounded-2xl border border-sky-200/20 bg-slate-900/55 shadow-[0_14px_35px_rgba(2,6,23,0.28)] backdrop-blur-md;
+  }
+
+  .rv-title {
+    @apply text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl;
+  }
+
+  .rv-muted {
+    @apply text-sm text-slate-600;
+  }
+
+  .rv-btn {
+    @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300;
+  }
+
+  .rv-btn-primary {
+    @apply rv-btn bg-gradient-to-r from-sky-500 to-cyan-400 text-white shadow-[0_10px_24px_rgba(14,165,233,0.35)] hover:brightness-110;
+  }
+
+  .rv-btn-secondary {
+    @apply rv-btn border border-slate-200 bg-white text-slate-700 hover:bg-slate-50;
+  }
+
+  .rv-input {
+    @apply mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-100;
+  }
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -47,6 +81,10 @@ body {
 
 .animate-fade-in {
   animation: fadeIn 500ms ease-out both;
+}
+
+.animate-soft-fade-up {
+  animation: fadeUp 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .vehicle-form input,

@@ -18,15 +18,15 @@ export default async function CatalogoPage() {
     <PublicChrome>
       <div className="min-h-dvh bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-50 animate-fade-in">
         <header className="border-b border-white/10 px-4 py-6">
-          <div className="mx-auto max-w-lg">
-            <h1 className="text-2xl font-semibold">Autos en venta</h1>
+          <div className="mx-auto max-w-5xl">
+            <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Autos en venta</h1>
             <p className="mt-2 text-sm text-slate-400">
               Tocá un vehículo para ver la ficha completa, fotos y documentación.
             </p>
           </div>
         </header>
 
-        <main className="mx-auto max-w-lg px-4 py-6">
+        <main className="mx-auto max-w-5xl px-4 py-6">
           {vehicles.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-white/15 bg-white/5 px-4 py-14 text-center">
               <p className="text-sm text-slate-300">
@@ -35,7 +35,7 @@ export default async function CatalogoPage() {
               </p>
             </div>
           ) : (
-            <ul className="space-y-4">
+            <ul className="grid gap-4 md:grid-cols-2">
               {vehicles.map((v) => {
                 const price =
                   v.price != null
@@ -46,7 +46,7 @@ export default async function CatalogoPage() {
                   <li key={v.id}>
                     <Link
                       href={`/v/${v.urlSlug}`}
-                      className="group flex gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-sky-500/50 hover:bg-white/[0.09]"
+                      className="group flex gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-sky-500/50 hover:bg-white/[0.09] hover:shadow-[0_16px_35px_rgba(14,165,233,0.22)]"
                     >
                       <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-xl bg-slate-800">
                         {thumb ? (

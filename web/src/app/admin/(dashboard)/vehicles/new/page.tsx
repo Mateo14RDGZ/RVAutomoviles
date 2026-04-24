@@ -10,12 +10,12 @@ export default function NewVehiclePage() {
     <div className="space-y-4">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold text-slate-900">Nuevo vehículo</h1>
-          <p className="mt-1 text-sm text-slate-600">
+          <h1 className="rv-title">Nuevo vehículo</h1>
+          <p className="mt-1 rv-muted">
             Guardá para obtener el ID y poder subir fotos y documentos.
           </p>
         </div>
-        <Link href="/admin/vehicles" className="text-sm text-slate-600 underline">
+        <Link href="/admin/vehicles" className="rv-btn-secondary px-3 py-1.5">
           Volver
         </Link>
       </div>

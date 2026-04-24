@@ -14,7 +14,7 @@ export function PublicMobileNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-30 border-t border-white/10 bg-slate-950/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md"
+      className="fixed bottom-0 left-0 right-0 z-30 border-t border-sky-200/20 bg-slate-950/90 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl"
       aria-label="Principal"
     >
       <ul className="mx-auto flex max-w-lg items-stretch justify-around gap-1 px-2 pt-2">
@@ -28,7 +28,9 @@ export function PublicMobileNav() {
               <Link
                 href={href}
                 className={`flex min-h-[3rem] flex-col items-center justify-center rounded-xl text-xs font-medium transition-colors ${
-                  active ? "bg-white/10 text-white" : "text-slate-400 hover:text-slate-200"
+                  active
+                    ? "bg-gradient-to-r from-sky-400/20 to-cyan-300/20 text-sky-100"
+                    : "text-slate-400 hover:text-slate-200"
                 }`}
               >
                 {label}
