@@ -5,6 +5,20 @@ import { useRouter } from "next/navigation";
 import type { Vehicle } from "@/lib/vehicle-types";
 
 const featureOptions = ["Aire", "Vidrios electricos", "Direccion"] as const;
+const allowedImageExt = [
+  "jpg",
+  "jpeg",
+  "png",
+  "webp",
+  "avif",
+  "gif",
+  "bmp",
+  "tif",
+  "tiff",
+  "heic",
+  "heif",
+  "jfif",
+] as const;
 
 type Props =
   | { mode: "create" }
@@ -196,6 +210,20 @@ export function VehicleAdminForm(props: Props) {
         ? `${queued.length} fotos listas para subir al guardar.`
         : "Foto lista para subir al guardar.",
     );
+  }
+
+  function isImageFile(file: File): boolean {
+    if (file.type.startsWith("image/")) return true;
+    const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
+    return allowedImageExt.includes(ext as (typeof allowedImageExt)[number]);
+  }
+
+  function normalizePhotoSelection(files: File[]): File[] {
+    const valid = files.filter(isImageFile);
+    if (valid.length !== files.length) {
+      setError("Algunos archivos no son imágenes compatibles. Se ignoraron automáticamente.");
+    }
+    return valid;
   }
 
   async function removePhoto(url: string) {
@@ -472,11 +500,11 @@ export function VehicleAdminForm(props: Props) {
             </p>
             <input
               type="file"
-              accept="*/*"
+              accept="image/*,.heic,.heif,.avif,.webp,.jpg,.jpeg,.png,.gif,.bmp,.tif,.tiff,.jfif"
               multiple
               disabled={uploading}
               onChange={(e) => {
-                const selected = Array.from(e.target.files || []);
+                const selected = normalizePhotoSelection(Array.from(e.target.files || []));
                 e.target.value = "";
                 if (!selected.length) return;
                 if (!vehicleId) {

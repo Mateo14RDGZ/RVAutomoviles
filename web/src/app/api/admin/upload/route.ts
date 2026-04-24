@@ -8,6 +8,26 @@ import { getVehicleById } from "@/lib/vehicle-store";
 export const runtime = "nodejs";
 
 const maxBytes = 40 * 1024 * 1024;
+const imageExts = new Set([
+  "jpg",
+  "jpeg",
+  "png",
+  "webp",
+  "avif",
+  "gif",
+  "bmp",
+  "tif",
+  "tiff",
+  "heic",
+  "heif",
+  "jfif",
+]);
+
+function isLikelyImage(file: File): boolean {
+  if (file.type?.startsWith("image/")) return true;
+  const ext = file.name.split(".").pop()?.toLowerCase();
+  return Boolean(ext && imageExts.has(ext));
+}
 
 export async function POST(request: Request) {
   if (!(await isAdminSessionValid())) {
@@ -31,6 +51,12 @@ export async function POST(request: Request) {
   }
   if (file.size > maxBytes) {
     return NextResponse.json({ error: "Archivo demasiado grande (máx. 40 MB)" }, { status: 400 });
+  }
+  if (!isLikelyImage(file)) {
+    return NextResponse.json(
+      { error: "El archivo no parece una imagen válida. Subí JPG, PNG, WEBP, HEIC u otro formato de foto." },
+      { status: 400 },
+    );
   }
 
   const rawName = file.name || "archivo";
