@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CopyVehiclePublicLink } from "@/components/copy-vehicle-public-link";
 import { PublicChrome } from "@/components/public-chrome";
 import { getVehicleBySlug } from "@/lib/vehicle-store";
 
@@ -31,28 +29,16 @@ export default async function PublicVehiclePage({ params }: Props) {
 
   return (
     <PublicChrome>
-      <div className="min-h-dvh bg-slate-950 text-slate-50">
-        <header className="border-b border-white/10 bg-slate-950/80 px-4 py-4 backdrop-blur">
-          <div className="mx-auto flex max-w-lg flex-wrap items-center justify-between gap-2">
-            <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
-              Ficha pública
+      <div className="min-h-dvh bg-white text-slate-900">
+        <main className="mx-auto max-w-3xl px-4 pb-10 pt-8">
+          <div className="mb-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-500">
+              Ficha del vehículo
             </p>
-            <div className="flex flex-wrap items-center gap-3 text-xs">
-              <Link href="/catalogo" className="text-sky-300 underline">
-                Autos
-              </Link>
-              <Link href="/" className="text-sky-300 underline">
-                Inicio
-              </Link>
-            </div>
           </div>
-        </header>
-
-        <main className="mx-auto max-w-lg px-4 pb-6 pt-4">
-          <CopyVehiclePublicLink slug={v.urlSlug} />
 
           {v.photos[0] ? (
-            <div className="mt-3 overflow-hidden rounded-2xl border border-white/10 bg-slate-900 shadow-xl">
+            <div className="mt-3 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={v.photos[0]}
@@ -61,7 +47,7 @@ export default async function PublicVehiclePage({ params }: Props) {
               />
             </div>
           ) : (
-            <div className="mt-3 flex aspect-[4/3] items-center justify-center rounded-2xl border border-dashed border-white/15 bg-slate-900/50 text-sm text-slate-400">
+            <div className="mt-3 flex aspect-[4/3] items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
               Fotos próximamente
             </div>
           )}
@@ -71,7 +57,7 @@ export default async function PublicVehiclePage({ params }: Props) {
               {v.photos.slice(1).map((url) => (
                 <div
                   key={url}
-                  className="h-20 w-28 shrink-0 overflow-hidden rounded-lg border border-white/10"
+                  className="h-20 w-28 shrink-0 overflow-hidden rounded-lg border border-slate-200"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={url} alt="" className="h-full w-full object-cover" />
@@ -84,25 +70,25 @@ export default async function PublicVehiclePage({ params }: Props) {
             <h1 className="text-2xl font-semibold leading-tight">
               {v.brand} {v.model}
             </h1>
-            <p className="text-sm text-slate-400">{v.year}</p>
-            <p className="text-lg font-semibold text-emerald-300">{priceLabel}</p>
+            <p className="text-sm text-slate-600">{v.year}</p>
+            <p className="text-lg font-semibold text-emerald-700">{priceLabel}</p>
           </section>
 
           <section className="mt-6 grid grid-cols-2 gap-3 text-sm">
-            <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-3">
-              <p className="text-xs text-slate-400">Color</p>
+            <div className="rounded-xl border border-slate-200 bg-white px-3 py-3">
+              <p className="text-xs text-slate-500">Color</p>
               <p className="mt-1 font-medium">{v.color}</p>
             </div>
-            <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-3">
-              <p className="text-xs text-slate-400">Combustible</p>
+            <div className="rounded-xl border border-slate-200 bg-white px-3 py-3">
+              <p className="text-xs text-slate-500">Combustible</p>
               <p className="mt-1 font-medium">{v.fuel}</p>
             </div>
-            <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-3">
-              <p className="text-xs text-slate-400">Caja</p>
+            <div className="rounded-xl border border-slate-200 bg-white px-3 py-3">
+              <p className="text-xs text-slate-500">Caja</p>
               <p className="mt-1 font-medium">{v.transmission}</p>
             </div>
-            <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-3">
-              <p className="text-xs text-slate-400">Kilometraje</p>
+            <div className="rounded-xl border border-slate-200 bg-white px-3 py-3">
+              <p className="text-xs text-slate-500">Kilometraje</p>
               <p className="mt-1 font-medium">
                 {v.mileageKm != null ? `${v.mileageKm.toLocaleString("es-AR")} km` : "—"}
               </p>
@@ -111,11 +97,11 @@ export default async function PublicVehiclePage({ params }: Props) {
 
           {v.highlights.length ? (
             <section className="mt-8">
-              <h2 className="text-sm font-semibold text-slate-200">Destacados</h2>
-              <ul className="mt-3 space-y-2 text-sm text-slate-300">
+              <h2 className="text-sm font-semibold text-slate-700">Destacados</h2>
+              <ul className="mt-3 space-y-2 text-sm text-slate-700">
                 {v.highlights.map((h) => (
                   <li key={h} className="flex gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-sky-400" aria-hidden />
+                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-sky-600" aria-hidden />
                     <span>{h}</span>
                   </li>
                 ))}
@@ -125,8 +111,8 @@ export default async function PublicVehiclePage({ params }: Props) {
 
           {v.description ? (
             <section className="mt-8">
-              <h2 className="text-sm font-semibold text-slate-200">Descripción</h2>
-              <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-slate-300">
+              <h2 className="text-sm font-semibold text-slate-700">Descripción</h2>
+              <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-slate-700">
                 {v.description}
               </p>
             </section>
@@ -134,7 +120,7 @@ export default async function PublicVehiclePage({ params }: Props) {
 
           {v.documents.length ? (
             <section className="mt-8">
-              <h2 className="text-sm font-semibold text-slate-200">Documentación</h2>
+              <h2 className="text-sm font-semibold text-slate-700">Documentación</h2>
               <ul className="mt-3 space-y-2">
                 {v.documents.map((d) => (
                   <li key={d.url}>
@@ -142,10 +128,10 @@ export default async function PublicVehiclePage({ params }: Props) {
                       href={d.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-full items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-sm text-sky-300 underline"
+                      className="inline-flex w-full items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-sky-700 underline"
                     >
                       <span className="truncate">{d.name}</span>
-                      <span className="shrink-0 text-xs text-slate-400">Abrir</span>
+                      <span className="shrink-0 text-xs text-slate-500">Abrir</span>
                     </a>
                   </li>
                 ))}

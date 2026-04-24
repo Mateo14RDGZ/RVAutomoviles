@@ -56,6 +56,7 @@ export function VehicleAdminForm(props: Props) {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const [form, setForm] = useState(() =>
     isEdit ? fromVehicle(props.initial) : emptyForm(),
   );
@@ -106,6 +107,7 @@ export function VehicleAdminForm(props: Props) {
 
   async function save() {
     setError(null);
+    setNotice(null);
     setSaving(true);
     try {
       const payload = toPayload();
@@ -122,6 +124,7 @@ export function VehicleAdminForm(props: Props) {
         router.refresh();
         return;
       }
+      setNotice("Cambios guardados.");
       router.refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Error");
@@ -130,21 +133,48 @@ export function VehicleAdminForm(props: Props) {
     }
   }
 
-  async function uploadFile(file: File) {
+  async function persistMedia(patch: {
+    photos?: string[];
+    documents?: { name: string; url: string }[];
+  }) {
+    if (!isEdit || !vehicleId) return;
+    const res = await fetch(`/api/admin/vehicles/${vehicleId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(patch),
+    });
+    const data = (await res.json().catch(() => ({}))) as { error?: string };
+    if (!res.ok) throw new Error(data.error || "No se pudo guardar la media");
+  }
+
+  async function uploadFiles(files: File[]) {
     if (!vehicleId) {
       setError("Creá el vehículo primero; después podrás subir archivos.");
       return;
     }
     setUploading(true);
     setError(null);
+    setNotice(null);
     try {
-      const fd = new FormData();
-      fd.set("vehicleId", vehicleId);
-      fd.set("file", file);
-      const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
-      const data = (await res.json().catch(() => ({}))) as { error?: string; url?: string };
-      if (!res.ok || !data.url) throw new Error(data.error || "Falló la subida");
-      setForm((f) => ({ ...f, photos: [...f.photos, data.url!] }));
+      const uploadedUrls: string[] = [];
+      for (const file of files) {
+        const fd = new FormData();
+        fd.set("vehicleId", vehicleId);
+        fd.set("file", file);
+        const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
+        const data = (await res.json().catch(() => ({}))) as { error?: string; url?: string };
+        if (!res.ok || !data.url) throw new Error(data.error || `Falló la subida de ${file.name}`);
+        uploadedUrls.push(data.url);
+      }
+      const nextPhotos = [...form.photos, ...uploadedUrls];
+      setForm((f) => ({ ...f, photos: nextPhotos }));
+      await persistMedia({ photos: nextPhotos });
+      setNotice(
+        uploadedUrls.length > 1
+          ? `${uploadedUrls.length} fotos subidas y guardadas.`
+          : "Foto subida y guardada.",
+      );
+      router.refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Error de subida");
     } finally {
@@ -159,6 +189,7 @@ export function VehicleAdminForm(props: Props) {
     }
     setUploading(true);
     setError(null);
+    setNotice(null);
     try {
       const fd = new FormData();
       fd.set("vehicleId", vehicleId);
@@ -166,10 +197,14 @@ export function VehicleAdminForm(props: Props) {
       const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
       const data = (await res.json().catch(() => ({}))) as { error?: string; url?: string };
       if (!res.ok || !data.url) throw new Error(data.error || "Falló la subida");
+      const nextDocs = [...form.documents, { name: name.trim() || file.name, url: data.url! }];
       setForm((f) => ({
         ...f,
-        documents: [...f.documents, { name: name.trim() || file.name, url: data.url! }],
+        documents: nextDocs,
       }));
+      await persistMedia({ documents: nextDocs });
+      setNotice("Documento subido y guardado.");
+      router.refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Error de subida");
     } finally {
@@ -182,6 +217,11 @@ export function VehicleAdminForm(props: Props) {
       {error ? (
         <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
           {error}
+        </p>
+      ) : null}
+      {notice ? (
+        <p className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+          {notice}
         </p>
       ) : null}
 
@@ -346,11 +386,12 @@ export function VehicleAdminForm(props: Props) {
         <input
           type="file"
           accept="image/*"
+          multiple
           disabled={!vehicleId || uploading}
           onChange={(e) => {
-            const f = e.target.files?.[0];
+            const selected = Array.from(e.target.files || []);
             e.target.value = "";
-            if (f) void uploadFile(f);
+            if (selected.length) void uploadFiles(selected);
           }}
           className="block w-full text-sm"
         />
