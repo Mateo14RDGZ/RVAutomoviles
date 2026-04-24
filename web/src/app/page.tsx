@@ -1,11 +1,21 @@
 import Link from "next/link";
+import { LatestIngresosWidget } from "@/components/latest-ingresos-widget";
 import { PublicChrome } from "@/components/public-chrome";
+import { listVehicles } from "@/lib/vehicle-store";
+
+export const dynamic = "force-dynamic";
 
 const MAPS_SHORT_URL = "https://maps.app.goo.gl/XHWmX8T1a47y4VPP9";
 /** Coordenadas del local (RV Automóviles) según el enlace compartido en Google Maps */
 const MAP_EMBED_QUERY = "-33.5338118,-56.8898191";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const all = await listVehicles();
+  const latestIngresos = all
+    .filter((v) => v.published)
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .slice(0, 3);
+
   return (
     <PublicChrome>
       <main className="w-full text-slate-900">
@@ -32,11 +42,13 @@ export default function HomePage() {
                 Ver autos en venta
               </Link>
               <p className="text-center text-xs text-slate-500 sm:text-left sm:text-sm">
-                Entrá al catálogo y elegí el que te interese: modelo, año y precio al toque.
+                Entrá al catálogo y elegí por foto y título; en la ficha ves todo el detalle.
               </p>
             </div>
           </div>
         </section>
+
+        <LatestIngresosWidget vehicles={latestIngresos} />
 
         {/* Por qué conviene */}
         <section className="border-b border-slate-200/80 bg-white py-12 sm:py-16">
@@ -57,8 +69,8 @@ export default function HomePage() {
               <article className="rounded-2xl border border-rv-accent/15 bg-slate-50/80 p-5 shadow-sm">
                 <p className="text-sm font-semibold text-rv-accent">Catálogo online</p>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                  Listado ordenado: foto, marca, modelo, año y precio. Ideal para mandar el link y que el
-                  cliente se ubique al toque.
+                  Listado en dos columnas con la foto arriba y el título bien claro. En la ficha el
+                  cliente ve precio y el resto de los datos.
                 </p>
               </article>
               <article className="rounded-2xl border border-rv-accent/15 bg-slate-50/80 p-5 shadow-sm">
