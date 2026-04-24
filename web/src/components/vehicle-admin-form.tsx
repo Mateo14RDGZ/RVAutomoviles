@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Vehicle } from "@/lib/vehicle-types";
 
+const featureOptions = ["Aire", "Vidrios electricos", "Direccion"] as const;
+
 type Props =
   | { mode: "create" }
   | { mode: "edit"; initial: Vehicle };
@@ -18,9 +20,10 @@ function emptyForm() {
     transmission: "",
     color: "",
     price: "" as string | number,
-    currency: "ARS",
+    currency: "USD",
     description: "",
     highlightsText: "",
+    features: [] as string[],
     photos: [] as string[],
     documents: [] as { name: string; url: string }[],
     published: true,
@@ -41,6 +44,7 @@ function fromVehicle(v: Vehicle) {
     currency: v.currency,
     description: v.description,
     highlightsText: v.highlights.join("\n"),
+    features: v.features ?? [],
     photos: [...v.photos],
     documents: [...v.documents],
     published: v.published,
@@ -95,9 +99,10 @@ export function VehicleAdminForm(props: Props) {
       transmission: form.transmission.trim(),
       color: form.color.trim(),
       price: Number.isFinite(price as number) ? (price as number) : null,
-      currency: form.currency.trim() || "ARS",
+      currency: form.currency.trim() || "USD",
       description: form.description,
       highlights,
+      features: form.features,
       photos: form.photos,
       documents: form.documents,
       published: form.published,
@@ -331,6 +336,31 @@ export function VehicleAdminForm(props: Props) {
           </label>
         </div>
 
+        <fieldset className="rounded-xl border border-slate-200 bg-slate-50/60 p-3">
+          <legend className="px-1 text-xs font-semibold uppercase tracking-wide text-slate-700">
+            Checklist de equipamiento
+          </legend>
+          <div className="mt-2 grid gap-2 sm:grid-cols-3">
+            {featureOptions.map((feature) => (
+              <label key={feature} className="flex items-center gap-2 text-sm text-slate-800">
+                <input
+                  type="checkbox"
+                  checked={form.features.includes(feature)}
+                  onChange={(e) =>
+                    setForm((f) => ({
+                      ...f,
+                      features: e.target.checked
+                        ? [...f.features, feature]
+                        : f.features.filter((x) => x !== feature),
+                    }))
+                  }
+                />
+                {feature}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
         <label className="block text-xs font-medium text-slate-700">
           Slug de URL (opcional)
           <input
@@ -380,7 +410,7 @@ export function VehicleAdminForm(props: Props) {
         <h2 className="text-sm font-semibold text-slate-900">Fotos</h2>
         <p className="text-xs text-slate-600">
           {isEdit
-            ? "Subí imágenes; se guardan en el servidor hasta que conectes almacenamiento en la nube."
+            ? "Subí todas las imágenes que quieras; se guardan automáticamente."
             : "Guardá el vehículo primero para habilitar la subida de fotos."}
         </p>
         <input

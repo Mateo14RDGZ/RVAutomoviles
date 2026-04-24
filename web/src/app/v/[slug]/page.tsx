@@ -109,6 +109,19 @@ export default async function PublicVehiclePage({ params }: Props) {
             </section>
           ) : null}
 
+          {v.features && v.features.length ? (
+            <section className="mt-8">
+              <h2 className="text-sm font-semibold text-slate-700">Equipamiento</h2>
+              <ul className="mt-3 grid grid-cols-1 gap-2 text-sm text-slate-700 sm:grid-cols-3">
+                {v.features.map((f) => (
+                  <li key={f} className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+
           {v.description ? (
             <section className="mt-8">
               <h2 className="text-sm font-semibold text-slate-700">Descripción</h2>

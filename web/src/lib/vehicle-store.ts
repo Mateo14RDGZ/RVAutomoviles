@@ -137,6 +137,7 @@ export async function createVehicle(input: VehicleInput): Promise<Vehicle> {
     currency: input.currency,
     description: input.description,
     highlights: input.highlights,
+    features: input.features ?? [],
     photos: input.photos,
     documents: input.documents,
     published: input.published,

@@ -5,6 +5,10 @@ const docSchema = z.object({
   url: z.string().min(1).max(2000),
 });
 
+const featuresSchema = z
+  .array(z.enum(["Aire", "Vidrios electricos", "Direccion"]))
+  .default([]);
+
 export const vehicleCreateSchema = z.object({
   brand: z.string().min(1).max(120),
   model: z.string().min(1).max(120),
@@ -14,9 +18,10 @@ export const vehicleCreateSchema = z.object({
   transmission: z.string().min(1).max(80),
   color: z.string().min(1).max(80),
   price: z.coerce.number().min(0).nullable().optional(),
-  currency: z.string().min(1).max(8).default("ARS"),
+  currency: z.string().min(1).max(8).default("USD"),
   description: z.string().max(20000).default(""),
   highlights: z.array(z.string().max(300)).max(30).default([]),
+  features: featuresSchema,
   photos: z.array(z.string().max(2000)).default([]),
   documents: z.array(docSchema).max(20).default([]),
   published: z.boolean().default(true),

@@ -43,6 +43,7 @@ export async function POST(request: Request) {
       currency: d.currency,
       description: d.description,
       highlights: d.highlights,
+      features: d.features,
       photos: d.photos,
       documents: d.documents,
       published: d.published,

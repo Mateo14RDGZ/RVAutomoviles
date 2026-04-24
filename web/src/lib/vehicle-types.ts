@@ -17,6 +17,7 @@ export type Vehicle = {
   currency: string;
   description: string;
   highlights: string[];
+  features: string[];
   photos: string[];
   documents: VehicleDocument[];
   published: boolean;
