@@ -16,7 +16,7 @@ export default async function CatalogoPage() {
 
   return (
     <PublicChrome>
-      <div className="min-h-dvh bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-50">
+      <div className="min-h-dvh bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-50 animate-fade-in">
         <header className="border-b border-white/10 px-4 py-6">
           <div className="mx-auto max-w-lg">
             <h1 className="text-2xl font-semibold">Autos en venta</h1>
@@ -46,7 +46,7 @@ export default async function CatalogoPage() {
                   <li key={v.id}>
                     <Link
                       href={`/v/${v.urlSlug}`}
-                      className="flex gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-3 shadow-sm transition-colors hover:border-sky-500/40 hover:bg-white/[0.07]"
+                      className="group flex gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-sky-500/50 hover:bg-white/[0.09]"
                     >
                       <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-xl bg-slate-800">
                         {thumb ? (
@@ -66,7 +66,9 @@ export default async function CatalogoPage() {
                         </p>
                         <p className="text-xs text-slate-400">{v.year}</p>
                         <p className="mt-2 text-sm font-medium text-emerald-300">{price}</p>
-                        <p className="mt-1 text-xs text-sky-300">Ver ficha →</p>
+                        <p className="mt-1 text-xs text-sky-300 transition-transform duration-300 group-hover:translate-x-1">
+                          Ver ficha →
+                        </p>
                       </div>
                     </Link>
                   </li>
