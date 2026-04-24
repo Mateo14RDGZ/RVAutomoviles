@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PublicChrome } from "@/components/public-chrome";
+import { VehiclePhotoCarousel } from "@/components/vehicle-photo-carousel";
 import { getVehicleBySlug } from "@/lib/vehicle-store";
 
 export const dynamic = "force-dynamic";
@@ -37,34 +38,15 @@ export default async function PublicVehiclePage({ params }: Props) {
             </p>
           </div>
 
-          {v.photos[0] ? (
-            <div className="mt-3 overflow-hidden rounded-3xl border border-rv-accent/15 bg-white shadow-[0_18px_40px_rgba(30,166,247,0.1)]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={v.photos[0]}
-                alt={`${v.brand} ${v.model}`}
-                className="aspect-[4/3] w-full object-cover"
-              />
+          {v.photos.length > 0 ? (
+            <div className="mt-3">
+              <VehiclePhotoCarousel photos={v.photos} alt={`${v.brand} ${v.model}`} />
             </div>
           ) : (
             <div className="mt-3 flex aspect-[4/3] items-center justify-center rounded-2xl border border-dashed border-rv-accent/25 bg-rv-accent/[0.04] text-sm text-slate-600">
               Fotos próximamente
             </div>
           )}
-
-          {v.photos.length > 1 ? (
-            <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
-              {v.photos.slice(1).map((url) => (
-                <div
-                  key={url}
-                  className="h-20 w-24 shrink-0 overflow-hidden rounded-lg border border-rv-accent/15 sm:w-28"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={url} alt="" className="h-full w-full object-cover" />
-                </div>
-              ))}
-            </div>
-          ) : null}
 
           <section className="mt-6 rounded-3xl border border-rv-accent/15 bg-white p-5 shadow-[0_12px_30px_rgba(30,166,247,0.08)]">
             <h1 className="text-2xl font-semibold leading-tight text-slate-900 sm:text-3xl">
