@@ -3,7 +3,9 @@ export function PublicFooter() {
     <footer className="mt-12 border-t border-sky-300/20 bg-slate-950/95">
       <div className="mx-auto grid max-w-5xl gap-6 px-4 py-8 text-sm text-slate-400 md:grid-cols-2">
         <div>
-          <p className="text-base font-semibold text-white">RV Automoviles</p>
+          <p className="inline-flex rounded-xl border border-sky-300/25 bg-sky-300/10 px-3 py-1.5 text-base font-extrabold tracking-[0.08em] text-sky-100">
+            RV Automoviles
+          </p>
           <p className="mt-2 leading-relaxed">
             Tu proximo auto con informacion clara, fotos reales y documentacion disponible.
           </p>

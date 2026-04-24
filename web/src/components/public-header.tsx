@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -15,8 +14,14 @@ export function PublicHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-sky-300/20 bg-slate-950/95 shadow-[0_6px_30px_rgba(14,165,233,0.12)] backdrop-blur-md">
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
-        <Link href="/" className="flex items-center gap-3 transition-transform duration-300 hover:scale-[1.03]" aria-label="Ir al inicio">
-          <Image src="/logo-rv.png" alt="RV Automoviles" width={170} height={70} priority className="h-auto w-[130px] sm:w-[170px]" />
+        <Link
+          href="/"
+          className="group inline-flex items-center rounded-xl border border-sky-300/30 bg-gradient-to-r from-sky-400/15 via-cyan-300/10 to-sky-400/15 px-3 py-2 transition-all duration-300 hover:scale-[1.03] hover:border-sky-300/60"
+          aria-label="Ir al inicio"
+        >
+          <span className="bg-gradient-to-r from-sky-200 via-cyan-100 to-white bg-clip-text text-lg font-extrabold tracking-[0.08em] text-transparent sm:text-xl">
+            RV Automoviles
+          </span>
         </Link>
 
         <nav aria-label="Principal">
