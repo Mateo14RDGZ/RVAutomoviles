@@ -21,20 +21,41 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
+function publicAppUrl(): string {
+  const custom = process.env.NEXT_PUBLIC_APP_URL?.trim();
+  if (custom) {
+    try {
+      return new URL(custom).origin;
+    } catch {
+      /* seguir */
+    }
+  }
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return "http://localhost:3000";
+}
+
+function safeMetadataBase(): URL {
+  try {
+    return new URL(publicAppUrl());
+  } catch {
+    return new URL("http://localhost:3000");
+  }
+}
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
+  metadataBase: safeMetadataBase(),
   title: {
-    default: "Automotora",
-    template: "%s · Automotora",
+    default: "RV Automóviles",
+    template: "%s · RV Automóviles",
   },
   description:
     "Fichas públicas de vehículos para compartir en redes y panel interno para tu automotora.",
-  applicationName: "Automotora",
+  applicationName: "RV Automóviles",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Automotora",
+    title: "RV Automóviles",
   },
   formatDetection: {
     telephone: true,

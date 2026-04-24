@@ -7,7 +7,7 @@ type Ctx = { params: Promise<{ slug: string }> };
 
 export async function GET(_request: Request, context: Ctx) {
   const { slug } = await context.params;
-  const vehicle = getVehicleBySlug(slug);
+  const vehicle = await getVehicleBySlug(slug);
   if (!vehicle || !vehicle.published) {
     return NextResponse.json({ error: "No encontrado" }, { status: 404 });
   }

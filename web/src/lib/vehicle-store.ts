@@ -1,8 +1,10 @@
 import fs from "fs";
 import path from "path";
 import { randomUUID } from "crypto";
+import { neon } from "@neondatabase/serverless";
 import { customAlphabet } from "nanoid";
 import type { Vehicle, VehicleInput } from "./vehicle-types";
+import { resolveDatabaseUrl } from "./database-url";
 
 const nanoidSlug = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 10);
 
@@ -11,21 +13,71 @@ const dataFile = path.join(dataDir, "vehicles.json");
 
 type StoreFile = { vehicles: Vehicle[] };
 
-function ensureFile(): void {
+function databaseUrl(): string | undefined {
+  return resolveDatabaseUrl();
+}
+
+let ensureDbPromise: Promise<void> | null = null;
+
+async function ensureDbTable(): Promise<void> {
+  const url = databaseUrl();
+  if (!url) return;
+  if (!ensureDbPromise) {
+    const sql = neon(url);
+    ensureDbPromise = (async () => {
+      await sql`
+        CREATE TABLE IF NOT EXISTS vehicle_store (
+          id smallint PRIMARY KEY,
+          payload text NOT NULL
+        )
+      `;
+      await sql`
+        INSERT INTO vehicle_store (id, payload) VALUES (1, '{"vehicles":[]}')
+        ON CONFLICT (id) DO NOTHING
+      `;
+    })();
+  }
+  await ensureDbPromise;
+}
+
+function readFileFs(): StoreFile {
   if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
   if (!fs.existsSync(dataFile)) {
     fs.writeFileSync(dataFile, JSON.stringify({ vehicles: [] }, null, 2), "utf-8");
   }
-}
-
-function readFile(): StoreFile {
-  ensureFile();
   return JSON.parse(fs.readFileSync(dataFile, "utf-8")) as StoreFile;
 }
 
-function writeFile(store: StoreFile): void {
-  ensureFile();
+function writeFileFs(store: StoreFile): void {
+  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
   fs.writeFileSync(dataFile, JSON.stringify(store, null, 2), "utf-8");
+}
+
+async function readStore(): Promise<StoreFile> {
+  const url = databaseUrl();
+  if (url) {
+    await ensureDbTable();
+    const sql = neon(url);
+    const rows = await sql`SELECT payload FROM vehicle_store WHERE id = 1`;
+    if (!rows.length) {
+      return { vehicles: [] };
+    }
+    const row = rows[0] as { payload: string };
+    return JSON.parse(row.payload) as StoreFile;
+  }
+  return readFileFs();
+}
+
+async function writeStore(store: StoreFile): Promise<void> {
+  const url = databaseUrl();
+  if (url) {
+    await ensureDbTable();
+    const sql = neon(url);
+    const text = JSON.stringify(store);
+    await sql`UPDATE vehicle_store SET payload = ${text} WHERE id = 1`;
+    return;
+  }
+  writeFileFs(store);
 }
 
 function newSlug(existing: Set<string>): string {
@@ -36,20 +88,23 @@ function newSlug(existing: Set<string>): string {
   return nanoidSlug() + nanoidSlug();
 }
 
-export function listVehicles(): Vehicle[] {
-  return readFile().vehicles;
+export async function listVehicles(): Promise<Vehicle[]> {
+  const store = await readStore();
+  return store.vehicles;
 }
 
-export function getVehicleById(id: string): Vehicle | undefined {
-  return readFile().vehicles.find((v) => v.id === id);
+export async function getVehicleById(id: string): Promise<Vehicle | undefined> {
+  const store = await readStore();
+  return store.vehicles.find((v) => v.id === id);
 }
 
-export function getVehicleBySlug(slug: string): Vehicle | undefined {
-  return readFile().vehicles.find((v) => v.urlSlug === slug);
+export async function getVehicleBySlug(slug: string): Promise<Vehicle | undefined> {
+  const store = await readStore();
+  return store.vehicles.find((v) => v.urlSlug === slug);
 }
 
-export function createVehicle(input: VehicleInput): Vehicle {
-  const store = readFile();
+export async function createVehicle(input: VehicleInput): Promise<Vehicle> {
+  const store = await readStore();
   const existingSlugs = new Set(store.vehicles.map((v) => v.urlSlug));
   const now = new Date().toISOString();
   const id = randomUUID();
@@ -78,12 +133,15 @@ export function createVehicle(input: VehicleInput): Vehicle {
     updatedAt: now,
   };
   store.vehicles.unshift(vehicle);
-  writeFile(store);
+  await writeStore(store);
   return vehicle;
 }
 
-export function updateVehicle(id: string, patch: Partial<VehicleInput>): Vehicle | null {
-  const store = readFile();
+export async function updateVehicle(
+  id: string,
+  patch: Partial<VehicleInput>,
+): Promise<Vehicle | null> {
+  const store = await readStore();
   const idx = store.vehicles.findIndex((v) => v.id === id);
   if (idx < 0) return null;
   const cur = store.vehicles[idx];
@@ -108,15 +166,20 @@ export function updateVehicle(id: string, patch: Partial<VehicleInput>): Vehicle
     updatedAt: new Date().toISOString(),
   };
   store.vehicles[idx] = next;
-  writeFile(store);
+  await writeStore(store);
   return next;
 }
 
-export function deleteVehicle(id: string): boolean {
-  const store = readFile();
+export async function deleteVehicle(id: string): Promise<boolean> {
+  const store = await readStore();
   const before = store.vehicles.length;
   store.vehicles = store.vehicles.filter((v) => v.id !== id);
   if (store.vehicles.length === before) return false;
-  writeFile(store);
+  await writeStore(store);
   return true;
+}
+
+/** True si los datos van a Postgres (recomendado en Vercel). */
+export function isRemoteStore(): boolean {
+  return Boolean(resolveDatabaseUrl());
 }

@@ -12,7 +12,7 @@ export async function GET(_request: Request, context: Ctx) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
   const { id } = await context.params;
-  const vehicle = getVehicleById(id);
+  const vehicle = await getVehicleById(id);
   if (!vehicle) return NextResponse.json({ error: "No encontrado" }, { status: 404 });
   return NextResponse.json({ vehicle });
 }
@@ -36,7 +36,7 @@ export async function PATCH(request: Request, context: Ctx) {
     );
   }
   try {
-    const vehicle = updateVehicle(id, parsed.data);
+    const vehicle = await updateVehicle(id, parsed.data);
     if (!vehicle) return NextResponse.json({ error: "No encontrado" }, { status: 404 });
     return NextResponse.json({ vehicle });
   } catch (e) {
@@ -50,7 +50,7 @@ export async function DELETE(_request: Request, context: Ctx) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
   const { id } = await context.params;
-  const ok = deleteVehicle(id);
+  const ok = await deleteVehicle(id);
   if (!ok) return NextResponse.json({ error: "No encontrado" }, { status: 404 });
   return NextResponse.json({ ok: true });
 }

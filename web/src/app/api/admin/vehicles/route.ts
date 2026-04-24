@@ -9,7 +9,7 @@ export async function GET() {
   if (!(await isAdminSessionValid())) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
-  return NextResponse.json({ vehicles: listVehicles() });
+  return NextResponse.json({ vehicles: await listVehicles() });
 }
 
 export async function POST(request: Request) {
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
   }
   const d = parsed.data;
   try {
-    const vehicle = createVehicle({
+    const vehicle = await createVehicle({
       brand: d.brand,
       model: d.model,
       year: d.year,

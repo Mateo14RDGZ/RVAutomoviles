@@ -7,8 +7,8 @@ export const metadata = {
   title: "Panel",
 };
 
-export default function AdminHomePage() {
-  const vehicles = listVehicles();
+export default async function AdminHomePage() {
+  const vehicles = await listVehicles();
   const published = vehicles.filter((v) => v.published).length;
 
   return (

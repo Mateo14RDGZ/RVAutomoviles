@@ -22,8 +22,8 @@ export function AdminHeader() {
           <Link href="/admin/vehicles" className="text-slate-600 hover:text-slate-900">
             Vehículos
           </Link>
-          <Link href="/" className="text-slate-600 hover:text-slate-900">
-            Ver sitio
+          <Link href="/catalogo" className="text-slate-600 hover:text-slate-900">
+            Ver catálogo
           </Link>
           <button
             type="button"

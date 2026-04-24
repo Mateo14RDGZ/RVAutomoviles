@@ -7,8 +7,8 @@ export const metadata = {
   title: "Vehículos",
 };
 
-export default function AdminVehiclesPage() {
-  const vehicles = listVehicles();
+export default async function AdminVehiclesPage() {
+  const vehicles = await listVehicles();
 
   return (
     <div className="space-y-4">
