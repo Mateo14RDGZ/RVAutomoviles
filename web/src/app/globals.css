@@ -48,3 +48,16 @@ body {
 .animate-fade-in {
   animation: fadeIn 500ms ease-out both;
 }
+
+.vehicle-form input,
+.vehicle-form textarea,
+.vehicle-form select {
+  color-scheme: light;
+}
+
+.vehicle-form input[type="text"],
+.vehicle-form input[type="number"],
+.vehicle-form textarea {
+  background: #ffffff;
+  color: #0f172a;
+}

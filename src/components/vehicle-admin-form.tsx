@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Vehicle } from "@/lib/vehicle-types";
 
@@ -62,6 +62,7 @@ export function VehicleAdminForm(props: Props) {
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
+  const [pendingPhotos, setPendingPhotos] = useState<Array<{ file: File; previewUrl: string }>>([]);
   const [form, setForm] = useState(() =>
     isEdit ? fromVehicle(props.initial) : emptyForm(),
   );
@@ -77,6 +78,12 @@ export function VehicleAdminForm(props: Props) {
     if (typeof window === "undefined") return sharePath;
     return `${window.location.origin}${sharePath}`;
   }, [sharePath]);
+
+  useEffect(() => {
+    return () => {
+      pendingPhotos.forEach((photo) => URL.revokeObjectURL(photo.previewUrl));
+    };
+  }, [pendingPhotos]);
 
   function toPayload() {
     const highlights = form.highlightsText
@@ -126,6 +133,20 @@ export function VehicleAdminForm(props: Props) {
       const data = (await res.json().catch(() => ({}))) as { error?: string; vehicle?: Vehicle };
       if (!res.ok) throw new Error(data.error || "No se pudo guardar");
       if (!isEdit && data.vehicle) {
+        if (pendingPhotos.length > 0) {
+          const uploadedUrls = await uploadFilesForVehicle(
+            data.vehicle.id,
+            pendingPhotos.map((photo) => photo.file),
+          );
+          if (uploadedUrls.length > 0) {
+            const patchRes = await fetch(`/api/admin/vehicles/${data.vehicle.id}`, {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ photos: uploadedUrls }),
+            });
+            if (!patchRes.ok) throw new Error("No se pudieron guardar las fotos seleccionadas.");
+          }
+        }
         router.push(`/admin/vehicles/${data.vehicle.id}/edit`);
         router.refresh();
         return;
@@ -151,6 +172,30 @@ export function VehicleAdminForm(props: Props) {
     });
     const data = (await res.json().catch(() => ({}))) as { error?: string };
     if (!res.ok) throw new Error(data.error || "No se pudo guardar la media");
+  }
+
+  async function uploadFilesForVehicle(targetVehicleId: string, files: File[]): Promise<string[]> {
+    const uploadedUrls: string[] = [];
+    for (const file of files) {
+      const fd = new FormData();
+      fd.set("vehicleId", targetVehicleId);
+      fd.set("file", file);
+      const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
+      const data = (await res.json().catch(() => ({}))) as { error?: string; url?: string };
+      if (!res.ok || !data.url) throw new Error(data.error || `Falló la subida de ${file.name}`);
+      uploadedUrls.push(data.url);
+    }
+    return uploadedUrls;
+  }
+
+  function queuePendingPhotos(files: File[]) {
+    const queued = files.map((file) => ({ file, previewUrl: URL.createObjectURL(file) }));
+    setPendingPhotos((current) => [...current, ...queued]);
+    setNotice(
+      queued.length > 1
+        ? `${queued.length} fotos listas para subir al guardar.`
+        : "Foto lista para subir al guardar.",
+    );
   }
 
   async function removePhoto(url: string) {
@@ -182,16 +227,7 @@ export function VehicleAdminForm(props: Props) {
     setError(null);
     setNotice(null);
     try {
-      const uploadedUrls: string[] = [];
-      for (const file of files) {
-        const fd = new FormData();
-        fd.set("vehicleId", vehicleId);
-        fd.set("file", file);
-        const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
-        const data = (await res.json().catch(() => ({}))) as { error?: string; url?: string };
-        if (!res.ok || !data.url) throw new Error(data.error || `Falló la subida de ${file.name}`);
-        uploadedUrls.push(data.url);
-      }
+      const uploadedUrls = await uploadFilesForVehicle(vehicleId, files);
       const nextPhotos = [...form.photos, ...uploadedUrls];
       setForm((f) => ({ ...f, photos: nextPhotos }));
       await persistMedia({ photos: nextPhotos });
@@ -239,7 +275,7 @@ export function VehicleAdminForm(props: Props) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="vehicle-form space-y-6">
       {error ? (
         <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
           {error}
@@ -432,20 +468,30 @@ export function VehicleAdminForm(props: Props) {
             <p className="text-xs text-slate-600">
               {isEdit
                 ? "Subí todas las imágenes que quieras; se guardan automáticamente."
-                : "Guardá el vehículo primero para habilitar la subida de fotos."}
+                : "Elegí fotos ahora; se subirán automáticamente cuando guardes el vehículo."}
             </p>
             <input
               type="file"
               accept="image/*"
               multiple
-              disabled={!vehicleId || uploading}
+              disabled={uploading}
               onChange={(e) => {
                 const selected = Array.from(e.target.files || []);
                 e.target.value = "";
-                if (selected.length) void uploadFiles(selected);
+                if (!selected.length) return;
+                if (!vehicleId) {
+                  queuePendingPhotos(selected);
+                  return;
+                }
+                void uploadFiles(selected);
               }}
               className="block w-full rounded-lg border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-sm"
             />
+            {!vehicleId && pendingPhotos.length > 0 ? (
+              <p className="text-xs text-amber-700">
+                Estas fotos se subirán al guardar y serán las que se mostrarán en catálogo y ficha.
+              </p>
+            ) : null}
             <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {form.photos.map((url, index) => (
                 <li key={`${url}-${index}`} className="relative overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
@@ -471,6 +517,36 @@ export function VehicleAdminForm(props: Props) {
                   </button>
                 </li>
               ))}
+              {!vehicleId
+                ? pendingPhotos.map((photo, index) => (
+                    <li
+                      key={photo.previewUrl}
+                      className="relative overflow-hidden rounded-xl border border-amber-200 bg-amber-50"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={photo.previewUrl}
+                        alt={`Foto pendiente ${index + 1}`}
+                        className="aspect-[4/3] w-full object-cover"
+                      />
+                      <span className="absolute left-2 top-2 rounded-full bg-amber-600 px-2 py-0.5 text-[10px] font-semibold text-white">
+                        Pendiente
+                      </span>
+                      <button
+                        type="button"
+                        className="absolute right-2 top-2 rounded-full bg-black/70 px-2 py-0.5 text-xs text-white"
+                        onClick={() => {
+                          URL.revokeObjectURL(photo.previewUrl);
+                          setPendingPhotos((current) =>
+                            current.filter((x) => x.previewUrl !== photo.previewUrl),
+                          );
+                        }}
+                      >
+                        Quitar
+                      </button>
+                    </li>
+                  ))
+                : null}
             </ul>
           </section>
 
