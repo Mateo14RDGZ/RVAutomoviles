@@ -401,30 +401,30 @@ export function VehicleAdminForm(props: Props) {
   return (
     <div className="vehicle-form space-y-6">
       {error ? (
-        <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
+        <p className="rounded-xl border border-red-400/30 bg-red-950/50 px-3 py-2.5 text-sm text-red-100">
           {error}
         </p>
       ) : null}
       {notice ? (
-        <p className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+        <p className="rounded-xl border border-emerald-400/25 bg-emerald-950/40 px-3 py-2.5 text-sm text-emerald-100">
           {notice}
         </p>
       ) : null}
 
       {isEdit ? (
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-          <h2 className="text-sm font-semibold text-slate-900">Enlace para clientes</h2>
-          <p className="mt-1 text-xs text-slate-600">
+        <section className="admin-card space-y-3">
+          <h2 className="admin-card-title">Enlace para clientes</h2>
+          <p className="admin-card-muted">
             Compartí esta URL en Instagram, WhatsApp o donde quieras. Solo se muestra si el vehículo
             está publicado.
           </p>
-          <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center">
-            <code className="break-all rounded-lg bg-slate-100 px-3 py-2 text-xs text-slate-800">
+          <div className="mt-1 flex flex-col gap-2 sm:flex-row sm:items-center">
+            <code className="break-all rounded-xl border border-white/10 bg-slate-950/80 px-3 py-2 text-xs text-slate-200">
               {shareUrl}
             </code>
             <button
               type="button"
-              className="rounded-lg bg-slate-900 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800"
+              className="rv-btn-secondary shrink-0 px-4 py-2"
               onClick={() => void navigator.clipboard.writeText(shareUrl)}
             >
               Copiar
@@ -434,162 +434,162 @@ export function VehicleAdminForm(props: Props) {
       ) : null}
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-4">
-          <h2 className="text-sm font-semibold text-slate-900">Datos del vehículo</h2>
+        <section className="admin-card space-y-4">
+          <h2 className="admin-card-title">Datos del vehículo</h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <label className="block text-xs font-medium text-slate-700">
-            Marca
-            <input
-              className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-              value={form.brand}
-              onChange={(e) => setForm((f) => ({ ...f, brand: e.target.value }))}
-            />
-          </label>
-          <label className="block text-xs font-medium text-slate-700">
-            Modelo
-            <input
-              className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-              value={form.model}
-              onChange={(e) => setForm((f) => ({ ...f, model: e.target.value }))}
-            />
-          </label>
-          <label className="block text-xs font-medium text-slate-700">
-            Año
-            <input
-              type="number"
-              className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-              value={form.year}
-              onChange={(e) => setForm((f) => ({ ...f, year: Number(e.target.value) }))}
-            />
-          </label>
-          <label className="block text-xs font-medium text-slate-700">
-            Kilometraje (km)
-            <input
-              type="number"
-              className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-              value={form.mileageKm}
-              onChange={(e) => setForm((f) => ({ ...f, mileageKm: e.target.value }))}
-              placeholder="Opcional"
-            />
-          </label>
-          <label className="block text-xs font-medium text-slate-700">
-            Combustible
-            <input
-              className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-              value={form.fuel}
-              onChange={(e) => setForm((f) => ({ ...f, fuel: e.target.value }))}
-              placeholder="Nafta, diésel, híbrido…"
-            />
-          </label>
-          <label className="block text-xs font-medium text-slate-700">
-            Caja
-            <input
-              className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-              value={form.transmission}
-              onChange={(e) => setForm((f) => ({ ...f, transmission: e.target.value }))}
-              placeholder="Manual, automática…"
-            />
-          </label>
-          <label className="block text-xs font-medium text-slate-700">
-            Color
-            <input
-              className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-              value={form.color}
-              onChange={(e) => setForm((f) => ({ ...f, color: e.target.value }))}
-            />
-          </label>
-          <label className="block text-xs font-medium text-slate-700">
-            Precio
-            <input
-              type="number"
-              className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-              value={form.price}
-              onChange={(e) => setForm((f) => ({ ...f, price: e.target.value }))}
-              placeholder="Opcional"
-            />
-          </label>
-          <div className="block text-xs font-medium text-slate-700">
-            Moneda
-            <div className="mt-1 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800">
-              USD (dólares)
+            <label className="admin-label">
+              Marca
+              <input
+                className="admin-field"
+                value={form.brand}
+                onChange={(e) => setForm((f) => ({ ...f, brand: e.target.value }))}
+              />
+            </label>
+            <label className="admin-label">
+              Modelo
+              <input
+                className="admin-field"
+                value={form.model}
+                onChange={(e) => setForm((f) => ({ ...f, model: e.target.value }))}
+              />
+            </label>
+            <label className="admin-label">
+              Año
+              <input
+                type="number"
+                className="admin-field"
+                value={form.year}
+                onChange={(e) => setForm((f) => ({ ...f, year: Number(e.target.value) }))}
+              />
+            </label>
+            <label className="admin-label">
+              Kilometraje (km)
+              <input
+                type="number"
+                className="admin-field"
+                value={form.mileageKm}
+                onChange={(e) => setForm((f) => ({ ...f, mileageKm: e.target.value }))}
+                placeholder="Opcional"
+              />
+            </label>
+            <label className="admin-label">
+              Combustible
+              <input
+                className="admin-field"
+                value={form.fuel}
+                onChange={(e) => setForm((f) => ({ ...f, fuel: e.target.value }))}
+                placeholder="Nafta, diésel, híbrido…"
+              />
+            </label>
+            <label className="admin-label">
+              Caja
+              <input
+                className="admin-field"
+                value={form.transmission}
+                onChange={(e) => setForm((f) => ({ ...f, transmission: e.target.value }))}
+                placeholder="Manual, automática…"
+              />
+            </label>
+            <label className="admin-label">
+              Color
+              <input
+                className="admin-field"
+                value={form.color}
+                onChange={(e) => setForm((f) => ({ ...f, color: e.target.value }))}
+              />
+            </label>
+            <label className="admin-label">
+              Precio
+              <input
+                type="number"
+                className="admin-field"
+                value={form.price}
+                onChange={(e) => setForm((f) => ({ ...f, price: e.target.value }))}
+                placeholder="Opcional"
+              />
+            </label>
+            <div className="admin-label">
+              Moneda
+              <div className="admin-field border-white/10 bg-slate-950/40 text-slate-300">
+                USD (dólares)
+              </div>
             </div>
           </div>
-          </div>
 
-          <fieldset className="rounded-xl border border-slate-200 bg-slate-50/60 p-3">
-          <legend className="px-1 text-xs font-semibold uppercase tracking-wide text-slate-700">
-            Checklist de equipamiento
-          </legend>
-          <div className="mt-2 grid gap-2 sm:grid-cols-3">
-            {featureOptions.map((feature) => (
-              <label key={feature} className="flex items-center gap-2 text-sm text-slate-800">
-                <input
-                  type="checkbox"
-                  checked={form.features.includes(feature)}
-                  onChange={(e) =>
-                    setForm((f) => ({
-                      ...f,
-                      features: e.target.checked
-                        ? [...f.features, feature]
-                        : f.features.filter((x) => x !== feature),
-                    }))
-                  }
-                />
-                {feature}
-              </label>
-            ))}
-          </div>
+          <fieldset className="rounded-xl border border-white/10 bg-slate-950/30 p-3">
+            <legend className="px-1 text-xs font-semibold uppercase tracking-wide text-slate-400">
+              Checklist de equipamiento
+            </legend>
+            <div className="mt-2 grid gap-2 sm:grid-cols-3">
+              {featureOptions.map((feature) => (
+                <label key={feature} className="flex items-center gap-2 text-sm text-slate-200">
+                  <input
+                    type="checkbox"
+                    checked={form.features.includes(feature)}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        features: e.target.checked
+                          ? [...f.features, feature]
+                          : f.features.filter((x) => x !== feature),
+                      }))
+                    }
+                  />
+                  {feature}
+                </label>
+              ))}
+            </div>
           </fieldset>
 
-          <label className="block text-xs font-medium text-slate-700">
-          Slug de URL (opcional)
-          <input
-            className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-            value={form.urlSlug}
-            onChange={(e) =>
-              setForm((f) => ({ ...f, urlSlug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, "") }))
-            }
-            placeholder="Se genera automáticamente si lo dejás vacío"
-          />
-          <span className="mt-1 block text-[11px] text-slate-500">
-            Solo letras minúsculas, números y guiones. Si lo cambiás, los enlaces viejos dejan de
-            funcionar.
-          </span>
+          <label className="admin-label">
+            Slug de URL (opcional)
+            <input
+              className="admin-field"
+              value={form.urlSlug}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, urlSlug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, "") }))
+              }
+              placeholder="Se genera automáticamente si lo dejás vacío"
+            />
+            <span className="mt-1 block text-[11px] text-slate-500">
+              Solo letras minúsculas, números y guiones. Si lo cambiás, los enlaces viejos dejan de
+              funcionar.
+            </span>
           </label>
 
-          <label className="flex items-center gap-2 text-sm text-slate-800">
-          <input
-            type="checkbox"
-            checked={form.published}
-            onChange={(e) => setForm((f) => ({ ...f, published: e.target.checked }))}
-          />
-          Publicado (visible para clientes)
+          <label className="flex items-center gap-2 text-sm text-slate-200">
+            <input
+              type="checkbox"
+              checked={form.published}
+              onChange={(e) => setForm((f) => ({ ...f, published: e.target.checked }))}
+            />
+            Publicado (visible para clientes)
           </label>
 
-          <label className="block text-xs font-medium text-slate-700">
-          Descripción
-          <textarea
-            className="mt-1 min-h-[120px] w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-            value={form.description}
-            onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
-          />
+          <label className="admin-label">
+            Descripción
+            <textarea
+              className="admin-field min-h-[120px]"
+              value={form.description}
+              onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
+            />
           </label>
 
-          <label className="block text-xs font-medium text-slate-700">
-          Destacados (uno por línea)
-          <textarea
-            className="mt-1 min-h-[80px] w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-            value={form.highlightsText}
-            onChange={(e) => setForm((f) => ({ ...f, highlightsText: e.target.value }))}
-            placeholder={"Airbags\nÚnico dueño\nService oficial…"}
-          />
+          <label className="admin-label">
+            Destacados (uno por línea)
+            <textarea
+              className="admin-field min-h-[80px]"
+              value={form.highlightsText}
+              onChange={(e) => setForm((f) => ({ ...f, highlightsText: e.target.value }))}
+              placeholder={"Airbags\nÚnico dueño\nService oficial…"}
+            />
           </label>
         </section>
 
         <div className="space-y-6">
-          <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-3">
-            <h2 className="text-sm font-semibold text-slate-900">Fotos</h2>
-            <p className="text-xs text-slate-600">
+          <section className="admin-card space-y-3">
+            <h2 className="admin-card-title">Fotos</h2>
+            <p className="admin-card-muted">
               {isEdit
                 ? "Podés subir varias fotos juntas. Si son pesadas, se optimizan automáticamente para evitar fallos."
                 : "Elegí varias fotos ahora; se optimizan y se subirán al guardar el vehículo."}
@@ -609,18 +609,21 @@ export function VehicleAdminForm(props: Props) {
                 }
                 void uploadFiles(selected);
               }}
-              className="block w-full rounded-lg border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-sm"
+              className="block w-full cursor-pointer rounded-xl border border-dashed border-white/15 bg-slate-950/40 px-3 py-2.5 text-sm text-slate-300 transition-colors duration-200 file:mr-3 file:rounded-lg file:border-0 file:bg-sky-500/20 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-sky-200 hover:border-sky-400/30"
             />
             {!vehicleId && pendingPhotos.length > 0 ? (
-              <p className="text-xs text-amber-700">
+              <p className="text-xs text-amber-200/90">
                 Estas fotos se subirán al guardar y serán las que se mostrarán en catálogo y ficha.
               </p>
             ) : null}
             <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {form.photos.map((url, index) => (
-                <li key={`${url}-${index}`} className="relative overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <li
+                  key={`${url}-${index}`}
+                  className="relative overflow-hidden rounded-xl border border-white/10 bg-slate-950/40"
+                >
                   {imageErrors[url] ? (
-                    <div className="flex aspect-[4/3] items-center justify-center px-3 text-center text-xs text-slate-500">
+                    <div className="flex aspect-[4/3] items-center justify-center px-3 text-center text-xs text-slate-400">
                       No se pudo cargar esta foto. Podés eliminarla y volver a subirla.
                     </div>
                   ) : (
@@ -634,7 +637,7 @@ export function VehicleAdminForm(props: Props) {
                   )}
                   <button
                     type="button"
-                    className="absolute right-2 top-2 rounded-full bg-black/70 px-2 py-0.5 text-xs text-white"
+                    className="absolute right-2 top-2 rounded-full bg-black/75 px-2 py-0.5 text-xs text-white transition-opacity hover:bg-black/90"
                     onClick={() => void removePhoto(url)}
                   >
                     Quitar
@@ -645,7 +648,7 @@ export function VehicleAdminForm(props: Props) {
                 ? pendingPhotos.map((photo, index) => (
                     <li
                       key={photo.previewUrl}
-                      className="relative overflow-hidden rounded-xl border border-amber-200 bg-amber-50"
+                      className="relative overflow-hidden rounded-xl border border-amber-400/35 bg-amber-950/35"
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
@@ -653,12 +656,12 @@ export function VehicleAdminForm(props: Props) {
                         alt={`Foto pendiente ${index + 1}`}
                         className="aspect-[4/3] w-full object-cover"
                       />
-                      <span className="absolute left-2 top-2 rounded-full bg-amber-600 px-2 py-0.5 text-[10px] font-semibold text-white">
+                      <span className="absolute left-2 top-2 rounded-full bg-amber-500/90 px-2 py-0.5 text-[10px] font-semibold text-slate-950">
                         Pendiente
                       </span>
                       <button
                         type="button"
-                        className="absolute right-2 top-2 rounded-full bg-black/70 px-2 py-0.5 text-xs text-white"
+                        className="absolute right-2 top-2 rounded-full bg-black/75 px-2 py-0.5 text-xs text-white"
                         onClick={() => {
                           URL.revokeObjectURL(photo.previewUrl);
                           setPendingPhotos((current) =>
@@ -674,13 +677,13 @@ export function VehicleAdminForm(props: Props) {
             </ul>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-3">
-            <h2 className="text-sm font-semibold text-slate-900">Documentación</h2>
-            <p className="text-xs text-slate-600">PDF o imágenes (seguro, informe, título, etc.).</p>
+          <section className="admin-card space-y-3">
+            <h2 className="admin-card-title">Documentación</h2>
+            <p className="admin-card-muted">PDF o imágenes (seguro, informe, título, etc.).</p>
             <button
               type="button"
               disabled={!vehicleId || uploading}
-              className="rounded-lg border border-slate-200 px-3 py-2 text-sm hover:bg-slate-50 disabled:opacity-50"
+              className="rv-btn-secondary disabled:opacity-50"
               onClick={() => {
                 const name = window.prompt("Nombre que verá el cliente (ej. Informe de dominio)") || "";
                 const input = document.createElement("input");
@@ -699,14 +702,19 @@ export function VehicleAdminForm(props: Props) {
               {form.documents.map((d) => (
                 <li
                   key={d.url}
-                  className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 px-3 py-2"
+                  className="flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-slate-950/30 px-3 py-2"
                 >
-                  <a className="truncate text-sky-700 underline" href={d.url} target="_blank" rel="noreferrer">
+                  <a
+                    className="truncate text-sky-400 underline-offset-2 transition-colors hover:text-sky-300 hover:underline"
+                    href={d.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {d.name}
                   </a>
                   <button
                     type="button"
-                    className="shrink-0 text-xs text-red-700"
+                    className="shrink-0 text-xs text-red-300 transition-colors hover:text-red-200"
                     onClick={() =>
                       setForm((f) => ({ ...f, documents: f.documents.filter((x) => x.url !== d.url) }))
                     }
@@ -725,7 +733,7 @@ export function VehicleAdminForm(props: Props) {
           type="button"
           disabled={saving || uploading}
           onClick={() => void save()}
-          className="rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-50"
+          className="rv-btn-primary px-6 py-3 disabled:opacity-50"
         >
           {saving ? "Guardando…" : "Guardar cambios"}
         </button>

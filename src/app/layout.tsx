@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import { RegisterPWA } from "@/components/register-pwa";
 import "./globals.css";
 
@@ -11,6 +11,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const brandFont = Outfit({
+  variable: "--font-brand",
+  subsets: ["latin"],
+  weight: ["300", "400"],
+  display: "swap",
 });
 
 export const viewport: Viewport = {
@@ -69,7 +76,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es-AR">
-      <body className={`${geistSans.variable} ${geistMono.variable} min-h-dvh antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${brandFont.variable} min-h-dvh antialiased`}
+      >
         {children}
         <RegisterPWA />
       </body>

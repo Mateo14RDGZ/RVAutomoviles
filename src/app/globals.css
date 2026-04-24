@@ -53,6 +53,59 @@ body {
   .rv-input {
     @apply mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-100;
   }
+
+  /* Panel admin: misma línea cromática que la web pública (slate oscuro + sky) */
+  .admin-panel .rv-title {
+    @apply text-lg font-medium tracking-tight text-white sm:text-xl;
+  }
+
+  .admin-panel .rv-muted {
+    @apply text-sm text-slate-400;
+  }
+
+  .admin-panel .rv-surface {
+    @apply rounded-2xl border border-white/10 bg-slate-900/50 text-slate-100 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-md transition-[border-color,box-shadow,transform] duration-300 ease-out;
+  }
+
+  .admin-panel .rv-surface:hover {
+    @apply border-white/15 shadow-[0_12px_40px_rgba(14,165,233,0.12)];
+  }
+
+  .admin-panel .rv-btn {
+    @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 ease-out active:scale-[0.98];
+  }
+
+  .admin-panel .rv-btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl border border-sky-400/30 bg-gradient-to-r from-sky-500 to-cyan-500 px-4 py-2.5 text-sm font-medium text-white shadow-[0_8px_24px_rgba(14,165,233,0.35)] transition-all duration-200 ease-out hover:brightness-110 hover:shadow-[0_10px_28px_rgba(14,165,233,0.45)] active:scale-[0.98];
+  }
+
+  .admin-panel .rv-btn-secondary {
+    @apply inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-medium text-slate-200 transition-all duration-200 ease-out hover:border-sky-400/25 hover:bg-white/10 hover:text-white active:scale-[0.98];
+  }
+
+  .admin-panel .rv-input {
+    @apply mt-1 w-full rounded-xl border border-white/10 bg-slate-950/80 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 focus:border-sky-400/60 focus:outline-none focus:ring-2 focus:ring-sky-500/20;
+  }
+
+  .admin-panel .admin-card {
+    @apply rounded-2xl border border-white/10 bg-slate-900/45 p-4 text-slate-100 shadow-[0_8px_28px_rgba(0,0,0,0.3)] backdrop-blur-sm transition-[border-color,box-shadow] duration-300 ease-out hover:border-white/15;
+  }
+
+  .admin-panel .admin-card-muted {
+    @apply text-xs text-slate-400;
+  }
+
+  .admin-panel .admin-card-title {
+    @apply text-sm font-medium text-slate-100;
+  }
+
+  .admin-panel .admin-label {
+    @apply block text-xs font-medium text-slate-400;
+  }
+
+  .admin-panel .admin-field {
+    @apply mt-1 w-full rounded-xl border border-white/10 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500/20;
+  }
 }
 
 @keyframes fadeUp {

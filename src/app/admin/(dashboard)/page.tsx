@@ -20,13 +20,13 @@ export default async function AdminHomePage() {
         </p>
       </div>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <div className="rv-surface p-4">
-          <p className="text-xs text-slate-500">Vehículos</p>
-          <p className="mt-1 text-2xl font-semibold text-slate-900">{vehicles.length}</p>
+        <div className="rv-surface p-5">
+          <p className="text-xs font-medium uppercase tracking-wide text-slate-400">Vehículos</p>
+          <p className="mt-2 text-3xl font-light tabular-nums text-white">{vehicles.length}</p>
         </div>
-        <div className="rv-surface p-4">
-          <p className="text-xs text-slate-500">Publicados</p>
-          <p className="mt-1 text-2xl font-semibold text-slate-900">{published}</p>
+        <div className="rv-surface p-5">
+          <p className="text-xs font-medium uppercase tracking-wide text-slate-400">Publicados</p>
+          <p className="mt-2 text-3xl font-light tabular-nums text-white">{published}</p>
         </div>
       </div>
       <div className="flex flex-col gap-2 sm:flex-row">

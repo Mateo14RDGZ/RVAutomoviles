@@ -14,26 +14,26 @@ export function AdminHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-30 border-b border-sky-200/40 bg-white/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-30 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 lg:px-6">
-        <BrandLogo href="/admin" compact />
-        <nav className="flex flex-1 items-center justify-end gap-2 text-sm sm:gap-4">
+        <BrandLogo href="/admin" />
+        <nav className="flex flex-1 items-center justify-end gap-1 text-sm sm:gap-2">
           <Link
             href="/admin/vehicles"
-            className="rounded-lg px-3 py-1.5 text-slate-700 transition hover:bg-slate-100 hover:text-slate-900"
+            className="rounded-lg px-3 py-2 text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white"
           >
             Vehículos
           </Link>
           <Link
             href="/catalogo"
-            className="rounded-lg px-3 py-1.5 text-slate-700 transition hover:bg-slate-100 hover:text-slate-900"
+            className="rounded-lg px-3 py-2 text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white"
           >
-            Ver catálogo
+            Catálogo
           </Link>
           <button
             type="button"
             onClick={() => void logout()}
-            className="rv-btn-secondary px-3 py-1.5"
+            className="rv-btn-secondary ml-1 px-3 py-2 text-xs sm:text-sm"
           >
             Salir
           </button>
