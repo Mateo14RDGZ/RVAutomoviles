@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PublicChrome } from "@/components/public-chrome";
 import { VehiclePhotoCarousel } from "@/components/vehicle-photo-carousel";
+import { VehicleVisitCtaInline, VehicleVisitCtaSticky } from "@/components/vehicle-visit-cta";
 import { getVehicleBySlug } from "@/lib/vehicle-store";
 
 export const dynamic = "force-dynamic";
@@ -18,6 +20,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+const sectionTitle = "text-xs font-bold uppercase tracking-[0.2em] text-rv-accent";
+const cardBase =
+  "rounded-2xl border border-slate-200/90 bg-white px-4 py-3.5 shadow-sm sm:px-4 sm:py-4";
+
 export default async function PublicVehiclePage({ params }: Props) {
   const { slug } = await params;
   const v = await getVehicleBySlug(slug);
@@ -30,62 +36,73 @@ export default async function PublicVehiclePage({ params }: Props) {
 
   return (
     <PublicChrome>
-      <div className="min-h-dvh bg-white text-slate-900">
-        <main className="mx-auto max-w-4xl px-4 pb-12 pt-8">
-          <div className="mb-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rv-accent">
-              Ficha del vehículo
-            </p>
+      <div className="min-h-dvh bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-900">
+        <main className="mx-auto max-w-xl px-4 pb-36 pt-3 sm:px-5 sm:pt-5 md:max-w-2xl md:pb-16">
+          <nav className="mb-3 flex items-center gap-2 text-sm md:mb-4">
+            <Link
+              href="/catalogo"
+              className="inline-flex items-center gap-1 font-medium text-rv-accent transition hover:text-rv-accent/80"
+            >
+              <span aria-hidden className="text-lg leading-none">
+                ←
+              </span>
+              Autos en venta
+            </Link>
+          </nav>
+
+          <div className="-mx-4 overflow-hidden sm:mx-0 sm:rounded-3xl sm:shadow-[0_12px_40px_rgba(30,166,247,0.1)]">
+            {v.photos.length > 0 ? (
+              <VehiclePhotoCarousel
+                photos={v.photos}
+                alt={`${v.brand} ${v.model}`}
+                className="rounded-none border-x-0 border-t-0 border-b-0 shadow-none sm:rounded-3xl sm:border sm:border-rv-accent/15 sm:shadow-[0_18px_48px_rgba(30,166,247,0.12)]"
+              />
+            ) : (
+              <div className="mx-4 flex aspect-[4/3] items-center justify-center rounded-2xl border border-dashed border-rv-accent/25 bg-rv-accent/[0.06] text-base text-slate-600 sm:mx-0">
+                Fotos próximamente
+              </div>
+            )}
           </div>
 
-          {v.photos.length > 0 ? (
-            <div className="mt-3">
-              <VehiclePhotoCarousel photos={v.photos} alt={`${v.brand} ${v.model}`} />
-            </div>
-          ) : (
-            <div className="mt-3 flex aspect-[4/3] items-center justify-center rounded-2xl border border-dashed border-rv-accent/25 bg-rv-accent/[0.04] text-sm text-slate-600">
-              Fotos próximamente
-            </div>
-          )}
-
-          <section className="mt-6 rounded-3xl border border-rv-accent/15 bg-white p-5 shadow-[0_12px_30px_rgba(30,166,247,0.08)]">
-            <h1 className="text-2xl font-semibold leading-tight text-slate-900 sm:text-3xl">
+          <section className="mt-5 rounded-3xl border border-rv-accent/12 bg-white p-5 shadow-[0_10px_40px_rgba(15,23,42,0.06)] sm:mt-6 sm:p-6">
+            <p className={sectionTitle}>Ficha</p>
+            <h1 className="mt-2 text-2xl font-bold leading-[1.2] tracking-tight text-slate-900 sm:text-3xl">
               {v.brand} {v.model}
             </h1>
-            <p className="mt-1 text-sm text-slate-600">{v.year}</p>
-            <p className="mt-4 inline-flex rounded-full border border-rv-accent/25 bg-rv-accent/10 px-3 py-1 text-lg font-semibold text-rv-accent">
+            <p className="mt-1.5 text-base text-slate-500">{v.year}</p>
+            <p className="mt-5 inline-flex rounded-2xl border border-rv-accent/20 bg-rv-accent/[0.08] px-4 py-2 text-xl font-bold tabular-nums text-rv-accent sm:text-2xl">
               {priceLabel}
             </p>
           </section>
 
-          <section className="mt-6 grid grid-cols-2 gap-3 text-sm">
-            <div className="rounded-xl border border-rv-accent/12 bg-white px-3 py-3 shadow-sm">
-              <p className="text-xs font-medium text-rv-accent">Color</p>
-              <p className="mt-1 font-medium">{v.color}</p>
+          <section className="mt-5 grid grid-cols-2 gap-3 sm:mt-6 sm:gap-4">
+            <div className={cardBase}>
+              <p className={`${sectionTitle} tracking-[0.12em]`}>Color</p>
+              <p className="mt-2 text-base font-semibold leading-snug text-slate-900">{v.color}</p>
             </div>
-            <div className="rounded-xl border border-rv-accent/12 bg-white px-3 py-3 shadow-sm">
-              <p className="text-xs font-medium text-rv-accent">Combustible</p>
-              <p className="mt-1 font-medium">{v.fuel}</p>
+            <div className={cardBase}>
+              <p className={`${sectionTitle} tracking-[0.12em]`}>Combustible</p>
+              <p className="mt-2 text-base font-semibold leading-snug text-slate-900">{v.fuel}</p>
             </div>
-            <div className="rounded-xl border border-rv-accent/12 bg-white px-3 py-3 shadow-sm">
-              <p className="text-xs font-medium text-rv-accent">Caja</p>
-              <p className="mt-1 font-medium">{v.transmission}</p>
+            <div className={cardBase}>
+              <p className={`${sectionTitle} tracking-[0.12em]`}>Caja</p>
+              <p className="mt-2 text-base font-semibold leading-snug text-slate-900">{v.transmission}</p>
             </div>
-            <div className="rounded-xl border border-rv-accent/12 bg-white px-3 py-3 shadow-sm">
-              <p className="text-xs font-medium text-rv-accent">Kilometraje</p>
-              <p className="mt-1 font-medium">
+            <div className={cardBase}>
+              <p className={`${sectionTitle} tracking-[0.12em]`}>Kilometraje</p>
+              <p className="mt-2 text-base font-semibold leading-snug text-slate-900">
                 {v.mileageKm != null ? `${v.mileageKm.toLocaleString("es-AR")} km` : "—"}
               </p>
             </div>
           </section>
 
           {v.highlights.length ? (
-            <section className="mt-8">
-              <h2 className="text-sm font-semibold text-rv-accent">Destacados</h2>
-              <ul className="mt-3 space-y-2 text-sm text-slate-700">
+            <section className="mt-8 sm:mt-10">
+              <h2 className={sectionTitle}>Destacados</h2>
+              <ul className="mt-4 space-y-3.5 text-base leading-relaxed text-slate-700">
                 {v.highlights.map((h) => (
-                  <li key={h} className="flex gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-rv-accent" aria-hidden />
+                  <li key={h} className="flex gap-3 rounded-2xl bg-white/80 px-3 py-2.5 ring-1 ring-slate-200/80">
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-rv-accent" aria-hidden />
                     <span>{h}</span>
                   </li>
                 ))}
@@ -94,11 +111,14 @@ export default async function PublicVehiclePage({ params }: Props) {
           ) : null}
 
           {v.features && v.features.length ? (
-            <section className="mt-8">
-              <h2 className="text-sm font-semibold text-rv-accent">Equipamiento</h2>
-              <ul className="mt-3 grid grid-cols-1 gap-2 text-sm text-slate-700 sm:grid-cols-3">
+            <section className="mt-8 sm:mt-10">
+              <h2 className={sectionTitle}>Equipamiento</h2>
+              <ul className="mt-4 grid grid-cols-1 gap-2.5 text-base sm:grid-cols-2">
                 {v.features.map((f) => (
-                  <li key={f} className="rounded-lg border border-rv-accent/15 bg-rv-accent/[0.05] px-3 py-2">
+                  <li
+                    key={f}
+                    className="rounded-2xl border border-rv-accent/12 bg-rv-accent/[0.06] px-4 py-3 font-medium text-slate-800"
+                  >
                     {f}
                   </li>
                 ))}
@@ -107,28 +127,28 @@ export default async function PublicVehiclePage({ params }: Props) {
           ) : null}
 
           {v.description ? (
-            <section className="mt-8">
-              <h2 className="text-sm font-semibold text-rv-accent">Descripción</h2>
-              <p className="mt-3 whitespace-pre-wrap border-l-4 border-rv-accent bg-rv-accent/[0.04] py-3 pl-4 pr-3 text-sm leading-relaxed text-slate-700">
+            <section className="mt-8 sm:mt-10">
+              <h2 className={sectionTitle}>Descripción</h2>
+              <p className="mt-4 whitespace-pre-wrap rounded-2xl border border-slate-200/90 bg-white px-4 py-4 text-base leading-[1.65] text-slate-700 shadow-sm sm:px-5 sm:py-5">
                 {v.description}
               </p>
             </section>
           ) : null}
 
           {v.documents.length ? (
-            <section className="mt-8">
-              <h2 className="text-sm font-semibold text-rv-accent">Documentación</h2>
-              <ul className="mt-3 space-y-2">
+            <section className="mt-8 sm:mt-10">
+              <h2 className={sectionTitle}>Documentación</h2>
+              <ul className="mt-4 space-y-3">
                 {v.documents.map((d) => (
                   <li key={d.url}>
                     <a
                       href={d.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-full items-center justify-between gap-3 rounded-xl border border-rv-accent/15 bg-white px-3 py-3 text-sm font-medium text-rv-accent underline-offset-2 hover:bg-rv-accent/[0.04]"
+                      className="flex min-h-[3.25rem] w-full items-center justify-between gap-3 rounded-2xl border border-rv-accent/15 bg-white px-4 py-3.5 text-base font-semibold text-rv-accent shadow-sm transition active:bg-slate-50 hover:border-rv-accent/30 hover:bg-rv-accent/[0.04]"
                     >
-                      <span className="truncate">{d.name}</span>
-                      <span className="shrink-0 text-xs text-slate-500">Abrir</span>
+                      <span className="min-w-0 truncate">{d.name}</span>
+                      <span className="shrink-0 text-sm font-bold text-rv-accent/80">Abrir</span>
                     </a>
                   </li>
                 ))}
@@ -136,10 +156,14 @@ export default async function PublicVehiclePage({ params }: Props) {
             </section>
           ) : null}
 
-          <p className="mt-10 text-center text-xs text-slate-500">
-            Consultanos por este vehículo desde el canal que prefieras.
+          <VehicleVisitCtaInline />
+
+          <p className="mt-8 text-center text-sm leading-relaxed text-slate-500 md:mt-10">
+            ¿Dudas? Escribinos o pasá cuando quieras.
           </p>
         </main>
+
+        <VehicleVisitCtaSticky />
       </div>
     </PublicChrome>
   );

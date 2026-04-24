@@ -5,9 +5,11 @@ import { useCallback, useRef, useState } from "react";
 type Props = {
   photos: string[];
   alt: string;
+  /** Clases del contenedor (p. ej. bordes distintos en mobile full-bleed) */
+  className?: string;
 };
 
-export function VehiclePhotoCarousel({ photos, alt }: Props) {
+export function VehiclePhotoCarousel({ photos, alt, className = "" }: Props) {
   const [index, setIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const n = photos.length;
@@ -42,7 +44,7 @@ export function VehiclePhotoCarousel({ photos, alt }: Props) {
       aria-label={n > 1 ? `${alt}, galería de ${n} fotos` : alt}
       tabIndex={0}
       onKeyDown={onKeyDown}
-      className="relative overflow-hidden rounded-3xl border border-rv-accent/15 bg-slate-100 shadow-[0_18px_48px_rgba(30,166,247,0.12)] outline-none ring-rv-accent/30 focus-visible:ring-2"
+      className={`relative overflow-hidden border border-rv-accent/15 bg-slate-100 shadow-[0_18px_48px_rgba(30,166,247,0.12)] outline-none ring-rv-accent/30 focus-visible:ring-2 ${className}`}
       onTouchStart={(e) => {
         touchStartX.current = e.touches[0].clientX;
       }}
