@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PublicChrome } from "@/components/public-chrome";
-import { PublicVehicleGallery } from "@/components/public-vehicle-gallery";
 import { getVehicleBySlug } from "@/lib/vehicle-store";
 
 export const dynamic = "force-dynamic";
@@ -16,6 +15,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${v.brand} ${v.model} ${v.year}`,
     description: v.description.slice(0, 160),
   };
+}
+
+function PublicVehicleGallery({ photos, alt }: { photos: string[]; alt: string }) {
+  if (!photos.length) {
+    return (
+      <div className="mt-3 flex aspect-[4/3] items-center justify-center rounded-3xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
+        Fotos proximamente
+      </div>
+    );
+  }
+
+  const main = photos[0];
+
+  return (
+    <section className="mt-3 space-y-3">
+      <div className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.12)]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={main} alt={alt} className="aspect-[4/3] w-full object-cover transition duration-500" />
+      </div>
+
+      {photos.length > 1 ? (
+        <div className="grid grid-cols-4 gap-2 sm:grid-cols-6">
+          {photos.map((url, index) => (
+            <div key={`${url}-${index}`} className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={url} alt="" className="aspect-[4/3] h-full w-full object-cover" />
+            </div>
+          ))}
+        </div>
+      ) : null}
+    </section>
+  );
 }
 
 export default async function PublicVehiclePage({ params }: Props) {
