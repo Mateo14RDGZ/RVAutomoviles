@@ -11,6 +11,9 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        rv: {
+          accent: "#1EA6F7",
+        },
       },
     },
   },
