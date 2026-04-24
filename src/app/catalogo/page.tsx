@@ -33,12 +33,6 @@ export default async function CatalogoPage() {
                 Todavía no hay autos publicados. Cuando cargues unidades desde el panel y las
                 marques como publicadas, aparecerán acá.
               </p>
-              <Link
-                href="/admin/login"
-                className="mt-6 inline-block text-sm font-medium text-sky-300 underline"
-              >
-                Ir al panel
-              </Link>
             </div>
           ) : (
             <ul className="space-y-4">
