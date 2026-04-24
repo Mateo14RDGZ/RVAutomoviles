@@ -64,32 +64,43 @@ export async function POST(request: Request) {
   const stamp = Date.now();
   const filename = `${stamp}-${safe}`;
 
-  const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
-  if (blobToken) {
-    const pathname = `vehicles/${vehicleId}/${filename}`;
-    const blob = await put(pathname, file, {
-      access: "public",
-      token: blobToken,
-    });
-    return NextResponse.json({ url: blob.url });
-  }
+  try {
+    const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
+    if (blobToken) {
+      const pathname = `vehicles/${vehicleId}/${filename}`;
+      const blob = await put(pathname, file, {
+        access: "public",
+        token: blobToken,
+      });
+      return NextResponse.json({ url: blob.url });
+    }
 
-  if (process.env.VERCEL) {
+    if (process.env.VERCEL) {
+      return NextResponse.json(
+        {
+          error:
+            "En Vercel hace falta Blob Storage: creá un store en el dashboard y definí BLOB_READ_WRITE_TOKEN.",
+        },
+        { status: 503 },
+      );
+    }
+
+    const relDir = path.join("uploads", "vehicles", vehicleId);
+    const absDir = path.join(process.cwd(), "public", relDir);
+    fs.mkdirSync(absDir, { recursive: true });
+    const absPath = path.join(absDir, filename);
+    const buf = Buffer.from(await file.arrayBuffer());
+    fs.writeFileSync(absPath, buf);
+    const url = `/${relDir.replace(/\\/g, "/")}/${filename}`;
+    return NextResponse.json({ url });
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Error interno al guardar el archivo.";
     return NextResponse.json(
       {
-        error:
-          "En Vercel hace falta Blob Storage: creá un store en el dashboard y definí BLOB_READ_WRITE_TOKEN.",
+        error: `No se pudo subir el archivo. ${message}`,
       },
-      { status: 503 },
+      { status: 500 },
     );
   }
-
-  const relDir = path.join("uploads", "vehicles", vehicleId);
-  const absDir = path.join(process.cwd(), "public", relDir);
-  fs.mkdirSync(absDir, { recursive: true });
-  const absPath = path.join(absDir, filename);
-  const buf = Buffer.from(await file.arrayBuffer());
-  fs.writeFileSync(absPath, buf);
-  const url = `/${relDir.replace(/\\/g, "/")}/${filename}`;
-  return NextResponse.json({ url });
 }
