@@ -29,16 +29,16 @@ export default async function PublicVehiclePage({ params }: Props) {
 
   return (
     <PublicChrome>
-      <div className="min-h-dvh bg-white text-slate-900">
-        <main className="mx-auto max-w-3xl px-4 pb-10 pt-8">
+      <div className="min-h-dvh bg-gradient-to-b from-slate-100 via-white to-slate-100 text-slate-900">
+        <main className="mx-auto max-w-4xl px-4 pb-12 pt-8">
           <div className="mb-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">
               Ficha del vehículo
             </p>
           </div>
 
           {v.photos[0] ? (
-            <div className="mt-3 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="mt-3 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.1)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={v.photos[0]}
@@ -57,7 +57,7 @@ export default async function PublicVehiclePage({ params }: Props) {
               {v.photos.slice(1).map((url) => (
                 <div
                   key={url}
-                  className="h-20 w-28 shrink-0 overflow-hidden rounded-lg border border-slate-200"
+                  className="h-20 w-24 shrink-0 overflow-hidden rounded-lg border border-slate-200 sm:w-28"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={url} alt="" className="h-full w-full object-cover" />
@@ -66,28 +66,30 @@ export default async function PublicVehiclePage({ params }: Props) {
             </div>
           ) : null}
 
-          <section className="mt-6 space-y-2">
-            <h1 className="text-2xl font-semibold leading-tight">
+          <section className="mt-6 rounded-3xl border border-white bg-white/90 p-5 shadow-[0_12px_30px_rgba(15,23,42,0.08)]">
+            <h1 className="text-2xl font-semibold leading-tight text-slate-900 sm:text-3xl">
               {v.brand} {v.model}
             </h1>
-            <p className="text-sm text-slate-600">{v.year}</p>
-            <p className="text-lg font-semibold text-emerald-700">{priceLabel}</p>
+            <p className="mt-1 text-sm text-slate-600">{v.year}</p>
+            <p className="mt-4 inline-flex rounded-full bg-emerald-100 px-3 py-1 text-lg font-semibold text-emerald-800">
+              {priceLabel}
+            </p>
           </section>
 
           <section className="mt-6 grid grid-cols-2 gap-3 text-sm">
-            <div className="rounded-xl border border-slate-200 bg-white px-3 py-3">
+            <div className="rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm">
               <p className="text-xs text-slate-500">Color</p>
               <p className="mt-1 font-medium">{v.color}</p>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-white px-3 py-3">
+            <div className="rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm">
               <p className="text-xs text-slate-500">Combustible</p>
               <p className="mt-1 font-medium">{v.fuel}</p>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-white px-3 py-3">
+            <div className="rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm">
               <p className="text-xs text-slate-500">Caja</p>
               <p className="mt-1 font-medium">{v.transmission}</p>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-white px-3 py-3">
+            <div className="rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm">
               <p className="text-xs text-slate-500">Kilometraje</p>
               <p className="mt-1 font-medium">
                 {v.mileageKm != null ? `${v.mileageKm.toLocaleString("es-AR")} km` : "—"}
