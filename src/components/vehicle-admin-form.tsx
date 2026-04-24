@@ -401,12 +401,12 @@ export function VehicleAdminForm(props: Props) {
   return (
     <div className="vehicle-form space-y-6">
       {error ? (
-        <p className="rounded-xl border border-red-400/30 bg-red-950/50 px-3 py-2.5 text-sm text-red-100">
+        <p className="rounded-xl border border-red-200 bg-red-50 px-3 py-2.5 text-sm text-red-800">
           {error}
         </p>
       ) : null}
       {notice ? (
-        <p className="rounded-xl border border-emerald-400/25 bg-emerald-950/40 px-3 py-2.5 text-sm text-emerald-100">
+        <p className="rounded-xl border border-rv-accent/25 bg-rv-accent/[0.08] px-3 py-2.5 text-sm text-slate-800">
           {notice}
         </p>
       ) : null}
@@ -419,7 +419,7 @@ export function VehicleAdminForm(props: Props) {
             está publicado.
           </p>
           <div className="mt-1 flex flex-col gap-2 sm:flex-row sm:items-center">
-            <code className="break-all rounded-xl border border-white/10 bg-slate-950/80 px-3 py-2 text-xs text-slate-200">
+            <code className="break-all rounded-xl border border-rv-accent/15 bg-rv-accent/[0.06] px-3 py-2 text-xs text-slate-800">
               {shareUrl}
             </code>
             <button
@@ -510,19 +510,19 @@ export function VehicleAdminForm(props: Props) {
             </label>
             <div className="admin-label">
               Moneda
-              <div className="admin-field border-white/10 bg-slate-950/40 text-slate-300">
+              <div className="admin-field border-rv-accent/15 bg-rv-accent/[0.05] text-slate-600">
                 USD (dólares)
               </div>
             </div>
           </div>
 
-          <fieldset className="rounded-xl border border-white/10 bg-slate-950/30 p-3">
-            <legend className="px-1 text-xs font-semibold uppercase tracking-wide text-slate-400">
+          <fieldset className="rounded-xl border border-rv-accent/15 bg-rv-accent/[0.04] p-3">
+            <legend className="px-1 text-xs font-semibold uppercase tracking-wide text-rv-accent">
               Checklist de equipamiento
             </legend>
             <div className="mt-2 grid gap-2 sm:grid-cols-3">
               {featureOptions.map((feature) => (
-                <label key={feature} className="flex items-center gap-2 text-sm text-slate-200">
+                <label key={feature} className="flex items-center gap-2 text-sm text-slate-800">
                   <input
                     type="checkbox"
                     checked={form.features.includes(feature)}
@@ -557,7 +557,7 @@ export function VehicleAdminForm(props: Props) {
             </span>
           </label>
 
-          <label className="flex items-center gap-2 text-sm text-slate-200">
+          <label className="flex items-center gap-2 text-sm text-slate-800">
             <input
               type="checkbox"
               checked={form.published}
@@ -609,10 +609,10 @@ export function VehicleAdminForm(props: Props) {
                 }
                 void uploadFiles(selected);
               }}
-              className="block w-full cursor-pointer rounded-xl border border-dashed border-white/15 bg-slate-950/40 px-3 py-2.5 text-sm text-slate-300 transition-colors duration-200 file:mr-3 file:rounded-lg file:border-0 file:bg-sky-500/20 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-sky-200 hover:border-sky-400/30"
+              className="block w-full cursor-pointer rounded-xl border border-dashed border-rv-accent/25 bg-white px-3 py-2.5 text-sm text-slate-600 transition-colors duration-200 file:mr-3 file:rounded-lg file:border-0 file:bg-rv-accent/15 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-rv-accent hover:border-rv-accent/40"
             />
             {!vehicleId && pendingPhotos.length > 0 ? (
-              <p className="text-xs text-amber-200/90">
+              <p className="text-xs font-medium text-amber-800">
                 Estas fotos se subirán al guardar y serán las que se mostrarán en catálogo y ficha.
               </p>
             ) : null}
@@ -620,7 +620,7 @@ export function VehicleAdminForm(props: Props) {
               {form.photos.map((url, index) => (
                 <li
                   key={`${url}-${index}`}
-                  className="relative overflow-hidden rounded-xl border border-white/10 bg-slate-950/40"
+                  className="relative overflow-hidden rounded-xl border border-rv-accent/12 bg-slate-50"
                 >
                   {imageErrors[url] ? (
                     <div className="flex aspect-[4/3] items-center justify-center px-3 text-center text-xs text-slate-400">
@@ -648,7 +648,7 @@ export function VehicleAdminForm(props: Props) {
                 ? pendingPhotos.map((photo, index) => (
                     <li
                       key={photo.previewUrl}
-                      className="relative overflow-hidden rounded-xl border border-amber-400/35 bg-amber-950/35"
+                      className="relative overflow-hidden rounded-xl border border-amber-200 bg-amber-50"
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
@@ -656,7 +656,7 @@ export function VehicleAdminForm(props: Props) {
                         alt={`Foto pendiente ${index + 1}`}
                         className="aspect-[4/3] w-full object-cover"
                       />
-                      <span className="absolute left-2 top-2 rounded-full bg-amber-500/90 px-2 py-0.5 text-[10px] font-semibold text-slate-950">
+                      <span className="absolute left-2 top-2 rounded-full bg-rv-accent px-2 py-0.5 text-[10px] font-semibold text-white">
                         Pendiente
                       </span>
                       <button
@@ -702,10 +702,10 @@ export function VehicleAdminForm(props: Props) {
               {form.documents.map((d) => (
                 <li
                   key={d.url}
-                  className="flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-slate-950/30 px-3 py-2"
+                  className="flex items-center justify-between gap-2 rounded-xl border border-rv-accent/12 bg-white px-3 py-2"
                 >
                   <a
-                    className="truncate text-sky-400 underline-offset-2 transition-colors hover:text-sky-300 hover:underline"
+                    className="truncate text-rv-accent underline-offset-2 transition-colors hover:text-rv-accent/80 hover:underline"
                     href={d.url}
                     target="_blank"
                     rel="noreferrer"

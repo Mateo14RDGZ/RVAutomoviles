@@ -16,11 +16,11 @@ export default async function CatalogoPage() {
 
   return (
     <PublicChrome>
-      <div className="min-h-dvh bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-50 animate-fade-in">
-        <header className="border-b border-white/10 px-4 py-6">
+      <div className="min-h-dvh animate-fade-in bg-white text-slate-900">
+        <header className="border-b border-rv-accent/12 px-4 py-6">
           <div className="mx-auto max-w-5xl">
-            <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">Autos en venta</h1>
-            <p className="mt-2 text-sm text-slate-300">
+            <h1 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">Autos en venta</h1>
+            <p className="mt-2 max-w-2xl border-l-4 border-rv-accent bg-rv-accent/[0.06] py-2 pl-3 text-sm text-slate-700">
               Elegí una unidad para ver ficha completa, galería y documentación.
             </p>
           </div>
@@ -28,8 +28,8 @@ export default async function CatalogoPage() {
 
         <main className="mx-auto max-w-5xl px-4 py-6">
           {vehicles.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-white/15 bg-white/5 px-4 py-14 text-center">
-              <p className="text-sm text-slate-300">
+            <div className="rounded-2xl border border-dashed border-rv-accent/30 bg-rv-accent/[0.04] px-4 py-14 text-center">
+              <p className="text-sm text-slate-600">
                 Todavía no hay autos publicados. Cuando cargues unidades desde el panel y las
                 marques como publicadas, aparecerán acá.
               </p>
@@ -46,9 +46,9 @@ export default async function CatalogoPage() {
                   <li key={v.id}>
                     <Link
                       href={`/v/${v.urlSlug}`}
-                      className="group flex gap-3 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-400/40 hover:bg-white/[0.08]"
+                      className="group flex gap-3 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-rv-accent/35 hover:shadow-[0_12px_36px_rgba(30,166,247,0.12)]"
                     >
-                      <div className="relative h-24 w-28 shrink-0 overflow-hidden rounded-xl bg-slate-800 sm:w-32">
+                      <div className="relative h-24 w-28 shrink-0 overflow-hidden rounded-xl border border-rv-accent/10 bg-slate-100 sm:w-32">
                         {thumb ? (
                           <>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -61,12 +61,12 @@ export default async function CatalogoPage() {
                         )}
                       </div>
                       <div className="min-w-0 flex-1 py-1">
-                        <p className="truncate font-semibold text-white">
+                        <p className="truncate font-semibold text-slate-900">
                           {v.brand} {v.model}
                         </p>
-                        <p className="text-xs text-slate-400">{v.year}</p>
-                        <p className="mt-2 text-sm font-medium text-emerald-300">{price}</p>
-                        <p className="mt-1 text-xs text-sky-200 transition-transform duration-300 group-hover:translate-x-1">
+                        <p className="text-xs text-slate-500">{v.year}</p>
+                        <p className="mt-2 text-sm font-semibold text-rv-accent">{price}</p>
+                        <p className="mt-1 text-xs font-medium text-rv-accent/90 transition-transform duration-300 group-hover:translate-x-1">
                           Ver ficha →
                         </p>
                       </div>

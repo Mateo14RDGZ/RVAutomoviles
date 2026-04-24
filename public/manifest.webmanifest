@@ -4,8 +4,8 @@
   "description": "Fichas de vehículos para compartir con clientes.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#020617",
-  "theme_color": "#0f172a",
+  "background_color": "#ffffff",
+  "theme_color": "#1EA6F7",
   "lang": "es-AR",
   "icons": [
     {

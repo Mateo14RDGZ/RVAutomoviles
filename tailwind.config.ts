@@ -11,6 +11,10 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        /** Marca RV: celeste para detalles, enlaces y CTAs */
+        rv: {
+          accent: "#1EA6F7",
+        },
       },
     },
   },

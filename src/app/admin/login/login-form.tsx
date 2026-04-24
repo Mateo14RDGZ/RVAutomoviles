@@ -32,7 +32,7 @@ export function LoginForm() {
 
   return (
     <form onSubmit={(e) => void onSubmit(e)} className="space-y-4">
-      <label className="block text-sm font-medium text-slate-300">
+      <label className="block text-sm font-medium text-slate-700">
         Contraseña de administración
         <input
           type="password"
@@ -42,7 +42,7 @@ export function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </label>
-      {error ? <p className="text-sm text-red-300">{error}</p> : null}
+      {error ? <p className="text-sm text-red-600">{error}</p> : null}
       <button
         type="submit"
         disabled={pending}

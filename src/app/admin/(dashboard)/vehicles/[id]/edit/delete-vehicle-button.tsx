@@ -25,7 +25,7 @@ export function DeleteVehicleButton({ id }: { id: string }) {
       type="button"
       disabled={pending}
       onClick={() => void onDelete()}
-      className="rounded-xl border border-red-400/35 bg-red-950/50 px-3 py-2 text-sm font-medium text-red-100 transition-colors duration-200 hover:border-red-400/50 hover:bg-red-900/40 disabled:opacity-50"
+      className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm font-medium text-red-800 transition-colors duration-200 hover:border-red-300 hover:bg-red-100 disabled:opacity-50"
     >
       {pending ? "Eliminando…" : "Eliminar"}
     </button>
@@ -60,7 +60,7 @@ export function MarkVehicleSoldButton({ id }: { id: string }) {
       type="button"
       disabled={pending}
       onClick={() => void onMarkSold()}
-      className="rounded-xl border border-amber-400/35 bg-amber-950/45 px-3 py-2 text-sm font-medium text-amber-100 transition-colors duration-200 hover:border-amber-400/55 hover:bg-amber-900/35 disabled:opacity-50"
+      className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-sm font-medium text-amber-900 transition-colors duration-200 hover:border-amber-300 hover:bg-amber-100 disabled:opacity-50"
     >
       {pending ? "Procesando…" : "Marcar como vendido"}
     </button>

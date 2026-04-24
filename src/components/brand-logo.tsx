@@ -16,7 +16,7 @@ export function BrandLogo({ href = "/", className = "" }: Props) {
     <Link
       href={href}
       aria-label="RV Automoviles"
-      className={`font-[family-name:var(--font-brand)] text-[0.95rem] font-light tracking-[0.12em] text-white/95 transition-colors duration-200 ease-out hover:text-sky-300 sm:text-base ${className}`}
+      className={`font-[family-name:var(--font-brand)] text-[0.95rem] font-light tracking-[0.12em] text-slate-900 transition-colors duration-200 ease-out hover:text-rv-accent sm:text-base ${className}`}
     >
       RV Automoviles
     </Link>

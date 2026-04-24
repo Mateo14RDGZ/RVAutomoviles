@@ -43,7 +43,7 @@ export default async function AdminVehiclesPage() {
                     {v.published ? "" : " · borrador"}
                   </p>
                 </div>
-                <span className="shrink-0 text-sm font-medium text-sky-400 transition-colors duration-200 group-hover:text-sky-300">
+                <span className="shrink-0 text-sm font-medium text-rv-accent transition-colors duration-200 group-hover:text-rv-accent/80">
                   Editar
                 </span>
               </Link>

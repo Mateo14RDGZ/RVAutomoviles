@@ -4,7 +4,7 @@ import { PublicMobileNav } from "@/components/public-mobile-nav";
 
 export function PublicChrome({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-dvh bg-slate-950 text-slate-50">
+    <div className="min-h-dvh bg-white text-slate-900">
       <PublicHeader />
       <div className="pb-20 md:pb-0">{children}</div>
       <PublicFooter />

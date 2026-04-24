@@ -19,15 +19,15 @@ export function CopyVehiclePublicLink({ slug }: { slug: string }) {
   }
 
   return (
-    <div className="flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-      <p className="text-xs text-slate-400">
-        Compartí esta ficha en <span className="text-slate-300">Instagram</span> o{" "}
-        <span className="text-slate-300">WhatsApp</span>.
+    <div className="flex items-center justify-between gap-2 rounded-xl border border-rv-accent/15 bg-rv-accent/[0.05] px-3 py-2">
+      <p className="text-xs text-slate-600">
+        Compartí esta ficha en <span className="font-medium text-rv-accent">Instagram</span> o{" "}
+        <span className="font-medium text-rv-accent">WhatsApp</span>.
       </p>
       <button
         type="button"
         onClick={() => void copy()}
-        className="shrink-0 rounded-lg bg-sky-500 px-3 py-1.5 text-xs font-semibold text-slate-950 hover:bg-sky-400"
+        className="shrink-0 rounded-lg bg-rv-accent px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-rv-accent/90"
       >
         {done ? "Copiado" : "Copiar enlace"}
       </button>
