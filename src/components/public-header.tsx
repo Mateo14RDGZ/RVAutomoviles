@@ -16,10 +16,10 @@ export function PublicHeader() {
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
         <Link
           href="/"
-          className="group inline-flex items-center rounded-xl border border-sky-300/30 bg-gradient-to-r from-sky-400/15 via-cyan-300/10 to-sky-400/15 px-3 py-2 transition-all duration-300 hover:scale-[1.03] hover:border-sky-300/60"
+          className="group inline-flex items-center rounded-lg border border-white/15 bg-white/5 px-4 py-2.5 transition-all duration-300 hover:border-sky-300/40 hover:bg-white/10"
           aria-label="Ir al inicio"
         >
-          <span className="bg-gradient-to-r from-sky-200 via-cyan-100 to-white bg-clip-text text-lg font-extrabold tracking-[0.08em] text-transparent sm:text-xl">
+          <span className="text-xl font-semibold tracking-[0.14em] text-slate-100 sm:text-2xl">
             RV Automoviles
           </span>
         </Link>

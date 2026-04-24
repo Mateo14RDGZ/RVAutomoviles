@@ -94,8 +94,16 @@ export async function POST(request: Request) {
     const url = `/${relDir.replace(/\\/g, "/")}/${filename}`;
     return NextResponse.json({ url });
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Error interno al guardar el archivo.";
+    const message = error instanceof Error ? error.message : "Error interno al guardar el archivo.";
+    if (message.includes("Cannot use public access on a private store")) {
+      return NextResponse.json(
+        {
+          error:
+            "Tu Blob Store está en modo privado y esta app necesita acceso público para mostrar fotos en catálogo/ficha. En Vercel > Storage > Blob > Settings, cambiá Access a Public y volvé a intentar.",
+        },
+        { status: 400 },
+      );
+    }
     return NextResponse.json(
       {
         error: `No se pudo subir el archivo. ${message}`,
