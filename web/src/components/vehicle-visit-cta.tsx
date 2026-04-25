@@ -1,4 +1,4 @@
-import { buildWhatsappVisitUrl } from "@/lib/whatsapp-visit";
+import { buildWhatsappVisitMessage, buildWhatsappVisitUrl } from "@/lib/whatsapp-visit";
 
 function WhatsappIcon({ className }: { className?: string }) {
   return (
@@ -8,9 +8,15 @@ function WhatsappIcon({ className }: { className?: string }) {
   );
 }
 
+type VehicleVisitCtaProps = {
+  /** URL absoluta de la ficha (se incluye en el mensaje de WhatsApp). */
+  listingAbsoluteUrl?: string | null;
+};
+
 /** Botón de WhatsApp debajo del contenido (móvil y escritorio). */
-export function VehicleVisitCtaBelowContent() {
-  const href = buildWhatsappVisitUrl();
+export function VehicleVisitCtaBelowContent({ listingAbsoluteUrl }: VehicleVisitCtaProps = {}) {
+  const href = buildWhatsappVisitUrl(listingAbsoluteUrl);
+  const preview = buildWhatsappVisitMessage(listingAbsoluteUrl);
   return (
     <section
       className="mt-10 rounded-3xl border-2 border-rv-accent/25 bg-gradient-to-b from-rv-accent/[0.12] via-white to-slate-50 p-5 shadow-[0_12px_40px_rgba(30,166,247,0.15)] sm:mt-12 sm:p-6"
@@ -30,8 +36,8 @@ export function VehicleVisitCtaBelowContent() {
         <WhatsappIcon className="h-7 w-7 shrink-0" />
         Coordina tu visita
       </a>
-      <p className="mt-2 text-center text-[11px] text-slate-500">
-        Mensaje: &ldquo;Buenas, me gustaria pasar a ver este auto&rdquo;
+      <p className="mt-2 whitespace-pre-wrap text-center text-[11px] leading-relaxed text-slate-500">
+        Mensaje: &ldquo;{preview}&rdquo;
       </p>
     </section>
   );

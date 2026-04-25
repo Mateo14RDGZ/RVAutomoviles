@@ -1,3 +1,5 @@
+import { buildWhatsappUrl } from "@/lib/whatsapp-visit";
+
 export function PublicFooter() {
   return (
     <footer className="mt-12 border-t border-sky-300/20 bg-slate-950/95">
@@ -17,8 +19,18 @@ export function PublicFooter() {
         </div>
 
         <div className="space-y-2">
-          <p className="font-semibold text-slate-200">Contacto (ejemplo)</p>
-          <p>Telefono: +54 9 11 2345 6789</p>
+          <p className="font-semibold text-slate-200">Contacto</p>
+          <p>
+            WhatsApp:{" "}
+            <a
+              href={buildWhatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-emerald-400 underline decoration-emerald-500/40 underline-offset-2 transition hover:text-emerald-300"
+            >
+              099 744 203
+            </a>
+          </p>
           <p>Instagram: @rv.automoviles</p>
           <p>Facebook: RV Automoviles</p>
         </div>

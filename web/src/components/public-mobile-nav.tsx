@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 const links = [
   { href: "/", label: "Inicio" },
   { href: "/catalogo", label: "Autos" },
-  { href: "/admin/login", label: "Gestión" },
 ] as const;
 
 export function PublicMobileNav() {

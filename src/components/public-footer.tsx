@@ -1,4 +1,5 @@
 import { BrandLogo } from "@/components/brand-logo";
+import { buildWhatsappUrl } from "@/lib/whatsapp-visit";
 
 export function PublicFooter() {
   return (
@@ -13,7 +14,17 @@ export function PublicFooter() {
 
         <div className="space-y-2">
           <p className="font-semibold text-rv-accent">Contacto</p>
-          <p>Telefono: +54 9 11 2345 6789</p>
+          <p>
+            WhatsApp:{" "}
+            <a
+              href={buildWhatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-emerald-700 underline decoration-emerald-600/40 underline-offset-2 transition hover:text-emerald-800"
+            >
+              099 744 203
+            </a>
+          </p>
           <p>Instagram: @rv.automoviles</p>
           <p>Facebook: RV Automoviles</p>
         </div>

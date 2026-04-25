@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { PublicChrome } from "@/components/public-chrome";
 import { VehiclePhotoCarousel } from "@/components/vehicle-photo-carousel";
 import { VehicleVisitCtaBelowContent } from "@/components/vehicle-visit-cta";
+import { getRequestOrigin } from "@/lib/request-origin";
 import { getVehicleBySlug } from "@/lib/vehicle-store";
 
 export const dynamic = "force-dynamic";
@@ -38,6 +39,9 @@ export default async function PublicVehiclePage({ params }: Props) {
   const { slug } = await params;
   const v = await getVehicleBySlug(slug);
   if (!v || !v.published) notFound();
+
+  const origin = await getRequestOrigin();
+  const listingAbsoluteUrl = origin ? `${origin}/v/${slug}` : undefined;
 
   const priceLabel =
     v.price != null
@@ -114,7 +118,6 @@ export default async function PublicVehiclePage({ params }: Props) {
               <DataRow label="Caja" value={show(v.transmission)} />
               <DataRow label="Kilometraje" value={km} />
               <DataRow label="Precio" value={priceLabel} />
-              <DataRow label="Moneda" value={v.currency || "USD"} />
             </div>
           </section>
 
@@ -181,7 +184,7 @@ export default async function PublicVehiclePage({ params }: Props) {
             </section>
           ) : null}
 
-          <VehicleVisitCtaBelowContent />
+          <VehicleVisitCtaBelowContent listingAbsoluteUrl={listingAbsoluteUrl} />
 
           <p className="mt-8 text-center text-sm font-medium text-slate-500">
             RV Automoviles · consultas por este usado
