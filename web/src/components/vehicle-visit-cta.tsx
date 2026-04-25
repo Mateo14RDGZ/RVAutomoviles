@@ -1,8 +1,5 @@
 import { buildWhatsappVisitUrl } from "@/lib/whatsapp-visit";
 
-/**
- * CTA para coordinar visita por WhatsApp (misma URL en barra fija e inline).
- */
 function WhatsappIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -11,45 +8,31 @@ function WhatsappIcon({ className }: { className?: string }) {
   );
 }
 
-export function VehicleVisitCtaSticky() {
+/** Botón de WhatsApp debajo del contenido (móvil y escritorio). */
+export function VehicleVisitCtaBelowContent() {
   const href = buildWhatsappVisitUrl();
   return (
-    <div
-      className="fixed inset-x-0 z-40 border-t border-slate-200/90 bg-white/95 px-3 pt-2 shadow-[0_-8px_32px_rgba(15,23,42,0.08)] backdrop-blur-md md:hidden"
-      style={{ bottom: "calc(4.75rem + env(safe-area-inset-bottom, 0px))" }}
+    <section
+      className="mt-10 rounded-3xl border-2 border-rv-accent/25 bg-gradient-to-b from-rv-accent/[0.12] via-white to-slate-50 p-5 shadow-[0_12px_40px_rgba(30,166,247,0.15)] sm:mt-12 sm:p-6"
+      aria-label="Coordinar visita por WhatsApp"
     >
+      <p className="text-center text-sm font-semibold text-slate-800">¿Querés verlo en persona?</p>
+      <p className="mt-1 text-center text-xs leading-relaxed text-slate-600">
+        Tocá el botón y se abre WhatsApp al <span className="font-semibold text-slate-800">099 744 203</span> con el
+        mensaje listo.
+      </p>
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex min-h-[3.25rem] w-full items-center justify-center gap-2.5 rounded-2xl bg-[#25D366] px-4 py-3.5 text-base font-bold text-white shadow-md transition active:scale-[0.99] hover:bg-[#20bd5a]"
+        className="mt-4 flex min-h-[3.35rem] w-full items-center justify-center gap-2.5 rounded-2xl bg-[#25D366] px-4 py-4 text-base font-bold text-white shadow-lg transition active:scale-[0.99] hover:bg-[#20bd5a] sm:text-lg"
       >
-        <WhatsappIcon className="h-6 w-6 shrink-0" />
+        <WhatsappIcon className="h-7 w-7 shrink-0" />
         Coordina tu visita
       </a>
-      <p className="pb-[max(0.35rem,env(safe-area-inset-bottom))] pt-1 text-center text-[10px] text-slate-500">
-        Abrís WhatsApp con un mensaje listo para enviar
+      <p className="mt-2 text-center text-[11px] text-slate-500">
+        Mensaje: &ldquo;Buenas, me gustaria pasar a ver este auto&rdquo;
       </p>
-    </div>
-  );
-}
-
-export function VehicleVisitCtaInline() {
-  const href = buildWhatsappVisitUrl();
-  return (
-    <div className="mt-10 hidden md:block">
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex min-h-[3rem] w-full items-center justify-center gap-2.5 rounded-2xl bg-[#25D366] px-6 py-3.5 text-base font-bold text-white shadow-md transition hover:bg-[#20bd5a]"
-      >
-        <WhatsappIcon className="h-6 w-6 shrink-0" />
-        Coordina tu visita
-      </a>
-      <p className="mt-2 text-center text-sm text-slate-500">
-        Te abrimos WhatsApp con el mensaje: &ldquo;Buenas, me gustaria pasar a ver este auto&rdquo;
-      </p>
-    </div>
+    </section>
   );
 }
