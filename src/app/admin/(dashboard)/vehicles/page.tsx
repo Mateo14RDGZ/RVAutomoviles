@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { listVehicles } from "@/lib/vehicle-store";
 
@@ -28,27 +29,48 @@ export default async function AdminVehiclesPage() {
         </div>
       ) : (
         <ul className="space-y-2">
-          {vehicles.map((v) => (
-            <li key={v.id}>
-              <Link
-                href={`/admin/vehicles/${v.id}/edit`}
-                className="group rv-surface flex items-center justify-between gap-3 px-4 py-3.5 active:scale-[0.99]"
-              >
-                <div className="min-w-0">
-                  <p className="truncate font-medium text-white">
-                    {v.brand} {v.model} · {v.year}
-                  </p>
-                  <p className="truncate text-xs text-slate-500">
-                    /v/{v.urlSlug}
-                    {v.published ? "" : " · borrador"}
-                  </p>
-                </div>
-                <span className="shrink-0 text-sm font-medium text-rv-accent transition-colors duration-200 group-hover:text-rv-accent/80">
-                  Editar
-                </span>
-              </Link>
-            </li>
-          ))}
+          {vehicles.map((v) => {
+            const thumb = v.photos[0];
+            return (
+              <li key={v.id}>
+                <Link
+                  href={`/admin/vehicles/${v.id}/edit`}
+                  className="group rv-surface flex items-center justify-between gap-3 px-4 py-3 active:scale-[0.99] sm:py-3.5"
+                >
+                  <div className="flex min-w-0 flex-1 items-center gap-3">
+                    <div className="relative h-14 w-[4.5rem] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-slate-900/80">
+                      {thumb ? (
+                        <Image
+                          src={thumb}
+                          alt={`${v.brand} ${v.model}`}
+                          fill
+                          className="object-cover"
+                          sizes="72px"
+                          unoptimized
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center px-1 text-center text-[10px] font-medium leading-tight text-slate-500">
+                          Sin foto
+                        </div>
+                      )}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-base font-semibold text-white">
+                        {v.brand} {v.model}
+                      </p>
+                      <p className="mt-0.5 truncate text-xs text-slate-500">
+                        {v.year} · /v/{v.urlSlug}
+                        {v.published ? "" : " · borrador"}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="shrink-0 text-sm font-medium text-rv-accent transition-colors duration-200 group-hover:text-rv-accent/80">
+                    Editar
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
