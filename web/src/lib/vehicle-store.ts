@@ -149,6 +149,30 @@ export async function createVehicle(input: VehicleInput): Promise<Vehicle> {
   return vehicle;
 }
 
+/** Copia todos los datos del vehículo salvo las fotos (quedan vacías). Nuevo slug y borrador. */
+export async function duplicateVehicleWithoutPhotos(sourceId: string): Promise<Vehicle> {
+  const src = await getVehicleById(sourceId);
+  if (!src) throw new Error("Vehículo no encontrado");
+  return createVehicle({
+    brand: src.brand,
+    model: src.model,
+    year: src.year,
+    mileageKm: src.mileageKm,
+    fuel: src.fuel,
+    transmission: src.transmission,
+    color: src.color,
+    price: src.price,
+    currency: src.currency,
+    description: src.description,
+    highlights: [...src.highlights],
+    features: [...(src.features ?? [])],
+    photos: [],
+    documents: src.documents.map((d) => ({ ...d })),
+    published: false,
+    urlSlug: undefined,
+  });
+}
+
 export async function updateVehicle(
   id: string,
   patch: Partial<VehicleInput>,
