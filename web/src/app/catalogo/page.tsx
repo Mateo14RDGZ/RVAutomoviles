@@ -16,6 +16,20 @@ export default async function CatalogoPage() {
     .filter((v) => v.published)
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
+  const formatPrice = (price: number | null, currency: string) => {
+    if (!price) return "Consultar";
+    return new Intl.NumberFormat("es-UY", {
+      style: "currency",
+      currency: currency || "UYU",
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+
+  const formatMileage = (mileageKm: number | null) => {
+    if (!mileageKm) return "N/D km";
+    return `${new Intl.NumberFormat("es-UY").format(mileageKm)} km`;
+  };
+
   return (
     <PublicChrome>
       <div className="min-h-dvh animate-fade-in bg-gradient-to-b from-slate-50 to-white text-slate-900">
@@ -37,11 +51,13 @@ export default async function CatalogoPage() {
               </p>
             </div>
           ) : (
-            <ul className="grid grid-cols-2 gap-3 sm:gap-6 lg:gap-8">
+            <ul className="grid grid-cols-1 gap-4 min-[430px]:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
               {vehicles.map((v) => {
                 const thumb = v.photos[0];
                 const title = `${v.brand} ${v.model}`.trim();
                 const extraPhotos = v.photos.length > 1 ? v.photos.length - 1 : 0;
+                const priceLabel = formatPrice(v.price, v.currency);
+                const mileageLabel = formatMileage(v.mileageKm);
                 return (
                   <li key={v.id} className="min-w-0">
                     <Link
@@ -83,7 +99,21 @@ export default async function CatalogoPage() {
                         <p className="line-clamp-2 min-h-[2.25rem] text-[11px] font-bold leading-snug tracking-tight text-slate-900 sm:min-h-0 sm:text-base sm:leading-snug group-hover:text-rv-accent">
                           {title}
                         </p>
-                        <span className="mt-2 inline-flex items-center gap-1 text-[10px] font-semibold text-rv-accent transition-transform duration-300 group-hover:translate-x-0.5 sm:text-xs">
+                        <p className="mt-1 text-sm font-semibold text-slate-900 sm:text-base">{priceLabel}</p>
+
+                        <div className="mt-2 flex flex-wrap gap-1.5">
+                          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600 sm:text-xs">
+                            {mileageLabel}
+                          </span>
+                          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600 sm:text-xs">
+                            {v.fuel || "N/D"}
+                          </span>
+                          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600 sm:text-xs">
+                            {v.transmission || "N/D"}
+                          </span>
+                        </div>
+
+                        <span className="mt-3 inline-flex items-center gap-1 text-[10px] font-semibold text-rv-accent transition-transform duration-300 group-hover:translate-x-0.5 sm:text-xs">
                           Ver ficha
                           <span aria-hidden className="text-rv-accent/80">
                             →
