@@ -181,11 +181,6 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <div className="fixed inset-x-3 bottom-3 z-40 sm:hidden">
-          <Link href="/catalogo" className="rv-btn-primary rv-mobile-scan inline-flex w-full justify-center rounded-2xl py-3 text-sm">
-            Ver autos en venta
-          </Link>
-        </div>
       </main>
     </PublicChrome>
   );
