@@ -17,13 +17,13 @@ export function LatestIngresosWidget({ vehicles }: Props) {
       aria-labelledby="ultimos-ingresos-heading"
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-rv-accent/40 to-transparent" />
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mx-auto max-w-5xl px-3 sm:px-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-xl">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-rv-accent">Últimos ingresos</p>
             <h2
               id="ultimos-ingresos-heading"
-              className="mt-1 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
+              className="mt-1 text-xl font-bold tracking-tight text-slate-900 sm:text-3xl"
             >
               Recién sumados al catálogo
             </h2>
@@ -34,18 +34,18 @@ export function LatestIngresosWidget({ vehicles }: Props) {
           </div>
           <Link
             href="/catalogo"
-            className="inline-flex shrink-0 items-center justify-center rounded-xl border border-rv-accent/25 bg-white px-4 py-2.5 text-sm font-semibold text-rv-accent shadow-sm transition-all hover:border-rv-accent/40 hover:bg-rv-accent/[0.06]"
+            className="inline-flex w-full shrink-0 items-center justify-center rounded-xl border border-rv-accent/25 bg-white px-4 py-2.5 text-sm font-semibold text-rv-accent shadow-sm transition-all hover:border-rv-accent/40 hover:bg-rv-accent/[0.06] sm:w-auto"
           >
             Ver catálogo completo
           </Link>
         </div>
 
-        <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-3">
+        <ul className="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 sm:mt-8 sm:grid sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:pb-0">
           {vehicles.map((v, index) => {
             const thumb = v.photos[0];
             const title = `${v.brand} ${v.model}`.trim();
             return (
-              <li key={v.id}>
+              <li key={v.id} className="min-w-[78%] snap-start sm:min-w-0">
                 <Link
                   href={`/v/${v.urlSlug}`}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_10px_40px_rgba(15,23,42,0.06)] ring-1 ring-transparent transition-all duration-300 hover:-translate-y-1 hover:border-rv-accent/30 hover:shadow-[0_16px_48px_rgba(30,166,247,0.15)] hover:ring-rv-accent/10"
