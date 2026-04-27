@@ -16,9 +16,28 @@ export default async function HomePage() {
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 3);
 
+  const dealerJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AutoDealer",
+    name: "RV Automóviles",
+    url: "https://rv-automovilesig.vercel.app",
+    areaServed: "Uruguay",
+    telephone: "+59899744203",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "UY",
+    },
+    sameAs: ["https://instagram.com/rv.automoviles"],
+  };
+
   return (
     <PublicChrome>
       <main className="relative w-full pb-24 text-slate-900 sm:pb-0">
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(dealerJsonLd) }}
+        />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(30,166,247,0.16),transparent_38%),radial-gradient(circle_at_85%_20%,rgba(30,166,247,0.12),transparent_34%)]" />
 
         <section className="rv-mobile-enter rv-mobile-enter-1 relative overflow-hidden border-b border-rv-accent/15 bg-white">

@@ -35,6 +35,13 @@ function DataRow({ label, value }: { label: string; value: string }) {
   );
 }
 
+const TRUST_CHECKLIST = [
+  "Publicación con datos y fotos reales",
+  "Revisión documental previa a la entrega",
+  "Asesoramiento en financiación bancaria",
+  "Coordinación de visita y prueba de manejo",
+] as const;
+
 export default async function PublicVehiclePage({ params }: Props) {
   const { slug } = await params;
   const v = await getVehicleBySlug(slug);
@@ -119,6 +126,25 @@ export default async function PublicVehiclePage({ params }: Props) {
               <DataRow label="Kilometraje" value={km} />
               <DataRow label="Precio" value={priceLabel} />
             </div>
+          </section>
+
+          <section className="mt-6 rounded-3xl border border-rv-accent/20 bg-rv-accent/[0.04] p-5 shadow-[0_8px_24px_rgba(30,166,247,0.08)] sm:mt-7 sm:p-6">
+            <h2 className="text-sm font-extrabold uppercase tracking-[0.2em] text-rv-accent">
+              Checklist de confianza
+            </h2>
+            <ul className="mt-4 space-y-2.5">
+              {TRUST_CHECKLIST.map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-sm font-medium text-slate-700 sm:text-base">
+                  <span
+                    aria-hidden
+                    className="mt-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-rv-accent text-[10px] font-bold text-white"
+                  >
+                    ✓
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </section>
 
           {v.highlights.length ? (

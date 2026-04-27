@@ -10,6 +10,7 @@ export function PublicFooter() {
           <p className="mt-3 max-w-md leading-relaxed">
             Tu proximo auto con informacion clara, fotos reales y documentacion disponible.
           </p>
+          <p className="mt-2 text-xs text-slate-500">Atención: Lun a Sáb · Respuesta dentro del día.</p>
         </div>
 
         <div className="space-y-2 md:justify-self-end md:text-right">
@@ -54,6 +55,14 @@ export function PublicFooter() {
             </p>
             <p>Instagram: @rv.automoviles</p>
             <p>Facebook: RV Automoviles</p>
+          </div>
+          <div className="mt-3 flex flex-wrap gap-3 text-xs md:justify-end">
+            <a href="/privacidad" className="text-slate-500 underline-offset-2 hover:text-rv-accent hover:underline">
+              Privacidad
+            </a>
+            <a href="/terminos" className="text-slate-500 underline-offset-2 hover:text-rv-accent hover:underline">
+              Términos
+            </a>
           </div>
         </div>
       </div>
