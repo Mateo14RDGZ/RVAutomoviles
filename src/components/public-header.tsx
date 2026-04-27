@@ -18,7 +18,7 @@ export function PublicHeader() {
         <BrandLogo className="max-w-[70%] sm:max-w-none" />
 
         <nav aria-label="Principal" className="w-full md:w-auto">
-          <ul className="grid w-full grid-cols-2 items-center gap-1 rounded-2xl border border-rv-accent/15 bg-white p-1.5 shadow-[inset_0_1px_0_rgba(30,166,247,0.06)] md:flex md:w-auto">
+          <ul className="rv-mobile-scan grid w-full grid-cols-2 items-center gap-1 rounded-2xl border border-rv-accent/15 bg-white p-1.5 shadow-[inset_0_1px_0_rgba(30,166,247,0.06)] md:flex md:w-auto">
             {links.map(({ href, label }) => {
               const active =
                 href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);

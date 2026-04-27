@@ -20,19 +20,47 @@ export function PublicFooter() {
 
         <div className="space-y-2">
           <p className="font-semibold text-slate-200">Contacto</p>
-          <p>
-            WhatsApp:{" "}
+          <div className="grid grid-cols-1 gap-2 sm:hidden">
             <a
               href={buildWhatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-emerald-400 underline decoration-emerald-500/40 underline-offset-2 transition hover:text-emerald-300"
+              className="inline-flex items-center justify-center rounded-xl border border-emerald-400/35 bg-emerald-500/10 px-3 py-2.5 text-sm font-semibold text-emerald-300 transition hover:bg-emerald-500/15"
             >
-              099 744 203
+              WhatsApp
             </a>
-          </p>
-          <p>Instagram: @rv.automoviles</p>
-          <p>Facebook: RV Automoviles</p>
+            <a
+              href="https://instagram.com/rv.automoviles"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-xl border border-fuchsia-300/35 bg-fuchsia-500/10 px-3 py-2.5 text-sm font-semibold text-fuchsia-200 transition hover:bg-fuchsia-500/15"
+            >
+              Instagram
+            </a>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-xl border border-sky-300/35 bg-sky-500/10 px-3 py-2.5 text-sm font-semibold text-sky-200 transition hover:bg-sky-500/15"
+            >
+              Facebook
+            </a>
+          </div>
+          <div className="hidden space-y-2 sm:block">
+            <p>
+              WhatsApp:{" "}
+              <a
+                href={buildWhatsappUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-emerald-400 underline decoration-emerald-500/40 underline-offset-2 transition hover:text-emerald-300"
+              >
+                099 744 203
+              </a>
+            </p>
+            <p>Instagram: @rv.automoviles</p>
+            <p>Facebook: RV Automoviles</p>
+          </div>
         </div>
       </div>
     </footer>

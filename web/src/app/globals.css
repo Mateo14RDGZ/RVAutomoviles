@@ -87,6 +87,69 @@ body {
   animation: fadeUp 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+@keyframes rvPulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(14, 165, 233, 0);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.22);
+  }
+}
+
+@keyframes rvScanLine {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@media (max-width: 639px) {
+  .rv-mobile-panel {
+    border-radius: 1.25rem;
+    border: 1px solid rgba(125, 211, 252, 0.22);
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.88));
+    color: #e2e8f0;
+    box-shadow: 0 16px 50px rgba(2, 6, 23, 0.45);
+    backdrop-filter: blur(10px);
+  }
+
+  .rv-mobile-card {
+    border: 1px solid rgba(125, 211, 252, 0.24);
+    background: linear-gradient(170deg, rgba(15, 23, 42, 0.94), rgba(30, 41, 59, 0.9));
+    color: #e2e8f0;
+    box-shadow: 0 14px 32px rgba(2, 6, 23, 0.35);
+    transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+  }
+
+  .rv-mobile-card:active {
+    transform: scale(0.985);
+  }
+
+  .rv-mobile-glow {
+    animation: rvPulseGlow 3.2s ease-in-out infinite;
+  }
+
+  .rv-mobile-scan {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rv-mobile-scan::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -40%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.2), transparent);
+    animation: rvScanLine 2.8s linear infinite;
+    pointer-events: none;
+  }
+}
+
 .vehicle-form input,
 .vehicle-form textarea,
 .vehicle-form select {

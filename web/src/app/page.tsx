@@ -18,19 +18,21 @@ export default async function HomePage() {
 
   return (
     <PublicChrome>
-      <main className="w-full pb-24 text-slate-900 sm:pb-0">
+      <main className="relative w-full pb-24 text-slate-900 sm:pb-0">
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[520px] bg-[radial-gradient(circle_at_10%_10%,rgba(56,189,248,0.25),transparent_55%),radial-gradient(circle_at_90%_20%,rgba(34,211,238,0.2),transparent_50%)] sm:hidden" />
         {/* Hero */}
-        <section className="animate-fade-up relative overflow-hidden border-b border-rv-accent/12 bg-white">
+        <section className="animate-fade-up relative z-10 overflow-hidden border-b border-rv-accent/12 bg-white sm:bg-white">
           <div className="pointer-events-none absolute -left-20 top-2 h-52 w-52 rounded-full bg-rv-accent/15 blur-3xl" />
           <div className="pointer-events-none absolute right-0 top-24 h-40 w-40 rounded-full bg-rv-accent/10 blur-3xl" />
           <div className="mx-auto max-w-5xl px-3 pb-10 pt-8 sm:px-6 sm:pb-16 sm:pt-14">
+            <div className="rv-mobile-panel rv-mobile-scan px-4 py-5 sm:bg-transparent sm:p-0">
             <p className="inline-flex rounded-full border border-rv-accent/25 bg-rv-accent/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-rv-accent">
               RV Automoviles · Uruguay
             </p>
-            <h1 className="mt-4 max-w-3xl text-[1.7rem] font-bold leading-tight tracking-tight text-slate-900 sm:mt-5 sm:text-4xl md:text-5xl">
+            <h1 className="mt-4 max-w-3xl bg-gradient-to-r from-white via-sky-100 to-cyan-200 bg-clip-text text-[1.7rem] font-bold leading-tight tracking-tight text-transparent sm:mt-5 sm:bg-none sm:text-4xl sm:text-slate-900 md:text-5xl">
               Usados con data clara, fotos de verdad y un catálogo que se entiende desde el celu
             </h1>
-            <p className="mt-4 max-w-2xl rounded-r-xl border-l-4 border-rv-accent bg-rv-accent/[0.06] py-3 pl-4 pr-3 text-sm leading-relaxed text-slate-700 sm:mt-5 sm:text-base">
+            <p className="mt-4 max-w-2xl rounded-r-xl border-l-4 border-rv-accent bg-rv-accent/[0.1] py-3 pl-4 pr-3 text-sm leading-relaxed text-slate-200 sm:mt-5 sm:bg-rv-accent/[0.06] sm:text-base sm:text-slate-700">
               Armamos la ficha pública de cada unidad para que la compartas por WhatsApp o redes, y un
               panel liviano para que publiques o saques autos del listado sin complicarte.
             </p>
@@ -51,6 +53,7 @@ export default async function HomePage() {
                 Entrá al catálogo y elegí por foto y título; en la ficha ves todo el detalle.
               </p>
             </div>
+            </div>
           </div>
         </section>
 
@@ -62,14 +65,14 @@ export default async function HomePage() {
           className="border-b border-rv-accent/15 bg-gradient-to-br from-rv-accent/[0.08] via-white to-rv-accent/[0.04] py-10 sm:py-16"
         >
           <div className="mx-auto max-w-5xl px-3 sm:px-6">
-            <div className="overflow-hidden rounded-3xl border border-rv-accent/20 bg-white/90 p-6 shadow-[0_16px_45px_rgba(30,166,247,0.18)] sm:p-8">
+            <div className="rv-mobile-panel rv-mobile-glow overflow-hidden rounded-3xl border border-rv-accent/20 bg-white/90 p-6 shadow-[0_16px_45px_rgba(30,166,247,0.18)] sm:bg-white/90 sm:p-8">
               <p className="inline-flex rounded-full border border-rv-accent/30 bg-rv-accent/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-rv-accent">
                 Financiación bancaria
               </p>
-              <h2 className="mt-4 max-w-3xl text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+              <h2 className="mt-4 max-w-3xl text-2xl font-bold tracking-tight text-white sm:text-3xl sm:text-slate-900">
                 Tu próximo auto puede salir hoy, con crédito de bancos líderes en Uruguay
               </h2>
-              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-700 sm:text-base">
+              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200 sm:text-base sm:text-slate-700">
                 Te asesoramos para que compares opciones de cuota, plazo y entrega. Trabajamos con
                 financiación bancaria para que compres con respaldo, claridad y confianza.
               </p>
@@ -86,7 +89,7 @@ export default async function HomePage() {
                 ].map((bank) => (
                   <span
                     key={bank}
-                    className="rounded-full border border-rv-accent/25 bg-white px-3 py-1.5 text-center text-xs font-semibold text-slate-700 shadow-sm sm:text-sm"
+                    className="rounded-full border border-rv-accent/25 bg-white/95 px-3 py-1.5 text-center text-xs font-semibold text-slate-700 shadow-sm sm:text-sm"
                   >
                     {bank}
                   </span>
@@ -97,7 +100,7 @@ export default async function HomePage() {
                 <Link href="/catalogo" className="rv-btn-primary inline-flex w-full justify-center sm:w-auto">
                   Quiero financiar mi auto
                 </Link>
-                <p className="text-center text-xs font-medium text-slate-600 sm:text-left sm:text-sm">
+                <p className="text-center text-xs font-medium text-slate-300 sm:text-left sm:text-sm sm:text-slate-600">
                   Consultanos y te mostramos alternativas reales según tu perfil.
                 </p>
               </div>
@@ -121,23 +124,23 @@ export default async function HomePage() {
               </p>
             </div>
             <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-5">
-              <article className="rounded-2xl border border-rv-accent/15 bg-slate-50/80 p-5 shadow-sm">
+              <article className="rv-mobile-card rounded-2xl border border-rv-accent/15 bg-slate-50/80 p-5 shadow-sm">
                 <p className="text-sm font-semibold text-rv-accent">Catálogo online</p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-slate-600">
                   Listado en dos columnas con la foto arriba y el título bien claro. En la ficha el
                   cliente ve precio y el resto de los datos.
                 </p>
               </article>
-              <article className="rounded-2xl border border-rv-accent/15 bg-slate-50/80 p-5 shadow-sm">
+              <article className="rv-mobile-card rounded-2xl border border-rv-accent/15 bg-slate-50/80 p-5 shadow-sm">
                 <p className="text-sm font-semibold text-rv-accent">Ficha por unidad</p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-slate-600">
                   Cada auto con galería, datos, equipamiento y documentación si la cargaste. Todo en
                   una sola página para compartir.
                 </p>
               </article>
-              <article className="rounded-2xl border border-rv-accent/15 bg-slate-50/80 p-5 shadow-sm">
+              <article className="rv-mobile-card rounded-2xl border border-rv-accent/15 bg-slate-50/80 p-5 shadow-sm">
                 <p className="text-sm font-semibold text-rv-accent">Panel de gestión</p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-slate-600">
                   Cargá fotos, editá textos y marcá si está publicado o no. Sirve desde la compu o desde
                   el celular cuando estás en la vuelta.
                 </p>
@@ -158,32 +161,32 @@ export default async function HomePage() {
               </p>
             </div>
             <ol className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-6">
-              <li className="relative rounded-2xl border border-white bg-white p-5 shadow-sm">
+              <li className="rv-mobile-card relative rounded-2xl border border-white bg-white p-5 shadow-sm">
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-rv-accent text-sm font-bold text-white">
                   1
                 </span>
                 <h3 className="mt-4 font-semibold text-slate-900">Cargás la unidad</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-slate-600">
                   Entrás al panel, completás datos y subís las fotos. Si falta algo, lo editás cuando
                   quieras.
                 </p>
               </li>
-              <li className="relative rounded-2xl border border-white bg-white p-5 shadow-sm">
+              <li className="rv-mobile-card relative rounded-2xl border border-white bg-white p-5 shadow-sm">
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-rv-accent text-sm font-bold text-white">
                   2
                 </span>
                 <h3 className="mt-4 font-semibold text-slate-900">Publicás en el catálogo</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-slate-600">
                   Cuando la marcás publicada, aparece en &ldquo;Autos en venta&rdquo; con el resto del
                   stock.
                 </p>
               </li>
-              <li className="relative rounded-2xl border border-white bg-white p-5 shadow-sm">
+              <li className="rv-mobile-card relative rounded-2xl border border-white bg-white p-5 shadow-sm">
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-rv-accent text-sm font-bold text-white">
                   3
                 </span>
                 <h3 className="mt-4 font-semibold text-slate-900">Compartís el link</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-slate-600">
                   Copiás el enlace de la ficha y lo mandás por WhatsApp, Instagram o como prefieras: el
                   cliente ve todo en limpio.
                 </p>
@@ -216,7 +219,7 @@ export default async function HomePage() {
                   Abrir en Google Maps
                 </a>
               </div>
-              <div className="overflow-hidden rounded-2xl border border-rv-accent/20 bg-slate-100 shadow-[0_12px_40px_rgba(30,166,247,0.12)]">
+              <div className="rv-mobile-panel overflow-hidden rounded-2xl border border-rv-accent/20 bg-slate-100 shadow-[0_12px_40px_rgba(30,166,247,0.12)]">
                 <iframe
                   title="Ubicación de RV Automóviles en Google Maps"
                   src={`https://www.google.com/maps?q=${encodeURIComponent(MAP_EMBED_QUERY)}&hl=es&z=17&output=embed`}
@@ -246,7 +249,7 @@ export default async function HomePage() {
         <div className="fixed inset-x-3 bottom-3 z-40 sm:hidden">
           <Link
             href="/catalogo"
-            className="rv-btn-primary inline-flex w-full justify-center rounded-2xl py-3 text-sm shadow-[0_10px_30px_rgba(30,166,247,0.35)]"
+            className="rv-btn-primary rv-mobile-scan inline-flex w-full justify-center rounded-2xl py-3 text-sm shadow-[0_10px_30px_rgba(30,166,247,0.35)]"
           >
             Ver autos en venta
           </Link>
