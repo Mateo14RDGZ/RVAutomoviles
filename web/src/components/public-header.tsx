@@ -13,10 +13,10 @@ export function PublicHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-sky-300/20 bg-slate-950/90 shadow-[0_12px_45px_rgba(14,165,233,0.12)] backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-4 sm:py-3">
+      <div className="rv-mobile-enter rv-mobile-enter-1 mx-auto flex max-w-6xl flex-col gap-2 px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-4 sm:py-3">
         <Link
           href="/"
-          className="group inline-flex w-full items-center gap-2.5 rounded-2xl border border-sky-300/25 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 px-3 py-2 transition-all duration-300 hover:border-sky-300/40 hover:from-sky-300/20 hover:to-white/10 sm:w-auto sm:gap-3 sm:bg-gradient-to-r sm:from-white/10 sm:to-white/5 sm:py-2.5"
+          className="group inline-flex w-full items-center gap-2.5 rounded-2xl border border-indigo-300/30 bg-gradient-to-r from-[#090d1d] via-[#111a36] to-[#0b132a] px-3 py-2 transition-all duration-300 hover:border-cyan-300/50 sm:w-auto sm:gap-3 sm:bg-gradient-to-r sm:from-white/10 sm:to-white/5 sm:py-2.5"
           aria-label="Ir al inicio"
         >
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 to-cyan-300 text-xs font-black tracking-[0.14em] text-slate-950 shadow-lg shadow-cyan-500/40 sm:h-10 sm:w-10 sm:text-sm">
@@ -33,7 +33,7 @@ export function PublicHeader() {
         </Link>
 
         <nav aria-label="Principal" className="w-full sm:w-auto">
-          <ul className="rv-mobile-scan grid w-full grid-cols-2 items-center gap-1 rounded-2xl border border-sky-300/20 bg-white/5 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] sm:flex sm:w-auto">
+          <ul className="rv-mobile-scan grid w-full grid-cols-2 items-center gap-1 rounded-2xl border border-indigo-300/30 bg-[#0b1228]/90 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] sm:flex sm:w-auto sm:border-sky-300/20 sm:bg-white/5">
             {links.map(({ href, label }) => {
               const active =
                 href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);

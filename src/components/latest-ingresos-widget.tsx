@@ -13,7 +13,7 @@ export function LatestIngresosWidget({ vehicles }: Props) {
 
   return (
     <section
-      className="relative border-y border-rv-accent/20 bg-gradient-to-br from-rv-accent/[0.07] via-white to-slate-50 py-10 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] sm:py-14"
+      className="rv-mobile-enter rv-mobile-enter-2 relative border-y border-rv-accent/20 bg-gradient-to-br from-rv-accent/[0.07] via-white to-slate-50 py-10 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] sm:py-14"
       aria-labelledby="ultimos-ingresos-heading"
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-rv-accent/40 to-transparent" />
@@ -23,11 +23,11 @@ export function LatestIngresosWidget({ vehicles }: Props) {
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-rv-accent">Últimos ingresos</p>
             <h2
               id="ultimos-ingresos-heading"
-              className="mt-1 text-xl font-bold tracking-tight text-slate-900 sm:text-3xl"
+              className="rv-mobile-title mt-1 text-xl font-bold tracking-tight sm:text-3xl sm:text-slate-900"
             >
               Recién sumados al catálogo
             </h2>
-            <p className="mt-2 text-sm text-slate-600 sm:text-base">
+            <p className="rv-mobile-muted mt-2 text-sm sm:text-base sm:text-slate-600">
               Tres unidades recientes para que veas qué entró. Tocá una y abrís la ficha con fotos y
               datos.
             </p>
@@ -48,7 +48,7 @@ export function LatestIngresosWidget({ vehicles }: Props) {
               <li key={v.id} className="min-w-[78%] snap-start sm:min-w-0">
                 <Link
                   href={`/v/${v.urlSlug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_10px_40px_rgba(15,23,42,0.06)] ring-1 ring-transparent transition-all duration-300 hover:-translate-y-1 hover:border-rv-accent/30 hover:shadow-[0_16px_48px_rgba(30,166,247,0.15)] hover:ring-rv-accent/10"
+                  className="rv-mobile-card group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_10px_40px_rgba(15,23,42,0.06)] ring-1 ring-transparent transition-all duration-300 hover:-translate-y-1 hover:border-rv-accent/30 hover:shadow-[0_16px_48px_rgba(30,166,247,0.15)] hover:ring-rv-accent/10"
                 >
                   <div className="relative aspect-[5/4] w-full overflow-hidden bg-slate-100">
                     {thumb ? (
@@ -70,10 +70,10 @@ export function LatestIngresosWidget({ vehicles }: Props) {
                     ) : null}
                   </div>
                   <div className="flex flex-1 flex-col p-4">
-                    <p className="line-clamp-2 text-base font-semibold leading-snug text-slate-900 group-hover:text-rv-accent">
+                    <p className="line-clamp-2 text-base font-semibold leading-snug text-white group-hover:text-rv-accent sm:text-slate-900">
                       {title}
                     </p>
-                    <p className="mt-1 text-sm text-slate-500">{v.year}</p>
+                    <p className="mt-1 text-sm text-slate-300 sm:text-slate-500">{v.year}</p>
                     <span className="mt-auto pt-3 text-xs font-semibold text-rv-accent transition-transform group-hover:translate-x-0.5">
                       Ver ficha →
                     </span>

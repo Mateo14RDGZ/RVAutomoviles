@@ -107,29 +107,97 @@ body {
 }
 
 @media (max-width: 639px) {
+  :root {
+    --rv-mobile-bg: #05060f;
+    --rv-mobile-surface: #0a1022;
+    --rv-mobile-surface-2: #0d1730;
+    --rv-mobile-text: #e7ecff;
+    --rv-mobile-muted: #a7b1d6;
+    --rv-mobile-accent: #6d5cff;
+    --rv-mobile-accent-2: #00d4ff;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at 12% 8%, rgba(109, 92, 255, 0.35), transparent 45%),
+      radial-gradient(circle at 88% 12%, rgba(0, 212, 255, 0.22), transparent 40%),
+      linear-gradient(180deg, #04050d 0%, #070a16 100%);
+  }
+
+  .rv-mobile-enter {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+    animation: rvMobileEnter 720ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .rv-mobile-enter-1 {
+    animation-delay: 80ms;
+  }
+
+  .rv-mobile-enter-2 {
+    animation-delay: 180ms;
+  }
+
+  .rv-mobile-enter-3 {
+    animation-delay: 280ms;
+  }
+
+  .rv-mobile-enter-4 {
+    animation-delay: 380ms;
+  }
+
+  .rv-mobile-enter-5 {
+    animation-delay: 480ms;
+  }
+
+  .rv-mobile-enter-6 {
+    animation-delay: 580ms;
+  }
+
+  @keyframes rvMobileEnter {
+    from {
+      opacity: 0;
+      transform: translateY(18px) scale(0.985);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
   .rv-mobile-panel {
     border-radius: 1.25rem;
-    border: 1px solid rgba(125, 211, 252, 0.22);
-    background: linear-gradient(145deg, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.88));
-    color: #e2e8f0;
-    box-shadow: 0 16px 50px rgba(2, 6, 23, 0.45);
+    border: 1px solid rgba(133, 122, 255, 0.35);
+    background:
+      linear-gradient(160deg, rgba(10, 16, 34, 0.96), rgba(13, 23, 48, 0.94)),
+      linear-gradient(90deg, rgba(109, 92, 255, 0.14), rgba(0, 212, 255, 0.08));
+    color: var(--rv-mobile-text);
+    box-shadow:
+      0 20px 42px rgba(4, 7, 17, 0.72),
+      inset 0 0 0 1px rgba(147, 197, 253, 0.06);
     backdrop-filter: blur(10px);
   }
 
   .rv-mobile-card {
-    border: 1px solid rgba(125, 211, 252, 0.24);
-    background: linear-gradient(170deg, rgba(15, 23, 42, 0.94), rgba(30, 41, 59, 0.9));
-    color: #e2e8f0;
-    box-shadow: 0 14px 32px rgba(2, 6, 23, 0.35);
-    transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+    border: 1px solid rgba(124, 141, 255, 0.36);
+    background: linear-gradient(170deg, rgba(10, 16, 34, 0.95), rgba(13, 23, 48, 0.93));
+    color: var(--rv-mobile-text);
+    box-shadow: 0 14px 34px rgba(4, 7, 17, 0.58);
+    transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease, filter 260ms ease;
   }
 
+  .rv-mobile-card:hover,
   .rv-mobile-card:active {
-    transform: scale(0.985);
+    border-color: rgba(0, 212, 255, 0.55);
+    box-shadow: 0 22px 36px rgba(4, 7, 17, 0.7);
+    filter: saturate(1.08);
+    transform: translateY(-2px);
   }
 
   .rv-mobile-glow {
-    animation: rvPulseGlow 3.2s ease-in-out infinite;
+    animation: rvPulseGlow 2.8s ease-in-out infinite;
   }
 
   .rv-mobile-scan {
@@ -144,9 +212,32 @@ body {
     left: -40%;
     width: 40%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.2), transparent);
-    animation: rvScanLine 2.8s linear infinite;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+    animation: rvScanLine 2.2s linear infinite;
     pointer-events: none;
+  }
+
+  .rv-mobile-title {
+    background: linear-gradient(90deg, #f5f7ff 0%, #b9c6ff 42%, #94ecff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .rv-mobile-muted {
+    color: var(--rv-mobile-muted);
+  }
+
+  .rv-btn-primary {
+    background: linear-gradient(90deg, var(--rv-mobile-accent), var(--rv-mobile-accent-2));
+    border: 1px solid rgba(171, 204, 255, 0.45);
+    box-shadow: 0 12px 30px rgba(74, 88, 255, 0.42);
+  }
+
+  .rv-btn-secondary {
+    background: rgba(13, 23, 48, 0.76);
+    color: #dbe4ff;
+    border-color: rgba(143, 172, 255, 0.44);
   }
 }
 

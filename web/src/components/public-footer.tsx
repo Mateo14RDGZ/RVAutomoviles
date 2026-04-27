@@ -2,8 +2,8 @@ import { buildWhatsappUrl } from "@/lib/whatsapp-visit";
 
 export function PublicFooter() {
   return (
-    <footer className="mt-12 border-t border-sky-300/20 bg-slate-950/95">
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 text-sm text-slate-400 md:grid-cols-2">
+    <footer className="mt-12 border-t border-indigo-300/20 bg-slate-950/95">
+      <div className="rv-mobile-enter rv-mobile-enter-6 mx-auto grid max-w-6xl gap-6 px-4 py-8 text-sm text-slate-400 md:grid-cols-2">
         <div>
           <div className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-2">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-sky-400 to-cyan-300 text-xs font-black text-slate-950">
@@ -25,7 +25,7 @@ export function PublicFooter() {
               href={buildWhatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-xl border border-emerald-400/35 bg-emerald-500/10 px-3 py-2.5 text-sm font-semibold text-emerald-300 transition hover:bg-emerald-500/15"
+              className="rv-mobile-card inline-flex items-center justify-center rounded-xl border px-3 py-2.5 text-sm font-semibold text-emerald-200 transition"
             >
               WhatsApp
             </a>
@@ -33,7 +33,7 @@ export function PublicFooter() {
               href="https://instagram.com/rv.automoviles"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-xl border border-fuchsia-300/35 bg-fuchsia-500/10 px-3 py-2.5 text-sm font-semibold text-fuchsia-200 transition hover:bg-fuchsia-500/15"
+              className="rv-mobile-card inline-flex items-center justify-center rounded-xl border px-3 py-2.5 text-sm font-semibold text-fuchsia-100 transition"
             >
               Instagram
             </a>
@@ -41,7 +41,7 @@ export function PublicFooter() {
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-xl border border-sky-300/35 bg-sky-500/10 px-3 py-2.5 text-sm font-semibold text-sky-200 transition hover:bg-sky-500/15"
+              className="rv-mobile-card inline-flex items-center justify-center rounded-xl border px-3 py-2.5 text-sm font-semibold text-cyan-100 transition"
             >
               Facebook
             </a>

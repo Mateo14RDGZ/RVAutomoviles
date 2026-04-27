@@ -3,10 +3,16 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark light;
   --background: #ffffff;
   --foreground: #0f172a;
-  --rv-accent: #1ea6f7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #020617;
+    --foreground: #f8fafc;
+  }
 }
 
 body {
@@ -17,11 +23,11 @@ body {
 
 @layer components {
   .rv-surface {
-    @apply rounded-2xl border border-slate-200/90 bg-white text-slate-900 shadow-[0_10px_36px_rgba(15,23,42,0.06)];
+    @apply rounded-2xl border border-white/60 bg-white/85 shadow-[0_12px_35px_rgba(2,6,23,0.08)] backdrop-blur-sm;
   }
 
   .rv-surface-dark {
-    @apply rounded-2xl border border-rv-accent/20 bg-rv-accent/[0.06] text-slate-900 shadow-[0_10px_32px_rgba(30,166,247,0.08)];
+    @apply rounded-2xl border border-sky-200/20 bg-slate-900/55 shadow-[0_14px_35px_rgba(2,6,23,0.28)] backdrop-blur-md;
   }
 
   .rv-title {
@@ -32,77 +38,20 @@ body {
     @apply text-sm text-slate-600;
   }
 
-  .rv-accent-label {
-    @apply text-xs font-semibold uppercase tracking-[0.18em] text-rv-accent;
-  }
-
   .rv-btn {
     @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300;
   }
 
   .rv-btn-primary {
-    @apply rv-btn bg-rv-accent text-white shadow-[0_10px_28px_rgba(30,166,247,0.35)] hover:brightness-105 hover:shadow-[0_12px_32px_rgba(30,166,247,0.42)];
+    @apply rv-btn bg-gradient-to-r from-sky-500 to-cyan-400 text-white shadow-[0_10px_24px_rgba(14,165,233,0.35)] hover:brightness-110;
   }
 
   .rv-btn-secondary {
-    @apply rv-btn border border-slate-200 bg-white text-slate-700 hover:border-rv-accent/35 hover:bg-rv-accent/[0.04] hover:text-slate-900;
+    @apply rv-btn border border-slate-200 bg-white text-slate-700 hover:bg-slate-50;
   }
 
   .rv-input {
-    @apply mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-rv-accent focus:outline-none focus:ring-2 focus:ring-rv-accent/20;
-  }
-
-  /* Admin: mismo blanco + acento celeste */
-  .admin-panel .rv-title {
-    @apply text-lg font-medium tracking-tight text-slate-900 sm:text-xl;
-  }
-
-  .admin-panel .rv-muted {
-    @apply text-sm text-slate-600;
-  }
-
-  .admin-panel .rv-surface {
-    @apply rounded-2xl border border-slate-200/90 bg-white text-slate-900 shadow-[0_8px_28px_rgba(15,23,42,0.06)] transition-[border-color,box-shadow,transform] duration-300 ease-out;
-  }
-
-  .admin-panel .rv-surface:hover {
-    @apply border-rv-accent/25 shadow-[0_12px_36px_rgba(30,166,247,0.12)];
-  }
-
-  .admin-panel .rv-btn {
-    @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 ease-out active:scale-[0.98];
-  }
-
-  .admin-panel .rv-btn-primary {
-    @apply inline-flex items-center justify-center rounded-xl border border-rv-accent/20 bg-rv-accent px-4 py-2.5 text-sm font-medium text-white shadow-[0_8px_24px_rgba(30,166,247,0.35)] transition-all duration-200 ease-out hover:brightness-105 hover:shadow-[0_10px_28px_rgba(30,166,247,0.45)] active:scale-[0.98];
-  }
-
-  .admin-panel .rv-btn-secondary {
-    @apply inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 transition-all duration-200 ease-out hover:border-rv-accent/35 hover:bg-rv-accent/[0.05] hover:text-slate-900 active:scale-[0.98];
-  }
-
-  .admin-panel .rv-input {
-    @apply mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-rv-accent focus:outline-none focus:ring-2 focus:ring-rv-accent/20;
-  }
-
-  .admin-panel .admin-card {
-    @apply rounded-2xl border border-slate-200/90 bg-white p-4 text-slate-900 shadow-[0_8px_28px_rgba(15,23,42,0.05)] transition-[border-color,box-shadow] duration-300 ease-out hover:border-rv-accent/20;
-  }
-
-  .admin-panel .admin-card-muted {
-    @apply text-xs text-slate-600;
-  }
-
-  .admin-panel .admin-card-title {
-    @apply text-sm font-semibold text-rv-accent;
-  }
-
-  .admin-panel .admin-label {
-    @apply block text-xs font-medium text-slate-600;
-  }
-
-  .admin-panel .admin-field {
-    @apply mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-rv-accent focus:outline-none focus:ring-2 focus:ring-rv-accent/20;
+    @apply mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-100;
   }
 }
 
@@ -141,10 +90,10 @@ body {
 @keyframes rvPulseGlow {
   0%,
   100% {
-    box-shadow: 0 0 0 rgba(30, 166, 247, 0);
+    box-shadow: 0 0 0 rgba(14, 165, 233, 0);
   }
   50% {
-    box-shadow: 0 0 30px rgba(30, 166, 247, 0.24);
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.22);
   }
 }
 
@@ -158,29 +107,97 @@ body {
 }
 
 @media (max-width: 639px) {
+  :root {
+    --rv-mobile-bg: #05060f;
+    --rv-mobile-surface: #0a1022;
+    --rv-mobile-surface-2: #0d1730;
+    --rv-mobile-text: #e7ecff;
+    --rv-mobile-muted: #a7b1d6;
+    --rv-mobile-accent: #6d5cff;
+    --rv-mobile-accent-2: #00d4ff;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at 12% 8%, rgba(109, 92, 255, 0.35), transparent 45%),
+      radial-gradient(circle at 88% 12%, rgba(0, 212, 255, 0.22), transparent 40%),
+      linear-gradient(180deg, #04050d 0%, #070a16 100%);
+  }
+
+  .rv-mobile-enter {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+    animation: rvMobileEnter 720ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .rv-mobile-enter-1 {
+    animation-delay: 80ms;
+  }
+
+  .rv-mobile-enter-2 {
+    animation-delay: 180ms;
+  }
+
+  .rv-mobile-enter-3 {
+    animation-delay: 280ms;
+  }
+
+  .rv-mobile-enter-4 {
+    animation-delay: 380ms;
+  }
+
+  .rv-mobile-enter-5 {
+    animation-delay: 480ms;
+  }
+
+  .rv-mobile-enter-6 {
+    animation-delay: 580ms;
+  }
+
+  @keyframes rvMobileEnter {
+    from {
+      opacity: 0;
+      transform: translateY(18px) scale(0.985);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
   .rv-mobile-panel {
     border-radius: 1.25rem;
-    border: 1px solid rgba(30, 166, 247, 0.22);
-    background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.92));
-    color: #e2e8f0;
-    box-shadow: 0 16px 46px rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(8px);
+    border: 1px solid rgba(133, 122, 255, 0.35);
+    background:
+      linear-gradient(160deg, rgba(10, 16, 34, 0.96), rgba(13, 23, 48, 0.94)),
+      linear-gradient(90deg, rgba(109, 92, 255, 0.14), rgba(0, 212, 255, 0.08));
+    color: var(--rv-mobile-text);
+    box-shadow:
+      0 20px 42px rgba(4, 7, 17, 0.72),
+      inset 0 0 0 1px rgba(147, 197, 253, 0.06);
+    backdrop-filter: blur(10px);
   }
 
   .rv-mobile-card {
-    border: 1px solid rgba(30, 166, 247, 0.24);
-    background: linear-gradient(170deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.92));
-    color: #e2e8f0;
-    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.34);
-    transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+    border: 1px solid rgba(124, 141, 255, 0.36);
+    background: linear-gradient(170deg, rgba(10, 16, 34, 0.95), rgba(13, 23, 48, 0.93));
+    color: var(--rv-mobile-text);
+    box-shadow: 0 14px 34px rgba(4, 7, 17, 0.58);
+    transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease, filter 260ms ease;
   }
 
+  .rv-mobile-card:hover,
   .rv-mobile-card:active {
-    transform: scale(0.985);
+    border-color: rgba(0, 212, 255, 0.55);
+    box-shadow: 0 22px 36px rgba(4, 7, 17, 0.7);
+    filter: saturate(1.08);
+    transform: translateY(-2px);
   }
 
   .rv-mobile-glow {
-    animation: rvPulseGlow 3.2s ease-in-out infinite;
+    animation: rvPulseGlow 2.8s ease-in-out infinite;
   }
 
   .rv-mobile-scan {
@@ -195,9 +212,32 @@ body {
     left: -40%;
     width: 40%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(30, 166, 247, 0.22), transparent);
-    animation: rvScanLine 2.8s linear infinite;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+    animation: rvScanLine 2.2s linear infinite;
     pointer-events: none;
+  }
+
+  .rv-mobile-title {
+    background: linear-gradient(90deg, #f5f7ff 0%, #b9c6ff 42%, #94ecff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .rv-mobile-muted {
+    color: var(--rv-mobile-muted);
+  }
+
+  .rv-btn-primary {
+    background: linear-gradient(90deg, var(--rv-mobile-accent), var(--rv-mobile-accent-2));
+    border: 1px solid rgba(171, 204, 255, 0.45);
+    box-shadow: 0 12px 30px rgba(74, 88, 255, 0.42);
+  }
+
+  .rv-btn-secondary {
+    background: rgba(13, 23, 48, 0.76);
+    color: #dbe4ff;
+    border-color: rgba(143, 172, 255, 0.44);
   }
 }
 
