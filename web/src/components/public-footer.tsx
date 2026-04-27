@@ -1,24 +1,18 @@
 import { buildWhatsappUrl } from "@/lib/whatsapp-visit";
+import { BrandLogo } from "@/components/brand-logo";
 
 export function PublicFooter() {
   return (
     <footer className="mt-12 border-t border-rv-accent/20 bg-white">
       <div className="rv-mobile-enter rv-mobile-enter-6 mx-auto grid max-w-6xl gap-6 px-4 py-8 text-sm text-slate-600 md:grid-cols-2">
         <div>
-          <div className="inline-flex items-center gap-2 rounded-xl border border-rv-accent/20 bg-gradient-to-r from-white to-rv-accent/[0.08] px-3 py-2">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-rv-accent to-sky-300 text-xs font-black text-white">
-              RV
-            </span>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-900">
-              RV Automoviles
-            </p>
-          </div>
-          <p className="mt-2 leading-relaxed">
+          <BrandLogo className="inline-flex" />
+          <p className="mt-3 max-w-md leading-relaxed">
             Tu proximo auto con informacion clara, fotos reales y documentacion disponible.
           </p>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2 md:justify-self-end md:text-right">
           <p className="font-semibold text-rv-accent">Contacto</p>
           <div className="grid grid-cols-1 gap-2 sm:hidden">
             <a

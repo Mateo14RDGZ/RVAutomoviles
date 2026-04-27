@@ -22,7 +22,7 @@ export default async function HomePage() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(30,166,247,0.16),transparent_38%),radial-gradient(circle_at_85%_20%,rgba(30,166,247,0.12),transparent_34%)]" />
 
         <section className="rv-mobile-enter rv-mobile-enter-1 relative overflow-hidden border-b border-rv-accent/15 bg-white">
-          <div className="mx-auto grid max-w-5xl gap-8 px-3 pb-10 pt-8 sm:px-6 sm:pb-16 sm:pt-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div className="mx-auto max-w-5xl px-3 pb-10 pt-8 sm:px-6 sm:pb-16 sm:pt-14">
             <div>
               <p className="inline-flex rounded-full border border-rv-accent/30 bg-rv-accent/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-rv-accent">
                 RV Automóviles · Uruguay
@@ -42,27 +42,6 @@ export default async function HomePage() {
                   Ver financiación
                 </a>
               </div>
-            </div>
-
-            <div className="rv-mobile-card rv-mobile-scan rounded-3xl border border-rv-accent/20 bg-white p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rv-accent">Indicadores</p>
-              <div className="mt-4 grid grid-cols-3 gap-3">
-                <article className="rounded-xl border border-rv-accent/15 bg-rv-accent/[0.05] p-3 text-center">
-                  <p className="text-xl font-bold text-slate-900">100%</p>
-                  <p className="mt-1 text-[11px] uppercase tracking-wide text-slate-500">Mobile</p>
-                </article>
-                <article className="rounded-xl border border-rv-accent/15 bg-rv-accent/[0.05] p-3 text-center">
-                  <p className="text-xl font-bold text-slate-900">7</p>
-                  <p className="mt-1 text-[11px] uppercase tracking-wide text-slate-500">Bancos</p>
-                </article>
-                <article className="rounded-xl border border-rv-accent/15 bg-rv-accent/[0.05] p-3 text-center">
-                  <p className="text-xl font-bold text-slate-900">24/7</p>
-                  <p className="mt-1 text-[11px] uppercase tracking-wide text-slate-500">Contacto</p>
-                </article>
-              </div>
-              <p className="rv-mobile-muted mt-4 text-xs">
-                Diseño optimizado para conversión: menos fricción, más consultas y mejor percepción de marca.
-              </p>
             </div>
           </div>
         </section>
