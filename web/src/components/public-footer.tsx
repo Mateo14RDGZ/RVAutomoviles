@@ -2,14 +2,14 @@ import { buildWhatsappUrl } from "@/lib/whatsapp-visit";
 
 export function PublicFooter() {
   return (
-    <footer className="mt-12 border-t border-indigo-300/20 bg-slate-950/95">
-      <div className="rv-mobile-enter rv-mobile-enter-6 mx-auto grid max-w-6xl gap-6 px-4 py-8 text-sm text-slate-400 md:grid-cols-2">
+    <footer className="mt-12 border-t border-rv-accent/20 bg-white">
+      <div className="rv-mobile-enter rv-mobile-enter-6 mx-auto grid max-w-6xl gap-6 px-4 py-8 text-sm text-slate-600 md:grid-cols-2">
         <div>
-          <div className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-2">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-sky-400 to-cyan-300 text-xs font-black text-slate-950">
+          <div className="inline-flex items-center gap-2 rounded-xl border border-rv-accent/20 bg-gradient-to-r from-white to-rv-accent/[0.08] px-3 py-2">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-rv-accent to-sky-300 text-xs font-black text-white">
               RV
             </span>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-100">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-900">
               RV Automoviles
             </p>
           </div>
@@ -19,13 +19,13 @@ export function PublicFooter() {
         </div>
 
         <div className="space-y-2">
-          <p className="font-semibold text-slate-200">Contacto</p>
+          <p className="font-semibold text-rv-accent">Contacto</p>
           <div className="grid grid-cols-1 gap-2 sm:hidden">
             <a
               href={buildWhatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="rv-mobile-card inline-flex items-center justify-center rounded-xl border px-3 py-2.5 text-sm font-semibold text-emerald-200 transition"
+              className="rv-mobile-card inline-flex items-center justify-center rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
             >
               WhatsApp
             </a>
@@ -33,7 +33,7 @@ export function PublicFooter() {
               href="https://instagram.com/rv.automoviles"
               target="_blank"
               rel="noopener noreferrer"
-              className="rv-mobile-card inline-flex items-center justify-center rounded-xl border px-3 py-2.5 text-sm font-semibold text-fuchsia-100 transition"
+              className="rv-mobile-card inline-flex items-center justify-center rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
             >
               Instagram
             </a>
@@ -41,7 +41,7 @@ export function PublicFooter() {
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="rv-mobile-card inline-flex items-center justify-center rounded-xl border px-3 py-2.5 text-sm font-semibold text-cyan-100 transition"
+              className="rv-mobile-card inline-flex items-center justify-center rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
             >
               Facebook
             </a>
@@ -53,7 +53,7 @@ export function PublicFooter() {
                 href={buildWhatsappUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-emerald-400 underline decoration-emerald-500/40 underline-offset-2 transition hover:text-emerald-300"
+                className="font-semibold text-rv-accent underline decoration-rv-accent/40 underline-offset-2 transition hover:text-rv-accent/80"
               >
                 099 744 203
               </a>

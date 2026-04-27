@@ -19,207 +19,176 @@ export default async function HomePage() {
   return (
     <PublicChrome>
       <main className="relative w-full pb-24 text-slate-900 sm:pb-0">
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[520px] bg-[radial-gradient(circle_at_10%_10%,rgba(56,189,248,0.25),transparent_55%),radial-gradient(circle_at_90%_20%,rgba(34,211,238,0.2),transparent_50%)] sm:hidden" />
-        {/* Hero */}
-        <section className="rv-mobile-enter rv-mobile-enter-1 animate-fade-up relative z-10 overflow-hidden border-b border-rv-accent/12 bg-white sm:bg-white">
-          <div className="pointer-events-none absolute -left-20 top-2 h-52 w-52 rounded-full bg-rv-accent/15 blur-3xl" />
-          <div className="pointer-events-none absolute right-0 top-24 h-40 w-40 rounded-full bg-rv-accent/10 blur-3xl" />
-          <div className="mx-auto max-w-5xl px-3 pb-10 pt-8 sm:px-6 sm:pb-16 sm:pt-14">
-            <div className="rv-mobile-panel rv-mobile-scan px-4 py-5 sm:bg-transparent sm:p-0">
-            <p className="inline-flex rounded-full border border-rv-accent/25 bg-rv-accent/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-rv-accent">
-              RV Automoviles · Uruguay
-            </p>
-            <h1 className="rv-mobile-title mt-4 max-w-3xl text-[1.7rem] font-bold leading-tight tracking-tight sm:mt-5 sm:bg-none sm:text-4xl sm:text-slate-900 md:text-5xl">
-              Usados con data clara, fotos de verdad y un catálogo que se entiende desde el celu
-            </h1>
-            <p className="rv-mobile-muted mt-4 max-w-2xl rounded-r-xl border-l-4 border-rv-accent bg-rv-accent/[0.1] py-3 pl-4 pr-3 text-sm leading-relaxed sm:mt-5 sm:bg-rv-accent/[0.06] sm:text-base sm:text-slate-700">
-              Armamos la ficha pública de cada unidad para que la compartas por WhatsApp o redes, y un
-              panel liviano para que publiques o saques autos del listado sin complicarte.
-            </p>
-            <div className="mt-6 flex flex-col gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
-              <Link
-                href="/catalogo"
-                className="rv-btn-primary inline-flex w-full justify-center sm:w-auto"
-              >
-                Ver autos en venta
-              </Link>
-              <a
-                href="#financiacion-bancaria"
-                className="inline-flex w-full justify-center rounded-xl border border-rv-accent/25 bg-white px-4 py-2.5 text-sm font-semibold text-rv-accent shadow-sm transition-colors hover:bg-rv-accent/[0.06] sm:hidden"
-              >
-                Ver financiación
-              </a>
-              <p className="rv-mobile-muted text-center text-xs sm:text-left sm:text-sm sm:text-slate-500">
-                Entrá al catálogo y elegí por foto y título; en la ficha ves todo el detalle.
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(30,166,247,0.16),transparent_38%),radial-gradient(circle_at_85%_20%,rgba(30,166,247,0.12),transparent_34%)]" />
+
+        <section className="rv-mobile-enter rv-mobile-enter-1 relative overflow-hidden border-b border-rv-accent/15 bg-white">
+          <div className="mx-auto grid max-w-5xl gap-8 px-3 pb-10 pt-8 sm:px-6 sm:pb-16 sm:pt-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div>
+              <p className="inline-flex rounded-full border border-rv-accent/30 bg-rv-accent/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-rv-accent">
+                RV Automóviles · Uruguay
               </p>
+              <h1 className="rv-mobile-title mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+                Compra tu próximo auto con una web pensada para decidir rápido
+              </h1>
+              <p className="rv-mobile-muted mt-4 max-w-xl text-sm leading-relaxed sm:text-base">
+                Catálogo claro, fichas completas y un proceso de consulta directo. Todo con una experiencia
+                visual moderna y mobile-first.
+              </p>
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Link href="/catalogo" className="rv-btn-primary inline-flex w-full justify-center sm:w-auto">
+                  Empezar ahora
+                </Link>
+                <a href="#financiacion-bancaria" className="rv-btn-secondary inline-flex w-full justify-center sm:w-auto">
+                  Ver financiación
+                </a>
+              </div>
             </div>
+
+            <div className="rv-mobile-card rv-mobile-scan rounded-3xl border border-rv-accent/20 bg-white p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rv-accent">Indicadores</p>
+              <div className="mt-4 grid grid-cols-3 gap-3">
+                <article className="rounded-xl border border-rv-accent/15 bg-rv-accent/[0.05] p-3 text-center">
+                  <p className="text-xl font-bold text-slate-900">100%</p>
+                  <p className="mt-1 text-[11px] uppercase tracking-wide text-slate-500">Mobile</p>
+                </article>
+                <article className="rounded-xl border border-rv-accent/15 bg-rv-accent/[0.05] p-3 text-center">
+                  <p className="text-xl font-bold text-slate-900">7</p>
+                  <p className="mt-1 text-[11px] uppercase tracking-wide text-slate-500">Bancos</p>
+                </article>
+                <article className="rounded-xl border border-rv-accent/15 bg-rv-accent/[0.05] p-3 text-center">
+                  <p className="text-xl font-bold text-slate-900">24/7</p>
+                  <p className="mt-1 text-[11px] uppercase tracking-wide text-slate-500">Contacto</p>
+                </article>
+              </div>
+              <p className="rv-mobile-muted mt-4 text-xs">
+                Diseño optimizado para conversión: menos fricción, más consultas y mejor percepción de marca.
+              </p>
             </div>
           </div>
         </section>
 
         <LatestIngresosWidget vehicles={latestIngresos} />
 
-        {/* Financiación bancaria */}
+        <section className="rv-mobile-enter rv-mobile-enter-3 border-b border-rv-accent/15 bg-white py-10 sm:py-16">
+          <div className="mx-auto max-w-5xl px-3 sm:px-6">
+            <div className="max-w-2xl">
+              <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-rv-accent">Propuesta</h2>
+              <p className="rv-mobile-title mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+                Una experiencia estilo producto premium
+              </p>
+            </div>
+            <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-5">
+              <article className="rv-mobile-card rounded-2xl p-5">
+                <p className="text-sm font-semibold text-rv-accent">Entrada dinámica</p>
+                <p className="rv-mobile-muted mt-2 text-sm leading-relaxed">
+                  Cada bloque aparece con transiciones progresivas para guiar la mirada del cliente.
+                </p>
+              </article>
+              <article className="rv-mobile-card rounded-2xl p-5">
+                <p className="text-sm font-semibold text-rv-accent">Distribución clara</p>
+                <p className="rv-mobile-muted mt-2 text-sm leading-relaxed">
+                  Estructura orientada a decisión: hero, ingresos, beneficios, financiación y contacto.
+                </p>
+              </article>
+              <article className="rv-mobile-card rounded-2xl p-5">
+                <p className="text-sm font-semibold text-rv-accent">Identidad consistente</p>
+                <p className="rv-mobile-muted mt-2 text-sm leading-relaxed">
+                  Paleta limpia en blanco y celeste con estética tecnológica, sin secciones oscuras.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
         <section
           id="financiacion-bancaria"
-          className="rv-mobile-enter rv-mobile-enter-2 border-b border-rv-accent/15 bg-gradient-to-br from-rv-accent/[0.08] via-white to-rv-accent/[0.04] py-10 sm:py-16"
+          className="rv-mobile-enter rv-mobile-enter-4 border-b border-rv-accent/15 bg-gradient-to-br from-rv-accent/[0.08] via-white to-rv-accent/[0.03] py-10 sm:py-16"
         >
           <div className="mx-auto max-w-5xl px-3 sm:px-6">
-            <div className="rv-mobile-panel rv-mobile-glow overflow-hidden rounded-3xl border border-rv-accent/20 bg-white/90 p-6 shadow-[0_16px_45px_rgba(30,166,247,0.18)] sm:bg-white/90 sm:p-8">
+            <div className="rv-mobile-card rv-mobile-glow rounded-3xl border border-rv-accent/20 bg-white p-6 sm:p-8">
               <p className="inline-flex rounded-full border border-rv-accent/30 bg-rv-accent/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-rv-accent">
                 Financiación bancaria
               </p>
-              <h2 className="rv-mobile-title mt-4 max-w-3xl text-2xl font-bold tracking-tight sm:text-3xl sm:text-slate-900">
+              <h2 className="rv-mobile-title mt-4 max-w-3xl text-2xl font-bold tracking-tight sm:text-3xl">
                 Tu próximo auto puede salir hoy, con crédito de bancos líderes en Uruguay
               </h2>
-              <p className="rv-mobile-muted mt-3 max-w-3xl text-sm leading-relaxed sm:text-base sm:text-slate-700">
-                Te asesoramos para que compares opciones de cuota, plazo y entrega. Trabajamos con
-                financiación bancaria para que compres con respaldo, claridad y confianza.
+              <p className="rv-mobile-muted mt-3 max-w-3xl text-sm leading-relaxed sm:text-base">
+                Te ayudamos a comparar cuotas y plazos con respaldo bancario real, para una compra segura.
               </p>
-
               <div className="mt-6 grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap">
-                {[
-                  "BROU",
-                  "Santander",
-                  "BBVA",
-                  "Scotiabank",
-                  "Itaú",
-                  "HSBC",
-                  "Banco República",
-                ].map((bank) => (
+                {["BROU", "Santander", "BBVA", "Scotiabank", "Itaú", "HSBC", "Banco República"].map((bank) => (
                   <span
                     key={bank}
-                    className="rounded-full border border-rv-accent/25 bg-white/95 px-3 py-1.5 text-center text-xs font-semibold text-slate-700 shadow-sm sm:text-sm"
+                    className="rounded-full border border-rv-accent/25 bg-white px-3 py-1.5 text-center text-xs font-semibold text-slate-700 shadow-sm sm:text-sm"
                   >
                     {bank}
                   </span>
                 ))}
               </div>
-
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="mt-7">
                 <Link href="/catalogo" className="rv-btn-primary inline-flex w-full justify-center sm:w-auto">
                   Quiero financiar mi auto
                 </Link>
-                <p className="rv-mobile-muted text-center text-xs font-medium sm:text-left sm:text-sm sm:text-slate-600">
-                  Consultanos y te mostramos alternativas reales según tu perfil.
-                </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Por qué conviene */}
-        <section className="rv-mobile-enter rv-mobile-enter-3 border-b border-slate-200/80 bg-white py-10 sm:py-16">
+        <section className="rv-mobile-enter rv-mobile-enter-5 border-b border-rv-accent/10 bg-white py-10 sm:py-16">
           <div className="mx-auto max-w-5xl px-3 sm:px-6">
             <div className="max-w-2xl">
-              <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-rv-accent">
-                Por qué conviene
-              </h2>
-              <p className="rv-mobile-title mt-2 text-2xl font-semibold tracking-tight sm:text-3xl sm:text-slate-900">
-                Menos vueltas, más ventas
-              </p>
-              <p className="rv-mobile-muted mt-3 text-sm sm:text-base sm:text-slate-600">
-                Pensado para una automotora uruguaya: lo importante arriba, sin relleno, con buena
-                lectura en pantalla chica.
-              </p>
-            </div>
-            <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-5">
-              <article className="rv-mobile-card rounded-2xl border border-rv-accent/15 bg-slate-50/80 p-5 shadow-sm">
-                <p className="text-sm font-semibold text-rv-accent">Catálogo online</p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-slate-600">
-                  Listado en dos columnas con la foto arriba y el título bien claro. En la ficha el
-                  cliente ve precio y el resto de los datos.
-                </p>
-              </article>
-              <article className="rv-mobile-card rounded-2xl border border-rv-accent/15 bg-slate-50/80 p-5 shadow-sm">
-                <p className="text-sm font-semibold text-rv-accent">Ficha por unidad</p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-slate-600">
-                  Cada auto con galería, datos, equipamiento y documentación si la cargaste. Todo en
-                  una sola página para compartir.
-                </p>
-              </article>
-              <article className="rv-mobile-card rounded-2xl border border-rv-accent/15 bg-slate-50/80 p-5 shadow-sm">
-                <p className="text-sm font-semibold text-rv-accent">Panel de gestión</p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-slate-600">
-                  Cargá fotos, editá textos y marcá si está publicado o no. Sirve desde la compu o desde
-                  el celular cuando estás en la vuelta.
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        {/* Cómo funciona — pasos */}
-        <section className="rv-mobile-enter rv-mobile-enter-4 border-b border-rv-accent/10 bg-slate-50 py-10 sm:py-16">
-          <div className="mx-auto max-w-5xl px-3 sm:px-6">
-            <div className="max-w-2xl">
-              <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-rv-accent">
-                Cómo funciona
-              </h2>
-              <p className="rv-mobile-title mt-2 text-2xl font-semibold tracking-tight sm:text-3xl sm:text-slate-900">
+              <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-rv-accent">Cómo funciona</h2>
+              <p className="rv-mobile-title mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
                 Tres pasos nomás
               </p>
             </div>
             <ol className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-6">
-              <li className="rv-mobile-card relative rounded-2xl border border-white bg-white p-5 shadow-sm">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-rv-accent text-sm font-bold text-white">
-                  1
-                </span>
-                <h3 className="mt-4 font-semibold text-slate-900">Cargás la unidad</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-slate-600">
-                  Entrás al panel, completás datos y subís las fotos. Si falta algo, lo editás cuando
-                  quieras.
+              <li className="rv-mobile-card rounded-2xl p-5">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-rv-accent text-sm font-bold text-white">1</span>
+                <h3 className="mt-4 font-semibold text-slate-900">Elegís el auto</h3>
+                <p className="rv-mobile-muted mt-2 text-sm leading-relaxed">
+                  Navegás el catálogo y abrís la ficha con fotos y datos claros.
                 </p>
               </li>
-              <li className="rv-mobile-card relative rounded-2xl border border-white bg-white p-5 shadow-sm">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-rv-accent text-sm font-bold text-white">
-                  2
-                </span>
-                <h3 className="mt-4 font-semibold text-slate-900">Publicás en el catálogo</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-slate-600">
-                  Cuando la marcás publicada, aparece en &ldquo;Autos en venta&rdquo; con el resto del
-                  stock.
+              <li className="rv-mobile-card rounded-2xl p-5">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-rv-accent text-sm font-bold text-white">2</span>
+                <h3 className="mt-4 font-semibold text-slate-900">Simulás financiación</h3>
+                <p className="rv-mobile-muted mt-2 text-sm leading-relaxed">
+                  Te mostramos alternativas de bancos para definir la mejor cuota.
                 </p>
               </li>
-              <li className="rv-mobile-card relative rounded-2xl border border-white bg-white p-5 shadow-sm">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-rv-accent text-sm font-bold text-white">
-                  3
-                </span>
-                <h3 className="mt-4 font-semibold text-slate-900">Compartís el link</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-slate-600">
-                  Copiás el enlace de la ficha y lo mandás por WhatsApp, Instagram o como prefieras: el
-                  cliente ve todo en limpio.
+              <li className="rv-mobile-card rounded-2xl p-5">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-rv-accent text-sm font-bold text-white">3</span>
+                <h3 className="mt-4 font-semibold text-slate-900">Coordinás visita</h3>
+                <p className="rv-mobile-muted mt-2 text-sm leading-relaxed">
+                  Confirmás disponibilidad y avanzás directo por WhatsApp.
                 </p>
               </li>
             </ol>
           </div>
         </section>
 
-        {/* Ubicación + mapa */}
-        <section className="rv-mobile-enter rv-mobile-enter-5 bg-white py-10 sm:py-16">
+        <section className="rv-mobile-enter rv-mobile-enter-6 bg-white py-10 sm:py-16">
           <div className="mx-auto max-w-5xl px-3 sm:px-6">
             <div className="grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-start">
               <div>
-                <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-rv-accent">
-                  Dónde estamos
-                </h2>
-                <p className="rv-mobile-title mt-2 text-2xl font-semibold tracking-tight sm:text-3xl sm:text-slate-900">
+                <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-rv-accent">Dónde estamos</h2>
+                <p className="rv-mobile-title mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
                   Pasá a saludar o coordiná una visita
                 </p>
-                <p className="rv-mobile-muted mt-3 text-sm leading-relaxed sm:text-base sm:text-slate-600">
+                <p className="rv-mobile-muted mt-3 text-sm leading-relaxed sm:text-base">
                   Acá abajo tenés el mapa con la ubicación de <strong className="text-slate-800">RV Automóviles</strong>.
-                  Si preferís abrirlo en la app de Google Maps, usá el botón y te lleva directo.
                 </p>
                 <a
                   href={MAPS_SHORT_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex w-full items-center justify-center rounded-xl border border-rv-accent/30 bg-rv-accent px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-rv-accent/90 sm:w-auto"
+                  className="rv-btn-primary mt-6 inline-flex w-full items-center justify-center sm:w-auto"
                 >
                   Abrir en Google Maps
                 </a>
               </div>
-              <div className="rv-mobile-panel overflow-hidden rounded-2xl border border-rv-accent/20 bg-slate-100 shadow-[0_12px_40px_rgba(30,166,247,0.12)]">
+              <div className="rv-mobile-card overflow-hidden rounded-2xl border border-rv-accent/20 bg-slate-100 shadow-[0_12px_40px_rgba(30,166,247,0.12)]">
                 <iframe
                   title="Ubicación de RV Automóviles en Google Maps"
                   src={`https://www.google.com/maps?q=${encodeURIComponent(MAP_EMBED_QUERY)}&hl=es&z=17&output=embed`}
@@ -233,24 +202,8 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* Cierre */}
-        <section className="rv-mobile-enter rv-mobile-enter-6 border-t border-rv-accent/12 bg-slate-50 py-10 sm:py-12">
-          <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
-            <p className="rv-mobile-muted text-sm sm:text-base sm:text-slate-600">
-              ¿Tenés dudas sobre algún usado?{" "}
-              <Link href="/catalogo" className="font-semibold text-rv-accent underline-offset-2 hover:underline">
-                Mirá el catálogo
-              </Link>{" "}
-              o escribinos por los canales que figuran abajo en el pie de página.
-            </p>
-          </div>
-        </section>
-
         <div className="fixed inset-x-3 bottom-3 z-40 sm:hidden">
-          <Link
-            href="/catalogo"
-            className="rv-btn-primary rv-mobile-scan rv-mobile-enter rv-mobile-enter-6 inline-flex w-full justify-center rounded-2xl py-3 text-sm shadow-[0_10px_30px_rgba(30,166,247,0.35)]"
-          >
+          <Link href="/catalogo" className="rv-btn-primary rv-mobile-scan inline-flex w-full justify-center rounded-2xl py-3 text-sm">
             Ver autos en venta
           </Link>
         </div>
