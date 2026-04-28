@@ -3,21 +3,37 @@
 import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 
+type Variant = "up" | "soft" | "left" | "right" | "zoom" | "mask";
+
 type Props = {
   delay?: number;
-  variant?: "up" | "soft";
+  variant?: Variant;
+  duration?: number;
   className?: string;
   children: ReactNode;
 };
 
+const VARIANT_CLASS: Record<Variant, string> = {
+  up: "rv-reveal",
+  soft: "rv-reveal-soft",
+  left: "rv-reveal-left",
+  right: "rv-reveal-right",
+  zoom: "rv-reveal-zoom",
+  mask: "rv-reveal-mask",
+};
+
 /**
- * Wrapper que activa una transición progresiva al entrar en viewport.
- * - variant="up": sube + aparece.
- * - variant="soft": además aplica un blur que se desvanece, ideal para hero.
- * En navegadores sin IntersectionObserver muestra el contenido sin animación.
+ * Wrapper que activa transiciones futuristas al entrar en viewport.
+ * Variantes: up, soft (blur), left, right, zoom, mask (clip-path).
  * Respeta `prefers-reduced-motion` vía CSS.
  */
-export function Reveal({ delay = 0, variant = "up", className = "", children }: Props) {
+export function Reveal({
+  delay = 0,
+  variant = "up",
+  duration,
+  className = "",
+  children,
+}: Props) {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -45,10 +61,16 @@ export function Reveal({ delay = 0, variant = "up", className = "", children }: 
     return () => observer.disconnect();
   }, [delay]);
 
-  const base = variant === "soft" ? "rv-reveal-soft" : "rv-reveal";
+  const style = duration
+    ? ({ ["--rv-reveal-duration" as string]: `${duration}ms` } as React.CSSProperties)
+    : undefined;
 
   return (
-    <div ref={ref} className={`${base} ${className}`.trim()}>
+    <div
+      ref={ref}
+      style={style}
+      className={`${VARIANT_CLASS[variant]} ${className}`.trim()}
+    >
       {children}
     </div>
   );

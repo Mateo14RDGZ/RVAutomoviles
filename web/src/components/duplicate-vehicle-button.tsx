@@ -38,18 +38,22 @@ export function DuplicateVehicleButton({ sourceId, sourceLabel }: Props) {
   }
 
   return (
-    <div className="flex shrink-0 flex-col items-stretch justify-center gap-1 border-l border-slate-200 pl-3 sm:pl-4">
+    <div className="flex flex-col items-end gap-1">
       <button
         type="button"
         onClick={onDuplicate}
         disabled={busy}
         title={`Duplicar datos de ${sourceLabel} (sin fotos)`}
         aria-label={`Duplicar ${sourceLabel} sin fotos`}
-        className="rv-btn-secondary whitespace-nowrap px-3 py-2 text-xs font-semibold disabled:opacity-50"
+        className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:bg-slate-100 disabled:opacity-50"
       >
+        <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5">
+          <rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" strokeWidth="1.6" />
+          <path d="M5 15V6a2 2 0 012-2h9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        </svg>
         {busy ? "Duplicando…" : "Duplicar"}
       </button>
-      {error ? <p className="max-w-[8rem] text-[10px] text-red-600">{error}</p> : null}
+      {error ? <p className="max-w-[10rem] text-right text-[10px] text-red-600">{error}</p> : null}
     </div>
   );
 }

@@ -30,14 +30,14 @@ export function LatestIngresosWidget({ vehicles }: Props) {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-5xl px-3 sm:px-6">
-        <Reveal>
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <Reveal variant="left">
             <div className="max-w-xl">
               <span className="rv-chip">Últimos ingresos</span>
               <h2
                 id="ultimos-ingresos-heading"
-                className="rv-mobile-title mt-3 text-2xl font-bold tracking-tight sm:text-4xl"
+                className="rv-mobile-title mt-3 text-3xl font-bold tracking-tight sm:text-5xl"
               >
                 Recién sumados al catálogo
               </h2>
@@ -45,6 +45,8 @@ export function LatestIngresosWidget({ vehicles }: Props) {
                 Tres unidades recientes para que veas qué entró. Tocá una y abrís la ficha con fotos y datos.
               </p>
             </div>
+          </Reveal>
+          <Reveal variant="right" delay={120}>
             <Link
               href="/catalogo"
               className="rv-btn-secondary inline-flex w-full shrink-0 items-center justify-center gap-2 sm:w-auto"
@@ -52,8 +54,8 @@ export function LatestIngresosWidget({ vehicles }: Props) {
               Ver catálogo completo
               <span aria-hidden>→</span>
             </Link>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
 
         <ul className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 sm:mt-10 sm:grid sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:pb-0">
           {vehicles.map((v, index) => {
@@ -61,7 +63,7 @@ export function LatestIngresosWidget({ vehicles }: Props) {
             const title = `${v.brand} ${v.model}`.trim();
             return (
               <li key={v.id} className="min-w-[78%] snap-start sm:min-w-0">
-                <Reveal delay={index * 90}>
+                <Reveal variant="zoom" delay={index * 130}>
                   <Link
                     href={`/v/${v.urlSlug}`}
                     className="rv-mobile-card rv-glow-ring group flex h-full flex-col overflow-hidden rounded-2xl border border-rv-accent/20 bg-white shadow-[0_12px_32px_rgba(30,166,247,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-rv-accent/45 hover:shadow-[0_20px_44px_rgba(30,166,247,0.22)]"
