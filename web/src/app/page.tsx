@@ -136,11 +136,32 @@ export default async function HomePage() {
                       </span>
                     ))}
                   </div>
-                  <div className="mt-7">
-                    <Link href="/catalogo" className="rv-btn-primary inline-flex w-full justify-center sm:w-auto">
-                      Simular financiación ahora
-                    </Link>
-                  </div>
+                  <details className="group mt-7 w-full sm:max-w-3xl">
+                    <summary className="rv-btn-primary inline-flex w-full cursor-pointer list-none justify-center sm:w-auto">
+                      Simular préstamo
+                    </summary>
+                    <div className="mt-4 overflow-hidden rounded-2xl border border-white/20 bg-white">
+                      <iframe
+                        title="Simulador de préstamo MiAuto"
+                        src="/miauto/simulador/"
+                        className="h-[620px] w-full border-0"
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                    <p className="mt-2 text-xs text-slate-300">
+                      Si tu navegador bloquea la carga, abrilo directo en{" "}
+                      <a
+                        href="https://www.miauto.com.uy/simulador/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline underline-offset-2"
+                      >
+                        MiAuto
+                      </a>
+                      .
+                    </p>
+                  </details>
                 </div>
                 <div className="grid gap-3">
                   <div className="rounded-2xl border border-white/15 bg-white p-4">
