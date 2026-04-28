@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LatestIngresosWidget } from "@/components/latest-ingresos-widget";
-import { MiautoSimulatorPanel } from "@/components/miauto-simulator-panel";
 import { PublicChrome } from "@/components/public-chrome";
 import { listVehicles } from "@/lib/vehicle-store";
 
@@ -102,11 +101,11 @@ export default async function HomePage() {
 
         <section
           id="financiacion-bancaria"
-          className="rv-mobile-enter rv-mobile-enter-4 relative overflow-hidden border-b border-rv-accent/20 bg-slate-950 py-10 text-white sm:py-16"
+          className="rv-mobile-enter rv-mobile-enter-4 relative overflow-hidden border-b border-rv-accent/15 bg-gradient-to-b from-[#f4fafe] via-[#eef7ff] to-white py-10 text-slate-900 sm:py-16"
         >
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(30,166,247,0.34),transparent_45%),radial-gradient(circle_at_90%_100%,rgba(56,189,248,0.18),transparent_40%),linear-gradient(120deg,rgba(15,23,42,0.9),rgba(2,6,23,0.92))]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(30,166,247,0.22),transparent_48%),radial-gradient(circle_at_100%_100%,rgba(56,189,248,0.14),transparent_42%)]" />
           <div className="mx-auto max-w-5xl px-3 sm:px-6">
-            <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-br from-slate-900/95 via-slate-950/95 to-rv-accent/30 p-6 shadow-[0_24px_80px_rgba(5,15,40,0.45)] backdrop-blur-[2px] sm:p-8">
+            <div className="relative overflow-hidden rounded-3xl border border-rv-accent/20 bg-gradient-to-br from-slate-950 via-[#0b1d3c] to-[#113969] p-6 text-white shadow-[0_24px_80px_rgba(9,24,60,0.28)] sm:p-8">
               <div className="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-center">
                 <div>
                   <p className="inline-flex rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-white">
@@ -138,7 +137,19 @@ export default async function HomePage() {
                       </span>
                     ))}
                   </div>
-                  <MiautoSimulatorPanel />
+                  <div className="mt-7">
+                    <a
+                      href="https://www.miauto.com.uy/simulador/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rv-btn-primary inline-flex w-full justify-center sm:w-auto"
+                    >
+                      Simular préstamo
+                    </a>
+                    <p className="mt-2 text-xs text-slate-300">
+                      Este botón abre el simulador oficial de MiAuto Santander.
+                    </p>
+                  </div>
                 </div>
                 <div className="grid gap-3">
                   <div className="rounded-2xl border border-white/15 bg-white p-4">
