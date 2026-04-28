@@ -7,6 +7,9 @@ import { BrandLogo } from "@/components/brand-logo";
 const links = [
   { href: "/", label: "Inicio" },
   { href: "/catalogo", label: "Autos" },
+  { href: "/#financiacion-bancaria", label: "Financiación" },
+  { href: "/#ubicacion", label: "Ubicación" },
+  { href: "/#contacto", label: "Contacto" },
 ] as const;
 
 export function PublicHeader() {
@@ -18,10 +21,9 @@ export function PublicHeader() {
         <BrandLogo className="w-full text-center sm:w-auto sm:text-left" />
 
         <nav aria-label="Principal" className="w-full sm:w-auto">
-          <ul className="grid w-full grid-cols-2 items-center gap-1 rounded-2xl border border-rv-accent/20 bg-white p-1.5 sm:flex sm:w-auto">
+          <ul className="grid w-full grid-cols-3 items-center gap-1 rounded-2xl border border-rv-accent/20 bg-white p-1.5 sm:flex sm:w-auto sm:flex-wrap sm:justify-end">
             {links.map(({ href, label }) => {
-              const active =
-                href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+              const active = href === "/" ? pathname === "/" : href === "/catalogo" && pathname.startsWith("/catalogo");
               return (
                 <li key={href}>
                   <Link

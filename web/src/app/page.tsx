@@ -4,6 +4,7 @@ import { LatestIngresosWidget } from "@/components/latest-ingresos-widget";
 import { MiautoPopupButton } from "../components/miauto-popup-button";
 import { PublicChrome } from "@/components/public-chrome";
 import { listVehicles } from "@/lib/vehicle-store";
+import { buildWhatsappUrl } from "@/lib/whatsapp-visit";
 
 export const dynamic = "force-dynamic";
 
@@ -239,7 +240,46 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section className="rv-mobile-enter rv-mobile-enter-6 bg-white py-10 sm:py-16">
+        <section id="contacto" className="rv-mobile-enter rv-mobile-enter-6 border-b border-rv-accent/10 bg-white py-10 sm:py-16">
+          <div className="mx-auto max-w-5xl px-3 sm:px-6">
+            <div className="rv-mobile-card rounded-3xl border border-rv-accent/20 bg-gradient-to-br from-white via-sky-50/40 to-cyan-50/40 p-6 sm:p-8">
+              <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-rv-accent">Contacto</h2>
+              <p className="rv-mobile-title mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+                Hablemos y coordinamos tu próxima visita
+              </p>
+              <p className="rv-mobile-muted mt-3 max-w-2xl text-sm leading-relaxed sm:text-base">
+                Respondemos consultas de financiación, disponibilidad de unidades y documentación en el día.
+              </p>
+
+              <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                <a
+                  href={buildWhatsappUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-between rounded-2xl border border-emerald-500/25 bg-emerald-50 px-4 py-3 transition hover:bg-emerald-100"
+                >
+                  <span className="font-semibold text-emerald-800">WhatsApp</span>
+                  <span className="text-sm font-medium text-emerald-700">099 744 203</span>
+                </a>
+                <a
+                  href="https://www.instagram.com/rv__automoviles/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-between rounded-2xl border border-fuchsia-500/25 bg-fuchsia-50 px-4 py-3 transition hover:bg-fuchsia-100"
+                >
+                  <span className="font-semibold text-fuchsia-800">Instagram</span>
+                  <span className="text-sm font-medium text-fuchsia-700">@rv__automoviles</span>
+                </a>
+                <div className="rounded-2xl border border-rv-accent/20 bg-white px-4 py-3 sm:col-span-2 lg:col-span-1">
+                  <p className="text-sm font-semibold text-rv-accent">Horarios</p>
+                  <p className="mt-1 text-sm text-slate-600">Lun a Sáb · Respuesta dentro del día</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="ubicacion" className="rv-mobile-enter rv-mobile-enter-7 bg-white py-10 sm:py-16">
           <div className="mx-auto max-w-5xl px-3 sm:px-6">
             <div className="grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-start">
               <div>
