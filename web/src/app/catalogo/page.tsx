@@ -42,7 +42,7 @@ export default async function CatalogoPage() {
               <span className="rv-text-gradient-anim">Autos en venta</span>
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
-              Elegí una unidad para ver ficha completa, galería y documentación.
+              Tocá una unidad para ver fotos, ficha técnica, equipamiento y documentación.
             </p>
           </div>
         </header>

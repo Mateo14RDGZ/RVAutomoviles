@@ -49,17 +49,17 @@ export function PublicHeader() {
           </span>
         </div>
 
-        <nav aria-label="Principal" className="w-full sm:w-auto">
-          <ul className="rv-glass grid w-full grid-cols-3 items-center gap-1 rounded-2xl p-1.5 sm:flex sm:w-auto sm:flex-wrap sm:justify-end">
+        <nav aria-label="Principal" className="-mx-3 w-[calc(100%+1.5rem)] sm:mx-0 sm:w-auto">
+          <ul className="rv-glass mx-3 flex items-center gap-1 overflow-x-auto rounded-2xl p-1.5 sm:mx-0 sm:flex-wrap sm:overflow-x-visible sm:justify-end">
             {links.map(({ href, label }) => {
               const active =
                 href === "/" ? pathname === "/" : href === "/catalogo" && pathname.startsWith("/catalogo");
               return (
-                <li key={href}>
+                <li key={href} className="shrink-0">
                   <Link
                     href={href}
                     onClick={(event) => handleInPageNavigation(event, href)}
-                    className={`relative inline-flex w-full justify-center overflow-hidden rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 sm:py-2 ${
+                    className={`relative inline-flex justify-center overflow-hidden whitespace-nowrap rounded-xl px-3.5 py-2 text-[13px] font-semibold transition-all duration-300 sm:px-4 sm:py-2 sm:text-sm ${
                       active
                         ? "bg-rv-accent/12 text-rv-accent shadow-[inset_0_0_0_1px_rgba(0,115,230,0.45)]"
                         : "text-slate-600 hover:bg-rv-accent/[0.08] hover:text-slate-900"

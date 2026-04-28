@@ -68,9 +68,9 @@ export default async function HomePage() {
                         <span className="absolute inset-0 animate-ping rounded-full bg-rv-accent/60" />
                         <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-rv-accent" />
                       </span>
-                      Automotora en vivo · Uruguay
+                      Automotora · Uruguay
                     </span>
-                    <span className="rv-caption text-slate-500">2026 · v2.0</span>
+                    <span className="rv-caption text-slate-500">Atención personalizada</span>
                   </div>
                 </Reveal>
 
@@ -84,8 +84,8 @@ export default async function HomePage() {
 
                 <Reveal variant="soft" delay={360}>
                   <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
-                    Catálogo en vivo, fichas con fotos reales, simulador de financiación oficial y atención
-                    directa por WhatsApp. Una sola web mobile-first para decidir rápido.
+                    Catálogo actualizado, fichas con fotos reales, simulador de financiación oficial y
+                    atención directa por WhatsApp. Pensada para que elijas tu próximo auto sin vueltas.
                   </p>
                 </Reveal>
 
@@ -156,17 +156,17 @@ export default async function HomePage() {
                   />
                   <div className="relative flex h-full flex-col justify-between p-6">
                     <div>
-                      <span className="rv-chip">Live Showroom</span>
+                      <span className="rv-chip">Showroom virtual</span>
                       <p className="mt-4 text-sm font-medium text-slate-600">
-                        Cada unidad se publica con fotos reales, año, kilometraje, equipamiento y documentación
-                        cuando corresponde.
+                        Cada unidad se publica con fotos reales, año, kilometraje, equipamiento y, cuando
+                        corresponde, su documentación.
                       </p>
                     </div>
                     <ul className="mt-6 space-y-3 text-sm">
                       {[
-                        "Catálogo actualizado",
-                        "Simulador oficial Santander",
-                        "WhatsApp directo con la automotora",
+                        "Stock actualizado",
+                        "Financiación con todos los bancos",
+                        "Atención personalizada por WhatsApp",
                       ].map((item, i) => (
                         <li key={item} className="flex items-center gap-3">
                           <span
@@ -181,7 +181,7 @@ export default async function HomePage() {
                     </ul>
                     <div className="rv-neon-divider mt-6" aria-hidden />
                     <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-rv-accent">
-                      RV Automóviles · 2026
+                      RV Automóviles · Uruguay
                     </p>
                   </div>
                 </TiltCard>
@@ -229,13 +229,13 @@ export default async function HomePage() {
             <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
               <Reveal variant="left">
                 <div>
-                  <span className="rv-chip">Propuesta</span>
+                  <span className="rv-chip">Por qué elegirnos</span>
                   <p className="rv-mobile-title mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">
-                    Tecnología, claridad y respaldo.
+                    Confianza, claridad y respaldo.
                   </p>
                   <p className="rv-mobile-muted mt-4 max-w-md text-sm leading-relaxed sm:text-base">
-                    Cada bloque está pensado para que decidas con confianza y la web te acompañe con fluidez
-                    en mobile y desktop.
+                    Te acompañamos en cada paso: desde elegir el auto hasta firmar la financiación,
+                    con asesoramiento honesto y trato personal.
                   </p>
                 </div>
               </Reveal>
@@ -243,12 +243,12 @@ export default async function HomePage() {
                 <div className="rv-glow-ring relative overflow-hidden rounded-3xl border border-rv-accent/20 bg-gradient-to-br from-white via-rv-accent/[0.06] to-white p-6 sm:p-8">
                   <div className="rv-beam" aria-hidden />
                   <p className="text-sm font-medium leading-relaxed text-slate-700 sm:text-base">
-                    Nuestro objetivo es que en una sola visita a la web tengas todo: el auto que querés,
-                    la cuota que te calza, y un canal directo con nosotros para coordinar.
+                    Nuestro objetivo es que en una sola consulta tengas todo lo que necesitás: el auto que
+                    buscás, la cuota que te calza y un canal directo con nosotros para coordinar.
                   </p>
                   <div className="rv-neon-divider mt-6" aria-hidden />
-                  <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-rv-accent">
-                    Mobile-first · Tiempos rápidos · Datos claros
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rv-accent mt-4">
+                    Atención directa · Asesoramiento real · Documentación en regla
                   </p>
                 </div>
               </Reveal>
@@ -257,7 +257,7 @@ export default async function HomePage() {
             <div className="mt-12 grid gap-4 sm:grid-cols-3 sm:gap-5">
               {[
                 {
-                  title: "Catálogo en vivo",
+                  title: "Catálogo actualizado",
                   desc: "Stock real con fotos y datos. Tocá una unidad y abrís la ficha completa al instante.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
@@ -279,7 +279,7 @@ export default async function HomePage() {
                   step: "02",
                 },
                 {
-                  title: "Atención directa",
+                  title: "Atención personalizada",
                   desc: "Coordinás visita por WhatsApp y recibís respuesta el mismo día.",
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
@@ -347,12 +347,12 @@ export default async function HomePage() {
                     </span>
                     <Reveal variant="mask" delay={120}>
                       <h2 className="mt-4 max-w-3xl text-2xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
-                        MiAuto Santander: simulá tu préstamo y sacá tu auto con financiación ágil.
+                        Financiá tu próximo auto con MiAuto Santander.
                       </h2>
                     </Reveal>
                     <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200 sm:text-base">
-                      Línea oficial de Santander para vehículos. Acá te resumimos sus tres modalidades y te
-                      acercamos al simulador real, sin formularios intermedios.
+                      Te ayudamos a elegir entre las tres líneas oficiales de Santander para autos.
+                      Simulás directo en su sistema, sin formularios intermedios y sin compromiso.
                     </p>
 
                     <div className="mt-5 grid gap-2 sm:grid-cols-3">
@@ -477,12 +477,12 @@ export default async function HomePage() {
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
             <Reveal variant="up">
               <div className="max-w-2xl">
-                <span className="rv-chip">Cómo funciona</span>
+                <span className="rv-chip">Cómo te acompañamos</span>
                 <p className="rv-mobile-title mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">
-                  Tres pasos nomás.
+                  Tres pasos hasta tu próximo auto.
                 </p>
                 <p className="rv-mobile-muted mt-3 text-sm leading-relaxed sm:text-base">
-                  Una experiencia pensada para que llegues hasta la entrega del auto sin fricción.
+                  De elegir el modelo a recibirlo en mano, te guiamos para que sea simple y sin sorpresas.
                 </p>
               </div>
             </Reveal>
@@ -495,18 +495,18 @@ export default async function HomePage() {
               {[
                 {
                   n: "01",
-                  title: "Elegís el auto",
-                  desc: "Navegás el catálogo y abrís la ficha con fotos y datos claros.",
+                  title: "Elegís el modelo",
+                  desc: "Navegás el catálogo y abrís la ficha con fotos, equipamiento y precio claro.",
                 },
                 {
                   n: "02",
-                  title: "Simulás financiación",
-                  desc: "Te mostramos alternativas de bancos para definir la mejor cuota.",
+                  title: "Simulás la cuota",
+                  desc: "Comparamos opciones con todos los bancos para encontrar la cuota que te conviene.",
                 },
                 {
                   n: "03",
-                  title: "Coordinás visita",
-                  desc: "Confirmás disponibilidad y avanzás directo por WhatsApp.",
+                  title: "Lo retirás",
+                  desc: "Coordinamos la visita por WhatsApp, hacemos la prueba y entregamos el auto.",
                 },
               ].map((step, i) => (
                 <Reveal
@@ -625,11 +625,11 @@ export default async function HomePage() {
                 <div>
                   <span className="rv-chip">Dónde estamos</span>
                   <p className="rv-mobile-title mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">
-                    Pasá a saludar.
+                    Te esperamos en el local.
                   </p>
                   <p className="rv-mobile-muted mt-3 text-sm leading-relaxed sm:text-base">
-                    Acá abajo tenés el mapa con la ubicación de{" "}
-                    <strong className="text-slate-800">RV Automóviles</strong>.
+                    Visitá <strong className="text-slate-800">RV Automóviles</strong> para conocer cada
+                    unidad en persona o agendá una prueba de manejo.
                   </p>
                   <a
                     href={MAPS_SHORT_URL}

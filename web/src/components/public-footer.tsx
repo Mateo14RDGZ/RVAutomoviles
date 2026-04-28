@@ -1,130 +1,190 @@
+import Link from "next/link";
 import { buildWhatsappUrl } from "@/lib/whatsapp-visit";
 import { BrandLogo } from "@/components/brand-logo";
 
-export function PublicFooter() {
+const MAPS_SHORT_URL = "https://maps.app.goo.gl/XHWmX8T1a47y4VPP9";
+
+function IconWhatsapp({ className = "h-4 w-4" }: { className?: string }) {
   return (
-    <footer className="relative mt-12 overflow-hidden border-t border-rv-accent/20 bg-white">
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <path
+        d="M20.5 3.5A11 11 0 003.5 18.6L2 22l3.5-1.4A11 11 0 1020.5 3.5z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8.5 9.5c.3-.6.7-.7 1-.7l.7.05c.2 0 .4.05.6.5.3.7.9 2 1 2.1.1.2.2.3.05.5-.15.2-.25.35-.5.55-.2.2-.4.4-.2.7.2.3.85 1.4 1.85 2.3 1.3 1.15 2.4 1.5 2.7 1.65.3.15.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.25.7-.15.3.1 2 .95 2.4 1.1.4.15.65.25.7.4.1.55-.05 1.55-.4 2.1-.5.85-2.4 1.55-3.4 1.45-.85-.1-1.95-.4-3.4-1-3-1.25-5-3.95-5.15-4.15-.15-.2-1.25-1.65-1.25-3.15 0-1.5.8-2.25 1.05-2.55z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+function IconInstagram({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+function IconPin({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <path
+        d="M12 22s7-7 7-12a7 7 0 10-14 0c0 5 7 12 7 12z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <circle cx="12" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  );
+}
+
+function IconClock({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M12 7v5l3 2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function PublicFooter() {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="relative mt-16 overflow-hidden border-t border-rv-accent/20 bg-white">
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-rv-accent/55 to-transparent"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -left-24 top-0 h-40 w-40 rounded-full bg-rv-accent/10 blur-3xl"
+        className="pointer-events-none absolute -left-24 -top-12 h-56 w-56 rounded-full bg-rv-accent/10 blur-3xl"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -right-24 bottom-0 h-40 w-40 rounded-full bg-sky-300/12 blur-3xl"
+        className="pointer-events-none absolute -right-24 bottom-0 h-56 w-56 rounded-full bg-rv-glow/10 blur-3xl"
         aria-hidden
       />
 
-      <div className="relative mx-auto grid max-w-6xl gap-6 px-4 py-10 text-sm text-slate-600 md:grid-cols-2">
+      {/* Top: marca + contacto + visitar */}
+      <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3 md:gap-8">
+        {/* Marca */}
         <div>
           <BrandLogo className="inline-flex" />
-          <p className="mt-3 max-w-md leading-relaxed">
-            Tu próximo auto con información clara, fotos reales y documentación disponible.
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-600">
+            Automotora en Uruguay con catálogo actualizado, fotos reales y atención personalizada en cada
+            consulta.
           </p>
-          <p className="rv-caption mt-3 flex items-center gap-2 normal-case tracking-normal text-xs text-slate-500">
-            <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden />
-            Atención · Lun–Vie 8:00–18:00 · Sáb 8:00–12:00
+          <p className="rv-caption mt-4 inline-flex items-center gap-2 normal-case tracking-normal text-xs text-slate-500">
+            <span className="relative inline-flex h-1.5 w-1.5 items-center justify-center" aria-hidden>
+              <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/70" />
+              <span className="relative h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            </span>
+            Atención activa hoy
           </p>
         </div>
 
-        <div className="space-y-3 md:justify-self-end md:text-right">
-          <p className="font-semibold text-rv-accent">Contacto</p>
+        {/* Contacto */}
+        <div>
+          <p className="rv-eyebrow">Contacto</p>
+          <ul className="mt-4 space-y-2.5">
+            <li>
+              <a
+                href={buildWhatsappUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rv-glow-ring group flex items-center justify-between gap-3 rounded-xl border border-rv-accent/20 bg-white px-3 py-2.5 text-sm text-slate-700 transition hover:-translate-y-0.5 hover:border-rv-accent/45 hover:bg-rv-accent/[0.05]"
+              >
+                <span className="flex items-center gap-2 font-medium">
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-rv-accent/[0.1] text-rv-accent ring-1 ring-rv-accent/25">
+                    <IconWhatsapp />
+                  </span>
+                  WhatsApp
+                </span>
+                <span className="rv-mono text-sm font-semibold text-rv-accent">099 744 203</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.instagram.com/rv__automoviles/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rv-glow-ring group flex items-center justify-between gap-3 rounded-xl border border-rv-accent/20 bg-white px-3 py-2.5 text-sm text-slate-700 transition hover:-translate-y-0.5 hover:border-rv-accent/45 hover:bg-rv-accent/[0.05]"
+              >
+                <span className="flex items-center gap-2 font-medium">
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-rv-accent/[0.1] text-rv-accent ring-1 ring-rv-accent/25">
+                    <IconInstagram />
+                  </span>
+                  Instagram
+                </span>
+                <span className="text-sm font-semibold text-rv-accent">@rv__automoviles</span>
+              </a>
+            </li>
+          </ul>
+        </div>
 
-          <div className="grid grid-cols-1 gap-2 sm:hidden">
-            <a
-              href={buildWhatsappUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rv-glow-ring rv-mobile-card inline-flex items-center justify-center gap-2 rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
-            >
-              <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
-                <path
-                  d="M20.5 3.5A11 11 0 003.5 18.6L2 22l3.5-1.4A11 11 0 1020.5 3.5z"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span>WhatsApp</span>
-            </a>
-            <a
-              href="https://www.instagram.com/rv__automoviles/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rv-glow-ring rv-mobile-card inline-flex items-center justify-center gap-2 rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
-            >
-              <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
-                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
-                <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-              </svg>
-              <span>Instagram</span>
-            </a>
-          </div>
-
-          <div className="hidden gap-2 sm:grid sm:min-w-[300px]">
-            <a
-              href={buildWhatsappUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rv-glow-ring inline-flex items-center justify-between gap-3 rounded-xl border border-rv-accent/25 bg-white px-3 py-2 text-sm text-slate-700 transition hover:bg-rv-accent/[0.06] md:gap-2"
-            >
-              <span className="flex items-center gap-2 font-medium">
-                <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 text-rv-accent">
-                  <path
-                    d="M20.5 3.5A11 11 0 003.5 18.6L2 22l3.5-1.4A11 11 0 1020.5 3.5z"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                WhatsApp
+        {/* Visitanos */}
+        <div>
+          <p className="rv-eyebrow">Visitanos</p>
+          <ul className="mt-4 space-y-2.5 text-sm text-slate-600">
+            <li className="flex items-start gap-2.5">
+              <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-rv-accent/[0.1] text-rv-accent ring-1 ring-rv-accent/25">
+                <IconClock />
               </span>
-              <span className="font-semibold text-rv-accent underline decoration-rv-accent/40 underline-offset-2">
-                099 744 203
-              </span>
-            </a>
-            <a
-              href="https://www.instagram.com/rv__automoviles/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rv-glow-ring inline-flex items-center justify-between gap-3 rounded-xl border border-rv-accent/25 bg-white px-3 py-2 text-sm text-slate-700 transition hover:bg-rv-accent/[0.06] md:gap-2"
-            >
-              <span className="flex items-center gap-2 font-medium">
-                <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 text-rv-accent">
-                  <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
-                  <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
-                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-                </svg>
-                Instagram
-              </span>
-              <span className="font-semibold text-rv-accent">@rv__automoviles</span>
-            </a>
-          </div>
-
-          <div className="mt-2 flex flex-wrap gap-3 text-xs md:justify-end">
-            <a href="/privacidad" className="text-slate-500 underline-offset-2 hover:text-rv-accent hover:underline">
-              Privacidad
-            </a>
-            <a href="/terminos" className="text-slate-500 underline-offset-2 hover:text-rv-accent hover:underline">
-              Términos
-            </a>
-          </div>
+              <div>
+                <p className="font-medium text-slate-800">Horarios</p>
+                <p className="text-xs text-slate-500">Lunes a Viernes 8:00 – 18:00</p>
+                <p className="text-xs text-slate-500">Sábados 8:00 – 12:00</p>
+              </div>
+            </li>
+            <li>
+              <a
+                href={MAPS_SHORT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 rounded-xl border border-rv-accent/20 bg-white px-3 py-2 text-sm font-semibold text-rv-accent transition hover:-translate-y-0.5 hover:border-rv-accent/45 hover:bg-rv-accent/[0.05]"
+              >
+                <span className="inline-flex h-6 w-6 items-center justify-center rounded-lg bg-rv-accent/[0.1] ring-1 ring-rv-accent/25">
+                  <IconPin className="h-3.5 w-3.5" />
+                </span>
+                Cómo llegar
+                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
-      {/* Sub-footer con copyright fino */}
-      <div className="relative border-t border-rv-accent/10 bg-white/60 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-3 text-[11px] text-slate-500 sm:flex-row">
-          <p className="rv-caption normal-case tracking-normal">
-            © {new Date().getFullYear()} RV Automóviles · Hecho en Uruguay
+      {/* Sub-footer: legales + firma */}
+      <div className="relative border-t border-rv-accent/10 bg-white/70 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-4 text-[11px] text-slate-500 sm:flex-row sm:gap-2 sm:px-6">
+          <p className="rv-caption normal-case tracking-normal text-center sm:text-left">
+            © {year} RV Automóviles · Todos los derechos reservados
           </p>
-          <p className="rv-caption normal-case tracking-normal">
-            <span className="rv-mono">v2.0</span> · Mobile-first · Catálogo en vivo
+          <div className="flex items-center gap-3">
+            <Link href="/privacidad" className="hover:text-rv-accent hover:underline">
+              Privacidad
+            </Link>
+            <span className="h-3 w-px bg-slate-300" aria-hidden />
+            <Link href="/terminos" className="hover:text-rv-accent hover:underline">
+              Términos
+            </Link>
+          </div>
+        </div>
+        <div className="border-t border-rv-accent/10">
+          <p className="rv-caption mx-auto max-w-6xl px-4 py-3 text-center text-[11px] normal-case tracking-normal text-slate-500 sm:px-6">
+            Desarrollado por{" "}
+            <span className="font-semibold text-slate-700">RF DigitalStudio</span> · Todos los derechos
+            reservados
           </p>
         </div>
       </div>
