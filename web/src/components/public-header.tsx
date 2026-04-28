@@ -35,7 +35,19 @@ export function PublicHeader() {
         aria-hidden
       />
       <div className="relative mx-auto flex max-w-6xl flex-col gap-2 px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-4 sm:py-3">
-        <BrandLogo className="w-full text-center sm:w-auto sm:text-left" />
+        <div className="flex items-center justify-center gap-2 sm:justify-start">
+          <BrandLogo className="text-center sm:text-left" />
+          <span
+            className="hidden items-center gap-1 rounded-full border border-emerald-300/60 bg-emerald-50 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em] text-emerald-700 sm:inline-flex"
+            title="Catálogo activo"
+          >
+            <span className="relative inline-flex h-1 w-1 items-center justify-center">
+              <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/70" aria-hidden />
+              <span className="relative h-1 w-1 rounded-full bg-emerald-500" aria-hidden />
+            </span>
+            Online
+          </span>
+        </div>
 
         <nav aria-label="Principal" className="w-full sm:w-auto">
           <ul className="rv-glass grid w-full grid-cols-3 items-center gap-1 rounded-2xl p-1.5 sm:flex sm:w-auto sm:flex-wrap sm:justify-end">
@@ -49,7 +61,7 @@ export function PublicHeader() {
                     onClick={(event) => handleInPageNavigation(event, href)}
                     className={`relative inline-flex w-full justify-center overflow-hidden rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 sm:py-2 ${
                       active
-                        ? "bg-rv-accent/12 text-rv-accent shadow-[inset_0_0_0_1px_rgba(30,166,247,0.45)]"
+                        ? "bg-rv-accent/12 text-rv-accent shadow-[inset_0_0_0_1px_rgba(0,115,230,0.45)]"
                         : "text-slate-600 hover:bg-rv-accent/[0.08] hover:text-slate-900"
                     }`}
                   >

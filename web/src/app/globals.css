@@ -5,10 +5,19 @@
 :root {
   color-scheme: light;
   --background: #ffffff;
-  --foreground: #0f172a;
-  --rv-accent: #1ea6f7;
-  --rv-accent-2: #67d5ff;
+  --foreground: #050b1f;
+  --rv-accent: #0073e6;
+  --rv-accent-2: #38bdf8;
+  --rv-glow: #22d3ee;
+  --rv-deep: #050b1f;
   --rv-violet: #6366f1;
+  --rv-amber: #f59e0b;
+  --rv-ink: #0b1226;
+}
+
+::selection {
+  background: rgba(0, 115, 230, 0.18);
+  color: #050b1f;
 }
 
 html {
@@ -29,7 +38,7 @@ body {
 
 @layer components {
   .rv-surface {
-    @apply rounded-3xl border border-rv-accent/15 bg-white/90 shadow-[0_16px_40px_rgba(30,166,247,0.12)] backdrop-blur-sm;
+    @apply rounded-3xl border border-rv-accent/15 bg-white/90 shadow-[0_16px_40px_rgba(0,115,230,0.12)] backdrop-blur-sm;
   }
 
   .rv-surface-dark {
@@ -47,21 +56,37 @@ body {
 
   .rv-btn {
     @apply relative inline-flex items-center justify-center overflow-hidden rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.005em;
+  }
+
+  .rv-btn:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px #fff,
+      0 0 0 4px rgba(0, 115, 230, 0.45);
+  }
+
+  .rv-btn:active {
+    transform: scale(0.985);
   }
 
   .rv-btn-primary {
-    @apply rv-btn text-white shadow-[0_14px_34px_rgba(14,165,233,0.32)];
-    background: linear-gradient(120deg, #1ea6f7 0%, #38bdf8 50%, #67d5ff 100%);
+    @apply rv-btn text-white;
+    background: linear-gradient(120deg, #0073e6 0%, #0ea5e9 45%, #22d3ee 100%);
     background-size: 220% 220%;
     background-position: 0% 50%;
+    box-shadow:
+      0 14px 34px rgba(0, 115, 230, 0.32),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
     transition: background-position 600ms ease, transform 220ms ease, box-shadow 220ms ease;
   }
 
   .rv-btn-primary:hover {
     background-position: 100% 50%;
     transform: translateY(-1px);
-    box-shadow: 0 18px 40px rgba(14, 165, 233, 0.42);
+    box-shadow:
+      0 18px 42px rgba(0, 115, 230, 0.42),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
 
   .rv-btn-primary::after {
@@ -79,22 +104,22 @@ body {
   }
 
   .rv-btn-secondary {
-    @apply rv-btn border border-rv-accent/25 bg-white/80 text-slate-700 backdrop-blur transition;
+    @apply rv-btn border border-rv-accent/25 bg-white/85 text-slate-700 backdrop-blur transition;
   }
 
   .rv-btn-secondary:hover {
-    @apply border-rv-accent/45 bg-white text-slate-900;
-    box-shadow: 0 8px 24px rgba(30, 166, 247, 0.18);
+    @apply border-rv-accent/55 bg-white text-slate-900;
+    box-shadow: 0 10px 26px rgba(0, 115, 230, 0.2);
   }
 
   .rv-input {
-    @apply mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-100;
+    @apply mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-rv-accent focus:outline-none focus:ring-2 focus:ring-rv-accent/20;
   }
 
   .rv-glass {
     background: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(247, 251, 255, 0.86));
     backdrop-filter: blur(18px);
-    border: 1px solid rgba(30, 166, 247, 0.18);
+    border: 1px solid rgba(0, 115, 230, 0.18);
     box-shadow:
       0 18px 40px rgba(15, 23, 42, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.7);
@@ -115,34 +140,70 @@ body {
 
   .rv-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(30, 166, 247, 0.55), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 115, 230, 0.55), transparent);
   }
 }
 
 @layer utilities {
   .rv-grid-bg {
     background-image:
-      linear-gradient(rgba(30, 166, 247, 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(30, 166, 247, 0.07) 1px, transparent 1px);
+      linear-gradient(rgba(0, 115, 230, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 115, 230, 0.07) 1px, transparent 1px);
     background-size: 48px 48px;
     mask-image: radial-gradient(ellipse at top, rgba(0, 0, 0, 0.6), transparent 75%);
     -webkit-mask-image: radial-gradient(ellipse at top, rgba(0, 0, 0, 0.6), transparent 75%);
   }
 
   .rv-text-gradient {
-    background: linear-gradient(90deg, #0f172a 0%, #1e4b7a 45%, #1ea6f7 100%);
+    background: linear-gradient(90deg, #050b1f 0%, #0b3870 45%, #0073e6 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
   .rv-text-gradient-anim {
-    background: linear-gradient(90deg, #0f172a, #1e4b7a, #1ea6f7, #67d5ff, #1ea6f7, #1e4b7a, #0f172a);
+    background: linear-gradient(
+      90deg,
+      #050b1f,
+      #0b3870,
+      #0073e6,
+      #22d3ee,
+      #0073e6,
+      #0b3870,
+      #050b1f
+    );
     background-size: 300% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     animation: rvGradientMove 11s linear infinite;
+  }
+
+  .rv-text-amber {
+    background: linear-gradient(90deg, #b45309, #f59e0b, #fbbf24);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .rv-eyebrow {
+    @apply text-[10px] font-bold uppercase tracking-[0.24em] text-rv-accent;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  .rv-caption {
+    @apply text-[11px] font-medium uppercase tracking-[0.18em] text-slate-500;
+  }
+
+  .rv-mono {
+    font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, "JetBrains Mono", monospace;
+    font-feature-settings: "tnum", "ss01";
+    letter-spacing: -0.01em;
+  }
+
+  .rv-divider-soft {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.08), transparent);
   }
 
   .rv-glow-ring {
@@ -155,7 +216,7 @@ body {
     inset: -1px;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(30, 166, 247, 0.6), rgba(99, 102, 241, 0.45), rgba(56, 189, 248, 0.6));
+    background: linear-gradient(135deg, rgba(0, 115, 230, 0.6), rgba(99, 102, 241, 0.45), rgba(56, 189, 248, 0.6));
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0);
@@ -179,26 +240,26 @@ body {
     left: -10%;
     height: 200%;
     width: 18%;
-    background: linear-gradient(120deg, transparent 30%, rgba(30, 166, 247, 0.18) 50%, transparent 70%);
+    background: linear-gradient(120deg, transparent 30%, rgba(0, 115, 230, 0.18) 50%, transparent 70%);
     transform: rotate(12deg);
     animation: rvBeamSweep 6s linear infinite;
   }
 
   .rv-stat-num {
-    background: linear-gradient(140deg, #1ea6f7 0%, #38bdf8 30%, #6366f1 70%, #1ea6f7 100%);
+    background: linear-gradient(140deg, #0073e6 0%, #22d3ee 30%, #6366f1 70%, #0073e6 100%);
     background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     animation: rvGradientMove 9s linear infinite;
     font-variant-numeric: tabular-nums;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
   }
 
   .rv-neon-divider {
     position: relative;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(30, 166, 247, 0.7), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 115, 230, 0.7), transparent);
     overflow: visible;
   }
 
@@ -292,7 +353,7 @@ body {
     pointer-events: none;
     background: radial-gradient(
       400px circle at var(--rv-spotlight-x, 50%) var(--rv-spotlight-y, 50%),
-      rgba(30, 166, 247, 0.18),
+      rgba(0, 115, 230, 0.18),
       transparent 60%
     );
     opacity: 0;
@@ -310,7 +371,7 @@ body {
     width: 380px;
     height: 380px;
     border-radius: 9999px;
-    background: radial-gradient(circle, rgba(30, 166, 247, 0.28), rgba(99, 102, 241, 0.16) 50%, transparent 75%);
+    background: radial-gradient(circle, rgba(0, 115, 230, 0.28), rgba(99, 102, 241, 0.16) 50%, transparent 75%);
     filter: blur(18px);
     transform: translate3d(var(--rv-orb-x, 50%), var(--rv-orb-y, 50%), 0) translate(-50%, -50%);
     transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms ease;
@@ -379,7 +440,7 @@ body {
 @keyframes rvPulseGlow {
   0%,
   100% {
-    box-shadow: 0 0 0 rgba(14, 165, 233, 0);
+    box-shadow: 0 0 0 rgba(0, 115, 230, 0);
   }
   50% {
     box-shadow: 0 0 30px rgba(34, 211, 238, 0.22);
@@ -448,7 +509,7 @@ body {
   inset: -10%;
   pointer-events: none;
   background:
-    radial-gradient(700px 280px at 10% -10%, rgba(30, 166, 247, 0.22), transparent 60%),
+    radial-gradient(700px 280px at 10% -10%, rgba(0, 115, 230, 0.22), transparent 60%),
     radial-gradient(600px 260px at 95% 0%, rgba(99, 102, 241, 0.18), transparent 55%),
     radial-gradient(500px 220px at 50% 110%, rgba(56, 189, 248, 0.22), transparent 60%);
   animation: rvAuroraShift 18s ease-in-out infinite;
@@ -577,16 +638,16 @@ body {
     --rv-mobile-bg: #ffffff;
     --rv-mobile-surface: #ffffff;
     --rv-mobile-surface-2: #f3f9ff;
-    --rv-mobile-text: #0f172a;
-    --rv-mobile-muted: #5f7087;
-    --rv-mobile-accent: #1ea6f7;
-    --rv-mobile-accent-2: #67d5ff;
+    --rv-mobile-text: #050b1f;
+    --rv-mobile-muted: #5b6b85;
+    --rv-mobile-accent: #0073e6;
+    --rv-mobile-accent-2: #22d3ee;
   }
 
   body {
     background:
-      radial-gradient(circle at 12% 8%, rgba(30, 166, 247, 0.18), transparent 45%),
-      radial-gradient(circle at 88% 12%, rgba(103, 213, 255, 0.2), transparent 40%),
+      radial-gradient(circle at 12% 8%, rgba(0, 115, 230, 0.18), transparent 45%),
+      radial-gradient(circle at 88% 12%, rgba(34, 211, 238, 0.2), transparent 40%),
       linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
   }
 
@@ -635,20 +696,20 @@ body {
 
   .rv-mobile-panel {
     border-radius: 1.25rem;
-    border: 1px solid rgba(30, 166, 247, 0.24);
+    border: 1px solid rgba(0, 115, 230, 0.24);
     background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(243, 249, 255, 0.95));
     color: var(--rv-mobile-text);
     box-shadow:
-      0 18px 38px rgba(30, 166, 247, 0.16),
-      inset 0 0 0 1px rgba(30, 166, 247, 0.08);
+      0 18px 38px rgba(0, 115, 230, 0.16),
+      inset 0 0 0 1px rgba(0, 115, 230, 0.08);
     backdrop-filter: blur(10px);
   }
 
   .rv-mobile-card {
-    border: 1px solid rgba(30, 166, 247, 0.22);
+    border: 1px solid rgba(0, 115, 230, 0.22);
     background: linear-gradient(170deg, rgba(255, 255, 255, 0.98), rgba(245, 250, 255, 0.95));
     color: var(--rv-mobile-text);
-    box-shadow: 0 12px 32px rgba(30, 166, 247, 0.15);
+    box-shadow: 0 12px 32px rgba(0, 115, 230, 0.15);
     transition:
       transform 260ms ease,
       border-color 260ms ease,
@@ -658,8 +719,8 @@ body {
 
   .rv-mobile-card:hover,
   .rv-mobile-card:active {
-    border-color: rgba(30, 166, 247, 0.55);
-    box-shadow: 0 18px 36px rgba(30, 166, 247, 0.22);
+    border-color: rgba(0, 115, 230, 0.55);
+    box-shadow: 0 18px 36px rgba(0, 115, 230, 0.22);
     filter: saturate(1.08);
     transform: translateY(-2px);
   }
@@ -680,13 +741,13 @@ body {
     left: -40%;
     width: 40%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(30, 166, 247, 0.24), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 115, 230, 0.24), transparent);
     animation: rvScanLine 2.2s linear infinite;
     pointer-events: none;
   }
 
   .rv-mobile-title {
-    background: linear-gradient(90deg, #0f172a 0%, #1e4b7a 45%, #1ea6f7 100%);
+    background: linear-gradient(90deg, #050b1f 0%, #0b3870 45%, #0073e6 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -699,7 +760,7 @@ body {
   .rv-btn-secondary {
     background: rgba(255, 255, 255, 0.92);
     color: #0f172a;
-    border-color: rgba(30, 166, 247, 0.34);
+    border-color: rgba(0, 115, 230, 0.34);
   }
 }
 
@@ -715,3 +776,4 @@ body {
   background: #ffffff;
   color: #0f172a;
 }
+

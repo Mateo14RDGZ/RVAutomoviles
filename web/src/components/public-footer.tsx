@@ -23,8 +23,9 @@ export function PublicFooter() {
           <p className="mt-3 max-w-md leading-relaxed">
             Tu próximo auto con información clara, fotos reales y documentación disponible.
           </p>
-          <p className="mt-2 text-xs text-slate-500">
-            Atención: Lunes a Viernes 8:00 a 18:00 · Sábados 8:00 a 12:00.
+          <p className="rv-caption mt-3 flex items-center gap-2 normal-case tracking-normal text-xs text-slate-500">
+            <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden />
+            Atención · Lun–Vie 8:00–18:00 · Sáb 8:00–12:00
           </p>
         </div>
 
@@ -113,6 +114,18 @@ export function PublicFooter() {
               Términos
             </a>
           </div>
+        </div>
+      </div>
+
+      {/* Sub-footer con copyright fino */}
+      <div className="relative border-t border-rv-accent/10 bg-white/60 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-3 text-[11px] text-slate-500 sm:flex-row">
+          <p className="rv-caption normal-case tracking-normal">
+            © {new Date().getFullYear()} RV Automóviles · Hecho en Uruguay
+          </p>
+          <p className="rv-caption normal-case tracking-normal">
+            <span className="rv-mono">v2.0</span> · Mobile-first · Catálogo en vivo
+          </p>
         </div>
       </div>
     </footer>

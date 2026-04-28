@@ -61,8 +61,8 @@ function QuickAction({
   icon: React.ReactNode;
 }) {
   const cardCls = primary
-    ? "rv-glow-ring relative overflow-hidden rounded-2xl border border-rv-accent/30 bg-gradient-to-br from-rv-accent/[0.12] via-white to-rv-accent/[0.06] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(30,166,247,0.22)]"
-    : "rv-glow-ring relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-rv-accent/35 hover:shadow-[0_14px_32px_rgba(30,166,247,0.14)]";
+    ? "rv-glow-ring relative overflow-hidden rounded-2xl border border-rv-accent/30 bg-gradient-to-br from-rv-accent/[0.12] via-white to-rv-accent/[0.06] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(0,115,230,0.22)]"
+    : "rv-glow-ring relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-rv-accent/35 hover:shadow-[0_14px_32px_rgba(0,115,230,0.14)]";
 
   return (
     <Link href={href} className={cardCls}>

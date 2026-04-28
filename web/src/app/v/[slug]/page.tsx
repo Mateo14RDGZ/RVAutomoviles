@@ -45,12 +45,12 @@ function SpecCard({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="rv-glow-ring relative flex items-center gap-3 rounded-2xl border border-rv-accent/20 bg-white px-4 py-3.5 shadow-[0_8px_24px_rgba(30,166,247,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(30,166,247,0.18)]">
+    <div className="rv-glow-ring relative flex items-center gap-3 rounded-2xl border border-rv-accent/20 bg-white px-4 py-3.5 shadow-[0_8px_24px_rgba(0,115,230,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,115,230,0.18)]">
       <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rv-accent/[0.1] text-rv-accent ring-1 ring-rv-accent/30">
         {icon}
       </span>
       <div className="min-w-0">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-rv-accent">{label}</p>
+        <p className="rv-eyebrow">{label}</p>
         <p className="mt-0.5 truncate text-sm font-semibold text-slate-900 sm:text-base">{value}</p>
       </div>
     </div>
@@ -93,7 +93,7 @@ export default async function PublicVehiclePage({ params }: Props) {
 
           {/* HERO ===================================================== */}
           <Reveal variant="zoom">
-            <section className="rv-glow-ring relative -mx-3 overflow-hidden rounded-none border border-rv-accent/15 bg-white shadow-[0_30px_70px_rgba(30,166,247,0.18)] sm:mx-0 sm:rounded-3xl">
+            <section className="rv-glow-ring relative -mx-3 overflow-hidden rounded-none border border-rv-accent/15 bg-white shadow-[0_30px_70px_rgba(0,115,230,0.18)] sm:mx-0 sm:rounded-3xl">
               <div className="relative">
                 {v.photos.length > 0 ? (
                   <VehiclePhotoCarousel
@@ -136,9 +136,15 @@ export default async function PublicVehiclePage({ params }: Props) {
               {/* Precio + CTA */}
               <div className="grid gap-3 p-4 sm:grid-cols-[1fr_auto] sm:items-center sm:p-6">
                 <div>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-rv-accent">Precio</p>
-                  <p className="mt-1 text-3xl font-extrabold tabular-nums sm:text-4xl">
+                  <p className="rv-eyebrow flex items-center gap-1.5">
+                    <span className="inline-block h-1 w-1 rounded-full bg-rv-accent" aria-hidden />
+                    Precio {v.price != null ? `· ${v.currency}` : ""}
+                  </p>
+                  <p className="rv-mono mt-1 text-3xl font-extrabold sm:text-4xl">
                     <span className="rv-text-gradient-anim">{priceLabel}</span>
+                  </p>
+                  <p className="rv-caption mt-1 normal-case tracking-normal text-[11px] text-slate-500">
+                    Precio sujeto a disponibilidad · IVA incluido cuando aplique
                   </p>
                 </div>
                 <a
@@ -265,7 +271,7 @@ export default async function PublicVehiclePage({ params }: Props) {
                 <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                   {v.highlights.map((h, i) => (
                     <Reveal key={h} variant="up" delay={i * 70}>
-                      <li className="rv-glow-ring relative flex items-start gap-3 rounded-2xl border border-rv-accent/20 bg-white px-4 py-3.5 text-sm font-medium leading-relaxed text-slate-800 shadow-[0_8px_24px_rgba(30,166,247,0.08)]">
+                      <li className="rv-glow-ring relative flex items-start gap-3 rounded-2xl border border-rv-accent/20 bg-white px-4 py-3.5 text-sm font-medium leading-relaxed text-slate-800 shadow-[0_8px_24px_rgba(0,115,230,0.08)]">
                         <span
                           aria-hidden
                           className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-rv-accent to-sky-400 text-[10px] font-bold text-white shadow-sm"
@@ -316,7 +322,7 @@ export default async function PublicVehiclePage({ params }: Props) {
                   </h2>
                   <span className="rv-chip">Detalle</span>
                 </div>
-                <div className="rv-glow-ring relative mt-5 overflow-hidden rounded-3xl border border-rv-accent/15 bg-white p-5 shadow-[0_12px_36px_rgba(30,166,247,0.1)] sm:p-6">
+                <div className="rv-glow-ring relative mt-5 overflow-hidden rounded-3xl border border-rv-accent/15 bg-white p-5 shadow-[0_12px_36px_rgba(0,115,230,0.1)] sm:p-6">
                   <span
                     className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-rv-accent/10 blur-3xl"
                     aria-hidden
@@ -374,7 +380,7 @@ export default async function PublicVehiclePage({ params }: Props) {
                         href={d.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="rv-glow-ring group flex w-full items-center justify-between gap-3 rounded-2xl border border-rv-accent/20 bg-white px-4 py-3.5 text-sm font-bold text-rv-accent transition hover:-translate-y-0.5 hover:bg-rv-accent/[0.06] hover:shadow-[0_14px_30px_rgba(30,166,247,0.18)]"
+                        className="rv-glow-ring group flex w-full items-center justify-between gap-3 rounded-2xl border border-rv-accent/20 bg-white px-4 py-3.5 text-sm font-bold text-rv-accent transition hover:-translate-y-0.5 hover:bg-rv-accent/[0.06] hover:shadow-[0_14px_30px_rgba(0,115,230,0.18)]"
                       >
                         <span className="flex items-center gap-2">
                           <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
@@ -415,7 +421,7 @@ export default async function PublicVehiclePage({ params }: Props) {
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="rv-glow-ring flex items-center justify-between gap-3 rounded-2xl border border-rv-accent/20 bg-white/95 p-3 shadow-[0_18px_50px_rgba(30,166,247,0.28)] backdrop-blur"
+            className="rv-glow-ring flex items-center justify-between gap-3 rounded-2xl border border-rv-accent/20 bg-white/95 p-3 shadow-[0_18px_50px_rgba(0,115,230,0.28)] backdrop-blur"
           >
             <div className="min-w-0">
               <p className="truncate text-[11px] font-bold uppercase tracking-[0.18em] text-rv-accent">
@@ -443,3 +449,4 @@ export default async function PublicVehiclePage({ params }: Props) {
     </PublicChrome>
   );
 }
+

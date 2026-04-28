@@ -67,7 +67,7 @@ export default async function CatalogoPage() {
                   <li key={v.id} className="min-w-0">
                     <Link
                       href={`/v/${v.urlSlug}`}
-                      className="rv-glow-ring group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-[0_8px_30px_rgba(15,23,42,0.06)] ring-1 ring-slate-200/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(30,166,247,0.22)] hover:ring-rv-accent/45"
+                      className="rv-glow-ring group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-[0_8px_30px_rgba(15,23,42,0.06)] ring-1 ring-slate-200/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,115,230,0.22)] hover:ring-rv-accent/45"
                     >
                       <div className="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
                         {thumb ? (
@@ -101,10 +101,15 @@ export default async function CatalogoPage() {
                           className="pointer-events-none absolute left-4 top-0 h-0.5 w-10 rounded-full bg-rv-accent/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:left-5"
                           aria-hidden
                         />
-                        <p className="line-clamp-2 min-h-[2.25rem] text-[11px] font-bold leading-snug tracking-tight text-slate-900 sm:min-h-0 sm:text-base sm:leading-snug group-hover:text-rv-accent">
+                        <p className="rv-caption normal-case tracking-normal text-[10px] text-slate-500">
+                          {v.year} · Disponible
+                        </p>
+                        <p className="line-clamp-2 mt-0.5 min-h-[2.25rem] text-[12px] font-bold leading-snug tracking-tight text-slate-900 sm:min-h-0 sm:text-base sm:leading-snug group-hover:text-rv-accent">
                           {title}
                         </p>
-                        <p className="mt-1 text-sm font-semibold text-slate-900 sm:text-base">{priceLabel}</p>
+                        <p className="rv-mono mt-1 text-sm font-extrabold text-slate-900 sm:text-base">
+                          {priceLabel}
+                        </p>
 
                         <div className="mt-2 flex flex-wrap gap-1.5">
                           <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600 sm:text-xs">
@@ -118,7 +123,7 @@ export default async function CatalogoPage() {
                           </span>
                         </div>
 
-                        <span className="mt-3 inline-flex items-center gap-1 text-[10px] font-semibold text-rv-accent transition-transform duration-300 group-hover:translate-x-0.5 sm:text-xs">
+                        <span className="mt-3 inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-rv-accent transition-transform duration-300 group-hover:translate-x-0.5">
                           Ver ficha
                           <span aria-hidden className="text-rv-accent/80">
                             →

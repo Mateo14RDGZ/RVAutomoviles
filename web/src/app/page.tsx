@@ -62,10 +62,16 @@ export default async function HomePage() {
             <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
               <div>
                 <Reveal variant="soft">
-                  <span className="rv-chip rv-mobile-glow">
-                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-rv-accent" aria-hidden />
-                    RV Automóviles · Uruguay
-                  </span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="rv-chip rv-mobile-glow">
+                      <span className="relative inline-flex h-1.5 w-1.5 items-center justify-center" aria-hidden>
+                        <span className="absolute inset-0 animate-ping rounded-full bg-rv-accent/60" />
+                        <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-rv-accent" />
+                      </span>
+                      Automotora en vivo · Uruguay
+                    </span>
+                    <span className="rv-caption text-slate-500">2026 · v2.0</span>
+                  </div>
                 </Reveal>
 
                 <h1 className="mt-5 text-[2.5rem] font-bold leading-[1.02] tracking-tight sm:text-6xl">
@@ -102,28 +108,40 @@ export default async function HomePage() {
                 </Reveal>
 
                 <Reveal variant="up" delay={580}>
-                  <dl className="mt-10 grid grid-cols-3 gap-2 sm:max-w-md sm:gap-3">
-                    <div className="rv-glow-ring relative rounded-2xl border border-rv-accent/15 bg-white/70 px-3 py-3 text-center backdrop-blur">
-                      <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-rv-accent">
+                  <dl className="mt-10 grid grid-cols-3 gap-2 sm:max-w-lg sm:gap-3">
+                    <div className="rv-glow-ring relative rounded-2xl border border-rv-accent/15 bg-white/70 px-3 py-3 text-left backdrop-blur">
+                      <dt className="rv-eyebrow flex items-center gap-1.5">
+                        <span className="inline-block h-1 w-1 rounded-full bg-rv-accent" aria-hidden />
                         Stock
                       </dt>
-                      <dd className="mt-1 text-lg font-bold text-slate-900 sm:text-xl">
-                        {stockCount > 0 ? <AnimatedCounter value={stockCount} suffix="+" /> : "—"}
+                      <dd className="rv-mono mt-1.5 text-xl font-bold text-slate-900 sm:text-2xl">
+                        {stockCount > 0 ? <AnimatedCounter value={stockCount} /> : "—"}
                       </dd>
+                      <p className="rv-caption mt-0.5 normal-case tracking-normal text-[10px] text-slate-500">
+                        {stockCount === 1 ? "unidad publicada" : "unidades publicadas"}
+                      </p>
                     </div>
-                    <div className="rv-glow-ring relative rounded-2xl border border-rv-accent/15 bg-white/70 px-3 py-3 text-center backdrop-blur">
-                      <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-rv-accent">
+                    <div className="rv-glow-ring relative rounded-2xl border border-rv-accent/15 bg-white/70 px-3 py-3 text-left backdrop-blur">
+                      <dt className="rv-eyebrow flex items-center gap-1.5">
+                        <span className="inline-block h-1 w-1 rounded-full bg-rv-accent" aria-hidden />
                         Marcas
                       </dt>
-                      <dd className="mt-1 text-lg font-bold text-slate-900 sm:text-xl">
+                      <dd className="rv-mono mt-1.5 text-xl font-bold text-slate-900 sm:text-2xl">
                         {brandCount > 0 ? <AnimatedCounter value={brandCount} /> : "—"}
                       </dd>
+                      <p className="rv-caption mt-0.5 normal-case tracking-normal text-[10px] text-slate-500">
+                        en catálogo
+                      </p>
                     </div>
-                    <div className="rv-glow-ring relative rounded-2xl border border-rv-accent/15 bg-white/70 px-3 py-3 text-center backdrop-blur">
-                      <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-rv-accent">
+                    <div className="rv-glow-ring relative rounded-2xl border border-rv-accent/15 bg-white/70 px-3 py-3 text-left backdrop-blur">
+                      <dt className="rv-eyebrow flex items-center gap-1.5">
+                        <span className="inline-block h-1 w-1 rounded-full bg-emerald-500" aria-hidden />
                         Atención
                       </dt>
-                      <dd className="mt-1 text-lg font-bold text-slate-900 sm:text-xl">Directa</dd>
+                      <dd className="mt-1.5 text-xl font-bold text-slate-900 sm:text-2xl">Directa</dd>
+                      <p className="rv-caption mt-0.5 normal-case tracking-normal text-[10px] text-slate-500">
+                        WhatsApp · L–V 8/18h
+                      </p>
                     </div>
                   </dl>
                 </Reveal>
@@ -131,9 +149,9 @@ export default async function HomePage() {
 
               {/* Panel decorativo del hero (solo desktop / tablet ancha) */}
               <Reveal variant="zoom" delay={300} className="hidden lg:block">
-                <TiltCard className="rv-glow-ring relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-rv-accent/20 bg-white/80 shadow-[0_30px_80px_rgba(30,166,247,0.18)]">
+                <TiltCard className="rv-glow-ring relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-rv-accent/20 bg-white/80 shadow-[0_30px_80px_rgba(0,115,230,0.18)]">
                   <div
-                    className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(30,166,247,0.22),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(99,102,241,0.18),transparent_55%)]"
+                    className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,115,230,0.22),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(99,102,241,0.18),transparent_55%)]"
                     aria-hidden
                   />
                   <div className="relative flex h-full flex-col justify-between p-6">
@@ -173,6 +191,11 @@ export default async function HomePage() {
 
           {/* Marquee de bancos */}
           <div className="relative border-y border-rv-accent/15 bg-gradient-to-r from-white via-rv-accent/[0.04] to-white py-5">
+            <p className="rv-caption mx-auto mb-3 flex max-w-6xl items-center gap-3 px-4 sm:px-6">
+              <span className="rv-divider-soft hidden flex-1 sm:block" aria-hidden />
+              Trabajamos con todos los bancos del mercado
+              <span className="rv-divider-soft hidden flex-1 sm:block" aria-hidden />
+            </p>
             <Marquee
               items={[
                 "BROU",
@@ -278,7 +301,7 @@ export default async function HomePage() {
                 },
               ].map((card, i) => (
                 <Reveal key={card.title} variant="zoom" delay={i * 110}>
-                  <TiltCard className="rv-mobile-card rv-glow-ring group relative h-full overflow-hidden rounded-2xl border border-rv-accent/20 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(30,166,247,0.22)]">
+                  <TiltCard className="rv-mobile-card rv-glow-ring group relative h-full overflow-hidden rounded-2xl border border-rv-accent/20 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(0,115,230,0.22)]">
                     <span
                       className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-rv-accent/10 blur-3xl transition-opacity duration-500 group-hover:opacity-90"
                       aria-hidden
@@ -536,7 +559,7 @@ export default async function HomePage() {
                       href={buildWhatsappUrl()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rv-glow-ring group relative flex h-full items-center justify-between gap-3 overflow-hidden rounded-2xl border border-rv-accent/25 bg-white px-4 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:bg-rv-accent/[0.06] hover:shadow-[0_18px_36px_rgba(30,166,247,0.18)]"
+                      className="rv-glow-ring group relative flex h-full items-center justify-between gap-3 overflow-hidden rounded-2xl border border-rv-accent/25 bg-white px-4 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:bg-rv-accent/[0.06] hover:shadow-[0_18px_36px_rgba(0,115,230,0.18)]"
                     >
                       <span className="flex items-center gap-2 font-semibold text-rv-accent">
                         <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
@@ -559,7 +582,7 @@ export default async function HomePage() {
                       href="https://www.instagram.com/rv__automoviles/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rv-glow-ring group relative flex h-full items-center justify-between gap-3 overflow-hidden rounded-2xl border border-rv-accent/25 bg-white px-4 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:bg-rv-accent/[0.06] hover:shadow-[0_18px_36px_rgba(30,166,247,0.18)]"
+                      className="rv-glow-ring group relative flex h-full items-center justify-between gap-3 overflow-hidden rounded-2xl border border-rv-accent/25 bg-white px-4 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:bg-rv-accent/[0.06] hover:shadow-[0_18px_36px_rgba(0,115,230,0.18)]"
                     >
                       <span className="flex items-center gap-2 font-semibold text-rv-accent">
                         <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
@@ -620,7 +643,7 @@ export default async function HomePage() {
                 </div>
               </Reveal>
               <Reveal variant="right" delay={120}>
-                <div className="rv-glow-ring rv-mobile-card overflow-hidden rounded-2xl border border-rv-accent/20 bg-slate-100 shadow-[0_18px_50px_rgba(30,166,247,0.14)]">
+                <div className="rv-glow-ring rv-mobile-card overflow-hidden rounded-2xl border border-rv-accent/20 bg-slate-100 shadow-[0_18px_50px_rgba(0,115,230,0.14)]">
                   <iframe
                     title="Ubicación de RV Automóviles en Google Maps"
                     src={`https://www.google.com/maps?q=${encodeURIComponent(MAP_EMBED_QUERY)}&hl=es&z=17&output=embed`}

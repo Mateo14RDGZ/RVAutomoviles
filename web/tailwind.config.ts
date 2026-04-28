@@ -12,8 +12,16 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         rv: {
-          accent: "#1EA6F7",
+          accent: "#0073E6",
+          "accent-2": "#38BDF8",
+          glow: "#22D3EE",
+          deep: "#050B1F",
+          violet: "#6366F1",
+          amber: "#F59E0B",
         },
+      },
+      fontFeatureSettings: {
+        tabular: '"tnum"',
       },
     },
   },

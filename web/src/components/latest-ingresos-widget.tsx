@@ -66,7 +66,7 @@ export function LatestIngresosWidget({ vehicles }: Props) {
                 <Reveal variant="zoom" delay={index * 130}>
                   <Link
                     href={`/v/${v.urlSlug}`}
-                    className="rv-mobile-card rv-glow-ring group flex h-full flex-col overflow-hidden rounded-2xl border border-rv-accent/20 bg-white shadow-[0_12px_32px_rgba(30,166,247,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-rv-accent/45 hover:shadow-[0_20px_44px_rgba(30,166,247,0.22)]"
+                    className="rv-mobile-card rv-glow-ring group flex h-full flex-col overflow-hidden rounded-2xl border border-rv-accent/20 bg-white shadow-[0_12px_32px_rgba(0,115,230,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-rv-accent/45 hover:shadow-[0_20px_44px_rgba(0,115,230,0.22)]"
                   >
                     <div className="relative aspect-[5/4] w-full overflow-hidden bg-slate-100">
                       {thumb ? (

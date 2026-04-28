@@ -39,7 +39,7 @@ export function AdminHeader() {
       />
       <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 lg:px-6">
         <Link href="/admin" className="inline-flex items-center gap-2.5">
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 via-cyan-400 to-sky-300 text-xs font-black text-white shadow-[0_8px_22px_rgba(30,166,247,0.35)] ring-1 ring-rv-accent/40">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 via-cyan-400 to-sky-300 text-xs font-black text-white shadow-[0_8px_22px_rgba(0,115,230,0.35)] ring-1 ring-rv-accent/40">
             RV
           </span>
           <div className="hidden flex-col leading-tight sm:flex">
@@ -56,7 +56,7 @@ export function AdminHeader() {
                   href={link.href}
                   className={`relative inline-flex items-center rounded-xl px-3 py-1.5 text-sm font-semibold transition ${
                     isActive(link.href)
-                      ? "bg-rv-accent/12 text-rv-accent shadow-[inset_0_0_0_1px_rgba(30,166,247,0.45)]"
+                      ? "bg-rv-accent/12 text-rv-accent shadow-[inset_0_0_0_1px_rgba(0,115,230,0.45)]"
                       : "text-slate-600 hover:bg-rv-accent/[0.08] hover:text-slate-900"
                   }`}
                 >
@@ -108,7 +108,7 @@ export function AdminHeader() {
                 href={link.href}
                 className={`inline-flex rounded-xl px-3 py-1.5 text-xs font-semibold transition ${
                   isActive(link.href)
-                    ? "bg-rv-accent/12 text-rv-accent shadow-[inset_0_0_0_1px_rgba(30,166,247,0.45)]"
+                    ? "bg-rv-accent/12 text-rv-accent shadow-[inset_0_0_0_1px_rgba(0,115,230,0.45)]"
                     : "text-slate-600 hover:bg-rv-accent/[0.08] hover:text-slate-900"
                 }`}
               >

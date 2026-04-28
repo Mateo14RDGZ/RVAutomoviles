@@ -81,7 +81,7 @@ export default async function AdminVehiclesPage() {
             const photoCount = v.photos.length;
             return (
               <li key={v.id}>
-                <div className="rv-glow-ring group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-rv-accent/35 hover:shadow-[0_22px_50px_rgba(30,166,247,0.18)]">
+                <div className="rv-glow-ring group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-rv-accent/35 hover:shadow-[0_22px_50px_rgba(0,115,230,0.18)]">
                   <Link
                     href={`/admin/vehicles/${v.id}/edit`}
                     aria-label={`Editar ${vehicleName} ${v.year}`}

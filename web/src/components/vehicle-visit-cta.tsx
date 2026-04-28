@@ -19,7 +19,7 @@ export function VehicleVisitCtaBelowContent({ listingAbsoluteUrl }: VehicleVisit
   const preview = buildWhatsappVisitMessage(listingAbsoluteUrl);
   return (
     <section
-      className="mt-10 rounded-3xl border-2 border-rv-accent/25 bg-gradient-to-b from-rv-accent/[0.12] via-white to-slate-50 p-5 shadow-[0_12px_40px_rgba(30,166,247,0.15)] sm:mt-12 sm:p-6"
+      className="mt-10 rounded-3xl border-2 border-rv-accent/25 bg-gradient-to-b from-rv-accent/[0.12] via-white to-slate-50 p-5 shadow-[0_12px_40px_rgba(0,115,230,0.15)] sm:mt-12 sm:p-6"
       aria-label="Coordinar visita por WhatsApp"
     >
       <p className="text-center text-sm font-semibold text-slate-800">¿Querés verlo en persona?</p>
