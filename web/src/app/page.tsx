@@ -29,7 +29,7 @@ export default async function HomePage() {
       "@type": "PostalAddress",
       addressCountry: "UY",
     },
-    sameAs: ["https://instagram.com/rv.automoviles"],
+    sameAs: ["https://www.instagram.com/rv__automoviles/"],
   };
 
   return (

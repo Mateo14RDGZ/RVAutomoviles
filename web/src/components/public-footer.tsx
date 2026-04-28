@@ -20,41 +20,40 @@ export function PublicFooter() {
               href={buildWhatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="rv-mobile-card inline-flex items-center justify-center rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-50 px-3 py-2.5 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100"
             >
-              WhatsApp
+              <span aria-hidden>💬</span>
+              <span>WhatsApp</span>
             </a>
             <a
-              href="https://instagram.com/rv.automoviles"
+              href="https://www.instagram.com/rv__automoviles/"
               target="_blank"
               rel="noopener noreferrer"
-              className="rv-mobile-card inline-flex items-center justify-center rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-fuchsia-500/30 bg-fuchsia-50 px-3 py-2.5 text-sm font-semibold text-fuchsia-700 transition hover:bg-fuchsia-100"
             >
-              Instagram
-            </a>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rv-mobile-card inline-flex items-center justify-center rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
-            >
-              Facebook
+              <span aria-hidden>📷</span>
+              <span>Instagram</span>
             </a>
           </div>
-          <div className="hidden space-y-2 sm:block">
-            <p>
-              WhatsApp:{" "}
-              <a
-                href={buildWhatsappUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-rv-accent underline decoration-rv-accent/40 underline-offset-2 transition hover:text-rv-accent/80"
-              >
-                099 744 203
-              </a>
-            </p>
-            <p>Instagram: @rv.automoviles</p>
-            <p>Facebook: RV Automoviles</p>
+          <div className="hidden gap-2 sm:grid sm:min-w-[300px]">
+            <a
+              href={buildWhatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-between rounded-xl border border-emerald-500/25 bg-emerald-50/80 px-3 py-2 text-sm text-emerald-800 transition hover:bg-emerald-100 md:justify-end md:gap-2"
+            >
+              <span className="font-medium">WhatsApp</span>
+              <span className="font-semibold underline decoration-emerald-700/40 underline-offset-2">099 744 203</span>
+            </a>
+            <a
+              href="https://www.instagram.com/rv__automoviles/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-between rounded-xl border border-fuchsia-500/25 bg-fuchsia-50/80 px-3 py-2 text-sm text-fuchsia-800 transition hover:bg-fuchsia-100 md:justify-end md:gap-2"
+            >
+              <span className="font-medium">Instagram</span>
+              <span className="font-semibold">@rv__automoviles</span>
+            </a>
           </div>
           <div className="mt-3 flex flex-wrap gap-3 text-xs md:justify-end">
             <a href="/privacidad" className="text-slate-500 underline-offset-2 hover:text-rv-accent hover:underline">
