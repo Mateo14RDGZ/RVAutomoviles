@@ -259,7 +259,9 @@ export default async function HomePage() {
                   className="inline-flex items-center justify-between rounded-2xl border border-rv-accent/25 bg-white px-4 py-3 transition hover:bg-rv-accent/[0.06]"
                 >
                   <span className="font-semibold text-rv-accent">WhatsApp</span>
-                  <span className="text-sm font-medium text-slate-700">099 744 203</span>
+                  <span className="inline-flex items-center justify-center rounded-xl bg-rv-accent px-3 py-1.5 text-xs font-semibold text-white sm:text-sm">
+                    Hacenos tu consulta
+                  </span>
                 </a>
                 <a
                   href="https://www.instagram.com/rv__automoviles/"
@@ -268,7 +270,9 @@ export default async function HomePage() {
                   className="inline-flex items-center justify-between rounded-2xl border border-rv-accent/25 bg-white px-4 py-3 transition hover:bg-rv-accent/[0.06]"
                 >
                   <span className="font-semibold text-rv-accent">Instagram</span>
-                  <span className="text-sm font-medium text-slate-700">@rv__automoviles</span>
+                  <span className="text-sm font-medium text-slate-700 underline decoration-rv-accent/40 underline-offset-2">
+                    Seguinos en Instagram
+                  </span>
                 </a>
                 <div className="rounded-2xl border border-rv-accent/20 bg-white px-4 py-3 sm:col-span-2 lg:col-span-1">
                   <p className="text-sm font-semibold text-rv-accent">Horarios</p>
