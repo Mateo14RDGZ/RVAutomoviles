@@ -111,16 +111,21 @@ export default async function HomePage() {
                     Financiación destacada
                   </p>
                   <h2 className="mt-4 max-w-3xl text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                    Santander + Crédito MiAuto: la campaña principal para sacar tu auto en cuotas
+                    MiAuto Santander: simulá tu préstamo y sacá tu auto con financiación ágil
                   </h2>
                   <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200 sm:text-base">
-                    Lanzamos una propuesta especial de aprobación ágil y plazos flexibles para que tengas una
-                    financiación clara desde el primer contacto.
+                    Inspirado en la propuesta oficial de MiAuto, destacamos sus líneas de Crédito Convencional,
+                    Cuota Aguinaldo y Compra Inteligente para ayudarte a elegir la mejor modalidad.
                   </p>
                   <p className="mt-4 text-sm font-medium text-slate-100 sm:text-base">
                     En RV Automóviles trabajamos con Santander y también con todos los bancos para encontrar la mejor
                     opción para cada cliente.
                   </p>
+                  <div className="mt-4 grid gap-2 text-xs text-slate-300 sm:grid-cols-3 sm:text-sm">
+                    <span className="rounded-xl border border-white/20 bg-white/5 px-3 py-2">Simulación fácil y sin compromiso</span>
+                    <span className="rounded-xl border border-white/20 bg-white/5 px-3 py-2">Asesoramiento de punta a punta</span>
+                    <span className="rounded-xl border border-white/20 bg-white/5 px-3 py-2">Respaldo de Grupo Santander en Uruguay</span>
+                  </div>
                   <div className="mt-6 grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap">
                     {["BROU", "Santander", "BBVA", "Scotiabank", "Itaú", "HSBC", "Banco República"].map((bank) => (
                       <span
@@ -133,18 +138,18 @@ export default async function HomePage() {
                   </div>
                   <div className="mt-7">
                     <Link href="/catalogo" className="rv-btn-primary inline-flex w-full justify-center sm:w-auto">
-                      Quiero mi Crédito MiAuto
+                      Simular financiación ahora
                     </Link>
                   </div>
                 </div>
                 <div className="grid gap-3">
                   <div className="rounded-2xl border border-white/15 bg-white p-4">
                     <Image
-                      src="/financiacion/santander-logo.svg"
-                      alt="Banco Santander"
-                      width={360}
-                      height={90}
-                      className="h-14 w-auto object-contain"
+                      src="/financiacion/miauto-logo.png"
+                      alt="MiAuto Santander"
+                      width={500}
+                      height={154}
+                      className="h-16 w-auto object-contain"
                     />
                   </div>
                   <div className="relative overflow-hidden rounded-2xl border border-white/20">

@@ -59,8 +59,12 @@ export const metadata: Metadata = {
     "Fichas públicas de vehículos para compartir en redes y panel interno para tu automotora.",
   applicationName: "RV Automóviles",
   icons: {
-    icon: [{ url: "/icon.png", type: "image/png" }, { url: "/favicon.png", type: "image/png" }],
-    shortcut: ["/icon.png"],
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/icon.png", type: "image/png" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    shortcut: ["/favicon.ico", "/icon.png"],
     apple: [{ url: "/apple-icon.png", type: "image/png" }],
   },
   manifest: "/manifest.webmanifest",
