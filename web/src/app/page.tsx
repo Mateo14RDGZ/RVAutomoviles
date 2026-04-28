@@ -1,9 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { AnimatedCounter } from "../components/animated-counter";
+import { CursorOrb } from "../components/cursor-orb";
 import { LatestIngresosWidget } from "../components/latest-ingresos-widget";
+import { Marquee } from "../components/marquee";
 import { MiautoPopupButton } from "../components/miauto-popup-button";
 import { PublicChrome } from "../components/public-chrome";
 import { Reveal } from "../components/reveal";
+import { StaggerText } from "../components/stagger-text";
+import { TiltCard } from "../components/tilt-card";
 import { listVehicles } from "@/lib/vehicle-store";
 import { buildWhatsappUrl } from "@/lib/whatsapp-visit";
 
@@ -51,6 +56,7 @@ export default async function HomePage() {
           <div className="rv-aurora" aria-hidden />
           <div className="rv-grid-bg pointer-events-none absolute inset-0" aria-hidden />
           <div className="rv-beam" aria-hidden />
+          <CursorOrb />
 
           <div className="relative mx-auto max-w-6xl px-4 pb-14 pt-12 sm:px-6 sm:pb-24 sm:pt-20">
             <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
@@ -62,17 +68,13 @@ export default async function HomePage() {
                   </span>
                 </Reveal>
 
-                <Reveal variant="mask" delay={120}>
-                  <h1 className="mt-5 text-[2.5rem] font-bold leading-[1.02] tracking-tight sm:text-6xl">
-                    <span className="rv-text-gradient-anim">Tu próximo auto</span>
-                  </h1>
-                </Reveal>
-                <Reveal variant="soft" delay={240}>
-                  <p className="mt-3 text-2xl font-semibold leading-tight text-slate-900 sm:text-4xl">
-                    con la experiencia más{" "}
-                    <span className="rv-text-gradient-anim">moderna del país.</span>
-                  </p>
-                </Reveal>
+                <h1 className="mt-5 text-[2.5rem] font-bold leading-[1.02] tracking-tight sm:text-6xl">
+                  <StaggerText text="Tu próximo auto" className="rv-text-gradient-anim" />
+                </h1>
+                <p className="mt-3 text-2xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+                  <StaggerText text="con la experiencia más" />{" "}
+                  <StaggerText text="moderna del país." className="rv-text-gradient-anim" />
+                </p>
 
                 <Reveal variant="soft" delay={360}>
                   <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
@@ -101,28 +103,35 @@ export default async function HomePage() {
 
                 <Reveal variant="up" delay={580}>
                   <dl className="mt-10 grid grid-cols-3 gap-2 sm:max-w-md sm:gap-3">
-                    {[
-                      { k: "Stock", v: stockCount > 0 ? `${stockCount}` : "—" },
-                      { k: "Marcas", v: brandCount > 0 ? `${brandCount}` : "—" },
-                      { k: "Atención", v: "Directa" },
-                    ].map((stat) => (
-                      <div
-                        key={stat.k}
-                        className="rv-glow-ring relative rounded-2xl border border-rv-accent/15 bg-white/70 px-3 py-3 text-center backdrop-blur"
-                      >
-                        <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-rv-accent">
-                          {stat.k}
-                        </dt>
-                        <dd className="mt-1 text-base font-bold text-slate-900 sm:text-lg">{stat.v}</dd>
-                      </div>
-                    ))}
+                    <div className="rv-glow-ring relative rounded-2xl border border-rv-accent/15 bg-white/70 px-3 py-3 text-center backdrop-blur">
+                      <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-rv-accent">
+                        Stock
+                      </dt>
+                      <dd className="mt-1 text-lg font-bold text-slate-900 sm:text-xl">
+                        {stockCount > 0 ? <AnimatedCounter value={stockCount} suffix="+" /> : "—"}
+                      </dd>
+                    </div>
+                    <div className="rv-glow-ring relative rounded-2xl border border-rv-accent/15 bg-white/70 px-3 py-3 text-center backdrop-blur">
+                      <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-rv-accent">
+                        Marcas
+                      </dt>
+                      <dd className="mt-1 text-lg font-bold text-slate-900 sm:text-xl">
+                        {brandCount > 0 ? <AnimatedCounter value={brandCount} /> : "—"}
+                      </dd>
+                    </div>
+                    <div className="rv-glow-ring relative rounded-2xl border border-rv-accent/15 bg-white/70 px-3 py-3 text-center backdrop-blur">
+                      <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-rv-accent">
+                        Atención
+                      </dt>
+                      <dd className="mt-1 text-lg font-bold text-slate-900 sm:text-xl">Directa</dd>
+                    </div>
                   </dl>
                 </Reveal>
               </div>
 
               {/* Panel decorativo del hero (solo desktop / tablet ancha) */}
               <Reveal variant="zoom" delay={300} className="hidden lg:block">
-                <div className="rv-glow-ring relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-rv-accent/20 bg-white/80 shadow-[0_30px_80px_rgba(30,166,247,0.18)]">
+                <TiltCard className="rv-glow-ring relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-rv-accent/20 bg-white/80 shadow-[0_30px_80px_rgba(30,166,247,0.18)]">
                   <div
                     className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(30,166,247,0.22),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(99,102,241,0.18),transparent_55%)]"
                     aria-hidden
@@ -157,11 +166,35 @@ export default async function HomePage() {
                       RV Automóviles · 2026
                     </p>
                   </div>
-                </div>
+                </TiltCard>
               </Reveal>
             </div>
           </div>
-          <div className="rv-neon-divider" aria-hidden />
+
+          {/* Marquee de bancos */}
+          <div className="relative border-y border-rv-accent/15 bg-gradient-to-r from-white via-rv-accent/[0.04] to-white py-5">
+            <Marquee
+              items={[
+                "BROU",
+                "Santander",
+                "BBVA",
+                "Scotiabank",
+                "Itaú",
+                "HSBC",
+                "Banco República",
+                "MiAuto",
+              ].map((b) => (
+                <span
+                  key={b}
+                  className="inline-flex items-center gap-2 rounded-full border border-rv-accent/20 bg-white/80 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-slate-700 shadow-sm backdrop-blur"
+                >
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-rv-accent" aria-hidden />
+                  {b}
+                </span>
+              ))}
+              speed={0.85}
+            />
+          </div>
         </section>
 
         <LatestIngresosWidget vehicles={latestIngresos} />
@@ -245,20 +278,20 @@ export default async function HomePage() {
                 },
               ].map((card, i) => (
                 <Reveal key={card.title} variant="zoom" delay={i * 110}>
-                  <article className="rv-mobile-card rv-glow-ring group relative h-full overflow-hidden rounded-2xl border border-rv-accent/20 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(30,166,247,0.22)]">
+                  <TiltCard className="rv-mobile-card rv-glow-ring group relative h-full overflow-hidden rounded-2xl border border-rv-accent/20 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(30,166,247,0.22)]">
                     <span
                       className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-rv-accent/10 blur-3xl transition-opacity duration-500 group-hover:opacity-90"
                       aria-hidden
                     />
-                    <div className="flex items-start justify-between">
+                    <div className="relative flex items-start justify-between">
                       <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-rv-accent/[0.12] text-rv-accent ring-1 ring-rv-accent/30">
                         {card.icon}
                       </span>
                       <span className="rv-stat-num text-2xl font-bold sm:text-3xl">{card.step}</span>
                     </div>
-                    <p className="mt-5 text-lg font-semibold tracking-tight text-slate-900">{card.title}</p>
-                    <p className="rv-mobile-muted mt-2 text-sm leading-relaxed">{card.desc}</p>
-                  </article>
+                    <p className="relative mt-5 text-lg font-semibold tracking-tight text-slate-900">{card.title}</p>
+                    <p className="rv-mobile-muted relative mt-2 text-sm leading-relaxed">{card.desc}</p>
+                  </TiltCard>
                 </Reveal>
               ))}
             </div>
@@ -328,17 +361,30 @@ export default async function HomePage() {
                       </span>
                     </div>
 
-                    <div className="mt-6 flex flex-wrap gap-2">
-                      {["BROU", "Santander", "BBVA", "Scotiabank", "Itaú", "HSBC", "Banco República"].map(
-                        (bank) => (
+                    <div className="mt-6">
+                      <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-200">
+                        Trabajamos con todos los bancos
+                      </p>
+                      <Marquee
+                        items={[
+                          "BROU",
+                          "Santander",
+                          "BBVA",
+                          "Scotiabank",
+                          "Itaú",
+                          "HSBC",
+                          "Banco República",
+                        ].map((b) => (
                           <span
-                            key={bank}
-                            className="rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white shadow-sm backdrop-blur sm:text-sm"
+                            key={b}
+                            className="rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white shadow-sm backdrop-blur sm:text-sm"
                           >
-                            {bank}
+                            {b}
                           </span>
-                        )
-                      )}
+                        ))}
+                        speed={0.7}
+                        reverse
+                      />
                     </div>
 
                     <div className="mt-7">
@@ -445,15 +491,18 @@ export default async function HomePage() {
                   variant={i === 0 ? "left" : i === 2 ? "right" : "up"}
                   delay={i * 130}
                 >
-                  <div className="rv-mobile-card rv-glow-ring relative flex h-full flex-col overflow-hidden rounded-2xl border border-rv-accent/20 bg-white p-6">
+                  <TiltCard
+                    max={4}
+                    className="rv-mobile-card rv-glow-ring relative flex h-full flex-col overflow-hidden rounded-2xl border border-rv-accent/20 bg-white p-6"
+                  >
                     <span
                       className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-rv-accent/10 blur-3xl"
                       aria-hidden
                     />
-                    <span className="rv-stat-num text-5xl font-bold leading-none sm:text-6xl">{step.n}</span>
-                    <h3 className="mt-5 text-lg font-semibold tracking-tight text-slate-900">{step.title}</h3>
-                    <p className="rv-mobile-muted mt-2 text-sm leading-relaxed">{step.desc}</p>
-                  </div>
+                    <span className="rv-stat-num relative text-5xl font-bold leading-none sm:text-6xl">{step.n}</span>
+                    <h3 className="relative mt-5 text-lg font-semibold tracking-tight text-slate-900">{step.title}</h3>
+                    <p className="rv-mobile-muted relative mt-2 text-sm leading-relaxed">{step.desc}</p>
+                  </TiltCard>
                 </Reveal>
               ))}
             </div>
