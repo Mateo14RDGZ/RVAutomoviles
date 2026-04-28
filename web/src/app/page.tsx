@@ -36,7 +36,6 @@ export default async function HomePage() {
       <main className="relative w-full pb-24 text-slate-900 sm:pb-0">
         <script
           type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(dealerJsonLd) }}
         />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(30,166,247,0.16),transparent_38%),radial-gradient(circle_at_85%_20%,rgba(30,166,247,0.12),transparent_34%)]" />
