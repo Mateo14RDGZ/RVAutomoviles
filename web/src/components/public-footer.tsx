@@ -81,13 +81,6 @@ export function PublicFooter() {
             Automotora en Uruguay con catálogo actualizado, fotos reales y atención personalizada en cada
             consulta.
           </p>
-          <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-300">
-            <span className="relative inline-flex h-1.5 w-1.5 items-center justify-center" aria-hidden>
-              <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/70" />
-              <span className="relative h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            </span>
-            Atención activa hoy
-          </p>
         </div>
 
         <div>
@@ -161,13 +154,13 @@ export function PublicFooter() {
         </div>
       </div>
 
-      {/* Sub-footer: legales + firma */}
-      <div className="relative border-t border-rv-border/60 bg-rv-deep/60 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-4 text-[11px] text-rv-muted sm:flex-row sm:gap-2 sm:px-6">
+      {/* Sub-footer: una sola línea con legales, copyright y firma */}
+      <div className="relative border-t border-rv-border bg-rv-deep/60 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-4 text-[11px] text-rv-muted sm:flex-row sm:gap-4 sm:px-6">
           <p className="rv-caption normal-case tracking-normal text-center sm:text-left">
             © {year} RV Automóviles · Todos los derechos reservados
           </p>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             <Link href="/privacidad" className="hover:text-rv-accent-2 hover:underline">
               Privacidad
             </Link>
@@ -175,14 +168,12 @@ export function PublicFooter() {
             <Link href="/terminos" className="hover:text-rv-accent-2 hover:underline">
               Términos
             </Link>
+            <span className="h-3 w-px bg-rv-border" aria-hidden />
+            <span>
+              Desarrollado por{" "}
+              <span className="font-semibold text-rv-text">RF DigitalStudio</span>
+            </span>
           </div>
-        </div>
-        <div className="border-t border-rv-border/60">
-          <p className="rv-caption mx-auto max-w-6xl px-4 py-3 text-center text-[11px] normal-case tracking-normal text-rv-muted sm:px-6">
-            Desarrollado por{" "}
-            <span className="font-semibold text-rv-text">RF DigitalStudio</span> · Todos los derechos
-            reservados
-          </p>
         </div>
       </div>
     </footer>

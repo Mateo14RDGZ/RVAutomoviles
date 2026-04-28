@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Outfit } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Geist_Mono, Outfit } from "next/font/google";
 import { RegisterPWA } from "@/components/register-pwa";
 import "./globals.css";
 
@@ -16,7 +16,14 @@ const geistMono = Geist_Mono({
 const brandFont = Outfit({
   variable: "--font-brand",
   subsets: ["latin"],
-  weight: ["300", "400"],
+  weight: ["300", "400", "500"],
+  display: "swap",
+});
+
+const displayFont = Bricolage_Grotesque({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -24,7 +31,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#0f172a",
+  themeColor: "#070b17",
   viewportFit: "cover",
 };
 
@@ -85,7 +92,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es-AR">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${brandFont.variable} min-h-dvh antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${brandFont.variable} ${displayFont.variable} min-h-dvh antialiased`}>
         {children}
         <RegisterPWA />
       </body>

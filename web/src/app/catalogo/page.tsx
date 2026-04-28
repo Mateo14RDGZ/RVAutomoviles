@@ -38,10 +38,10 @@ export default async function CatalogoPage() {
           <div className="rv-grid-bg pointer-events-none absolute inset-0 opacity-50" aria-hidden />
           <div className="relative mx-auto max-w-6xl">
             <span className="rv-chip">Catálogo</span>
-            <h1 className="mt-3 text-3xl font-bold tracking-tight text-rv-text sm:text-4xl">
-              <span className="rv-text-gradient-anim">Autos en venta</span>
+            <h1 className="rv-display mt-4 text-4xl font-bold tracking-tight text-rv-text sm:text-5xl">
+              Autos en venta
             </h1>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-rv-muted sm:text-base">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-rv-muted">
               Tocá una unidad para ver fotos, ficha técnica, equipamiento y documentación.
             </p>
             <p className="rv-caption mt-4 inline-flex items-center gap-2 normal-case tracking-normal text-rv-muted">
@@ -109,12 +109,10 @@ export default async function CatalogoPage() {
                         <p className="rv-caption normal-case tracking-normal text-[10px] text-rv-muted">
                           {v.year} · Disponible
                         </p>
-                        <p className="line-clamp-2 mt-0.5 min-h-[2.25rem] text-[12px] font-bold leading-snug tracking-tight text-rv-text sm:min-h-0 sm:text-base sm:leading-snug group-hover:text-rv-accent-2">
+                        <p className="rv-display line-clamp-2 mt-0.5 min-h-[2.25rem] text-[13px] font-bold leading-snug text-rv-text sm:min-h-0 sm:text-base sm:leading-snug group-hover:text-rv-accent-2">
                           {title}
                         </p>
-                        <p className="rv-mono mt-1 text-sm font-extrabold text-rv-text sm:text-base">
-                          {priceLabel}
-                        </p>
+                        <p className="rv-price mt-1 text-sm sm:text-base">{priceLabel}</p>
 
                         <div className="mt-2 flex flex-wrap gap-1.5">
                           <span className="rounded-full border border-rv-border bg-rv-surface/80 px-2 py-0.5 text-[10px] font-medium text-rv-muted sm:text-xs">

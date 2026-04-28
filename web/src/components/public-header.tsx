@@ -38,7 +38,7 @@ export function PublicHeader() {
         <div className="flex items-center justify-center gap-2 sm:justify-start">
           <BrandLogo className="text-center sm:text-left" />
           <span
-            className="hidden items-center gap-1 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em] text-emerald-300 sm:inline-flex"
+            className="hidden items-center gap-1 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em] text-emerald-300 lg:inline-flex"
             title="Catálogo activo"
           >
             <span className="relative inline-flex h-1 w-1 items-center justify-center">

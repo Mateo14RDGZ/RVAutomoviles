@@ -13,7 +13,9 @@
   --rv-bg2: #0b1226;
   --rv-surface: #101935;
   --rv-surface-2: #1a2347;
-  --rv-border: #1f2a4f;
+  /* Bordes más sutiles, white-based */
+  --rv-border: rgba(255, 255, 255, 0.08);
+  --rv-border-strong: rgba(255, 255, 255, 0.14);
   --rv-text: #e6ecff;
   --rv-muted: #8a95b9;
   --rv-violet: #6366f1;
@@ -118,8 +120,16 @@ body {
   }
 
   .rv-btn-secondary:hover {
-    @apply border-rv-accent/55 bg-rv-surface text-white;
-    box-shadow: 0 10px 26px rgba(59, 130, 246, 0.28);
+    @apply border-white/15 bg-rv-surface text-white;
+    box-shadow: 0 10px 26px rgba(59, 130, 246, 0.18);
+  }
+
+  .rv-btn-ghost {
+    @apply rv-btn border border-rv-border bg-transparent text-rv-text transition;
+  }
+
+  .rv-btn-ghost:hover {
+    @apply border-white/20 bg-white/[0.04] text-white;
   }
 
   .rv-input {
@@ -356,6 +366,20 @@ body {
     font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, "JetBrains Mono", monospace;
     font-feature-settings: "tnum", "ss01";
     letter-spacing: -0.01em;
+  }
+
+  .rv-display {
+    font-family: var(--font-display), system-ui, sans-serif;
+    letter-spacing: -0.025em;
+    font-feature-settings: "ss01", "ss02";
+  }
+
+  .rv-price {
+    color: var(--rv-amber);
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-feature-settings: "tnum";
+    letter-spacing: -0.02em;
+    font-weight: 800;
   }
 
   .rv-text-gradient {
@@ -700,10 +724,10 @@ body {
   }
 
   .rv-mobile-card {
-    border: 1px solid rgba(59, 130, 246, 0.28);
-    background: linear-gradient(170deg, rgba(26, 35, 71, 0.85), rgba(11, 18, 38, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(170deg, rgba(26, 35, 71, 0.7), rgba(11, 18, 38, 0.85));
     color: var(--rv-text);
-    box-shadow: 0 12px 32px rgba(2, 6, 23, 0.45);
+    box-shadow: 0 8px 22px rgba(2, 6, 23, 0.32);
     transition:
       transform 260ms ease,
       border-color 260ms ease,
@@ -713,9 +737,9 @@ body {
 
   .rv-mobile-card:hover,
   .rv-mobile-card:active {
-    border-color: rgba(59, 130, 246, 0.65);
-    box-shadow: 0 18px 36px rgba(59, 130, 246, 0.32);
-    filter: saturate(1.1);
+    border-color: rgba(59, 130, 246, 0.45);
+    box-shadow: 0 14px 28px rgba(59, 130, 246, 0.18);
+    filter: saturate(1.05);
     transform: translateY(-2px);
   }
 

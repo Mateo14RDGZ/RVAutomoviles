@@ -37,11 +37,11 @@ export function LatestIngresosWidget({ vehicles }: Props) {
               <span className="rv-chip">Últimos ingresos</span>
               <h2
                 id="ultimos-ingresos-heading"
-                className="rv-mobile-title mt-3 text-3xl font-bold tracking-tight sm:text-5xl"
+                className="rv-display mt-4 text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl"
               >
                 Recién sumados al catálogo
               </h2>
-              <p className="mt-2 text-sm text-rv-muted sm:text-base">
+              <p className="mt-3 text-base text-rv-muted">
                 Tres unidades recientes para que veas qué entró. Tocá una y abrís la ficha con fotos y datos.
               </p>
             </div>
@@ -92,12 +92,12 @@ export function LatestIngresosWidget({ vehicles }: Props) {
                         </span>
                       ) : null}
                     </div>
-                    <div className="flex flex-1 flex-col p-4">
-                      <p className="line-clamp-2 text-base font-semibold leading-snug text-rv-text transition-colors group-hover:text-rv-accent-2">
+                    <div className="flex flex-1 flex-col p-5">
+                      <p className="rv-display line-clamp-2 text-base font-bold leading-snug text-rv-text transition-colors group-hover:text-rv-accent-2 sm:text-lg">
                         {title}
                       </p>
                       <p className="mt-1 text-sm text-rv-muted">{v.year}</p>
-                      <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-rv-accent-2 transition-transform group-hover:translate-x-0.5">
+                      <span className="mt-auto inline-flex items-center gap-1 pt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-rv-accent-2 transition-transform group-hover:translate-x-0.5">
                         Ver ficha
                         <span aria-hidden>→</span>
                       </span>

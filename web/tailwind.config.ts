@@ -24,11 +24,17 @@ export default {
           bg2: "#0B1226",
           surface: "#101935",
           "surface-2": "#1A2347",
-          border: "#1F2A4F",
+          // Bordes white-based via CSS var
+          border: "var(--rv-border)",
+          "border-strong": "var(--rv-border-strong)",
           // Texto
           text: "#E6ECFF",
           muted: "#8A95B9",
         },
+      },
+      fontFamily: {
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
       },
       fontFeatureSettings: {
         tabular: '"tnum"',

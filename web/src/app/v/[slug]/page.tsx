@@ -35,24 +35,12 @@ const TRUST_CHECKLIST = [
   "Coordinación de visita y prueba de manejo",
 ] as const;
 
-function SpecCard({
-  label,
-  value,
-  icon,
-}: {
-  label: string;
-  value: string;
-  icon: React.ReactNode;
-}) {
+/** Fila editorial estilo tabla key/value, sin íconos coloridos. */
+function SpecRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rv-glow-ring relative flex items-center gap-3 rounded-2xl border border-rv-border bg-rv-surface/70 px-4 py-3.5 shadow-[0_8px_24px_rgba(2,6,23,0.45)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rv-surface hover:shadow-[0_14px_32px_rgba(59,130,246,0.32)]">
-      <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rv-accent/15 text-rv-accent-2 ring-1 ring-rv-accent/30">
-        {icon}
-      </span>
-      <div className="min-w-0">
-        <p className="rv-eyebrow">{label}</p>
-        <p className="mt-0.5 truncate text-sm font-semibold text-rv-text sm:text-base">{value}</p>
-      </div>
+    <div className="flex items-baseline justify-between gap-4 border-b border-rv-border py-3.5 last:border-0">
+      <span className="rv-eyebrow text-rv-muted">{label}</span>
+      <span className="text-right text-base font-semibold text-rv-text">{value}</span>
     </div>
   );
 }
@@ -79,10 +67,10 @@ export default async function PublicVehiclePage({ params }: Props) {
         <div className="rv-aurora opacity-50" aria-hidden />
 
         <main className="relative mx-auto max-w-3xl px-3 pb-32 pt-3 sm:px-5 sm:pt-5 md:max-w-4xl md:pb-16">
-          <nav className="mb-3 flex items-center gap-2 text-sm md:mb-4">
+          <nav className="mb-4 flex items-center gap-2 text-sm">
             <Link
               href="/catalogo"
-              className="inline-flex items-center gap-1.5 rounded-full border border-rv-border bg-rv-surface/70 px-3 py-1.5 font-semibold text-rv-accent-2 backdrop-blur transition hover:-translate-x-0.5 hover:border-rv-accent/55 hover:bg-rv-surface"
+              className="inline-flex items-center gap-1.5 rounded-full border border-rv-border bg-rv-surface/40 px-3 py-1.5 font-semibold text-rv-accent-2 backdrop-blur transition hover:-translate-x-0.5 hover:border-white/15 hover:bg-rv-surface/70"
             >
               <span aria-hidden className="text-base leading-none">
                 ←
@@ -93,7 +81,7 @@ export default async function PublicVehiclePage({ params }: Props) {
 
           {/* HERO ===================================================== */}
           <Reveal variant="zoom">
-            <section className="rv-glow-ring relative -mx-3 overflow-hidden rounded-none border border-rv-border bg-rv-surface/70 shadow-[0_30px_70px_rgba(2,6,23,0.55)] sm:mx-0 sm:rounded-3xl">
+            <section className="relative -mx-3 overflow-hidden rounded-none border border-rv-border bg-rv-surface/40 shadow-[0_24px_60px_rgba(2,6,23,0.45)] sm:mx-0 sm:rounded-3xl">
               <div className="relative">
                 {v.photos.length > 0 ? (
                   <VehiclePhotoCarousel
@@ -102,7 +90,7 @@ export default async function PublicVehiclePage({ params }: Props) {
                     className="rounded-none border-x-0 border-t-0 border-b border-rv-border shadow-none sm:rounded-t-3xl sm:border-x sm:border-t"
                   />
                 ) : (
-                  <div className="flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-rv-surface to-rv-bg2 text-base font-medium text-rv-muted">
+                  <div className="flex aspect-[4/3] items-center justify-center bg-rv-bg2 text-base font-medium text-rv-muted">
                     Fotos próximamente
                   </div>
                 )}
@@ -110,22 +98,22 @@ export default async function PublicVehiclePage({ params }: Props) {
                   className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-rv-deep/85 via-rv-deep/30 to-transparent"
                   aria-hidden
                 />
-                <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5">
-                  <span className="rv-chip mb-2 border-white/30 bg-white/10 text-white backdrop-blur">
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6">
+                  <span className="rv-chip mb-3 border-white/30 bg-white/10 text-white backdrop-blur">
                     En venta
                   </span>
-                  <h1 className="text-2xl font-bold leading-tight tracking-tight text-white drop-shadow-sm sm:text-4xl md:text-5xl">
+                  <h1 className="rv-display text-3xl font-bold leading-[1.05] text-white drop-shadow-sm sm:text-5xl">
                     {v.brand} {v.model}
                   </h1>
-                  <div className="mt-2 flex flex-wrap items-center gap-2">
-                    <span className="inline-flex rounded-lg bg-rv-deep/90 px-2.5 py-1 text-sm font-bold text-white backdrop-blur">
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <span className="inline-flex rounded-md border border-white/30 bg-white/10 px-2.5 py-1 text-sm font-semibold text-white backdrop-blur">
                       {v.year}
                     </span>
-                    <span className="inline-flex rounded-lg border border-white/30 bg-white/10 px-2.5 py-1 text-sm font-semibold text-white backdrop-blur">
+                    <span className="inline-flex rounded-md border border-white/30 bg-white/10 px-2.5 py-1 text-sm font-semibold text-white backdrop-blur">
                       {km}
                     </span>
                     {v.transmission ? (
-                      <span className="inline-flex rounded-lg border border-white/30 bg-white/10 px-2.5 py-1 text-sm font-semibold text-white backdrop-blur">
+                      <span className="inline-flex rounded-md border border-white/30 bg-white/10 px-2.5 py-1 text-sm font-semibold text-white backdrop-blur">
                         {v.transmission}
                       </span>
                     ) : null}
@@ -133,17 +121,14 @@ export default async function PublicVehiclePage({ params }: Props) {
                 </div>
               </div>
 
-              {/* Precio + CTA */}
-              <div className="grid gap-3 p-4 sm:grid-cols-[1fr_auto] sm:items-center sm:p-6">
+              {/* Precio + CTA — precio en amber sin gradient */}
+              <div className="grid gap-4 p-5 sm:grid-cols-[1fr_auto] sm:items-center sm:p-7">
                 <div>
-                  <p className="rv-eyebrow flex items-center gap-1.5">
-                    <span className="inline-block h-1 w-1 rounded-full bg-rv-accent" aria-hidden />
+                  <p className="rv-eyebrow text-rv-muted">
                     Precio {v.price != null ? `· ${v.currency}` : ""}
                   </p>
-                  <p className="rv-mono mt-1 text-3xl font-extrabold sm:text-4xl">
-                    <span className="rv-text-gradient-anim">{priceLabel}</span>
-                  </p>
-                  <p className="rv-caption mt-1 normal-case tracking-normal text-[11px] text-rv-muted">
+                  <p className="rv-price mt-2 text-4xl sm:text-5xl">{priceLabel}</p>
+                  <p className="mt-2 text-[12px] text-rv-muted">
                     Precio sujeto a disponibilidad · IVA incluido cuando aplique
                   </p>
                 </div>
@@ -168,92 +153,22 @@ export default async function PublicVehiclePage({ params }: Props) {
             </section>
           </Reveal>
 
-          {/* SPECS GRID ============================================== */}
+          {/* FICHA TÉCNICA — editorial table ============================== */}
           <Reveal variant="up" delay={120}>
-            <section className="mt-7" aria-labelledby="specs-heading">
+            <section className="mt-10" aria-labelledby="specs-heading">
               <div className="flex items-end justify-between">
-                <h2 id="specs-heading" className="rv-mobile-title text-2xl font-semibold tracking-tight sm:text-3xl">
+                <h2 id="specs-heading" className="rv-display text-2xl font-bold tracking-tight sm:text-3xl">
                   Ficha técnica
                 </h2>
                 <span className="rv-chip">Datos clave</span>
               </div>
-              <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                <SpecCard
-                  label="Año"
-                  value={String(v.year)}
-                  icon={
-                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
-                      <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="1.6" />
-                      <path d="M3 9h18M8 3v4M16 3v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                    </svg>
-                  }
-                />
-                <SpecCard
-                  label="Kilometraje"
-                  value={km}
-                  icon={
-                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
-                      <path d="M4 18a8 8 0 0116 0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                      <path d="M12 18l4-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                      <circle cx="12" cy="18" r="1.5" fill="currentColor" />
-                    </svg>
-                  }
-                />
-                <SpecCard
-                  label="Combustible"
-                  value={show(v.fuel)}
-                  icon={
-                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
-                      <rect x="4" y="3" width="10" height="18" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
-                      <path d="M14 8l3 2v8a2 2 0 11-4 0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                    </svg>
-                  }
-                />
-                <SpecCard
-                  label="Caja"
-                  value={show(v.transmission)}
-                  icon={
-                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
-                      <circle cx="6" cy="6" r="2" stroke="currentColor" strokeWidth="1.6" />
-                      <circle cx="6" cy="18" r="2" stroke="currentColor" strokeWidth="1.6" />
-                      <circle cx="18" cy="6" r="2" stroke="currentColor" strokeWidth="1.6" />
-                      <circle cx="18" cy="18" r="2" stroke="currentColor" strokeWidth="1.6" />
-                      <path d="M6 8v8M18 8v8M8 6h8M8 18h8" stroke="currentColor" strokeWidth="1.6" />
-                    </svg>
-                  }
-                />
-                <SpecCard
-                  label="Color"
-                  value={show(v.color)}
-                  icon={
-                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
-                      <path
-                        d="M12 3a9 9 0 100 18 3 3 0 003-3 1.5 1.5 0 011.5-1.5h1A3.5 3.5 0 0021 13a9 9 0 00-9-10z"
-                        stroke="currentColor"
-                        strokeWidth="1.6"
-                      />
-                      <circle cx="7.5" cy="11.5" r="1" fill="currentColor" />
-                      <circle cx="11" cy="7" r="1" fill="currentColor" />
-                      <circle cx="16" cy="9" r="1" fill="currentColor" />
-                    </svg>
-                  }
-                />
-                <SpecCard
-                  label="Marca"
-                  value={`${show(v.brand)} ${show(v.model)}`.trim()}
-                  icon={
-                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
-                      <path
-                        d="M3 12l2-5a2 2 0 011.8-1.2h10.4A2 2 0 0119 7l2 5v6a1 1 0 01-1 1h-1a1 1 0 01-1-1v-1H6v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-6z"
-                        stroke="currentColor"
-                        strokeWidth="1.6"
-                        strokeLinejoin="round"
-                      />
-                      <circle cx="7.5" cy="14.5" r="1" fill="currentColor" />
-                      <circle cx="16.5" cy="14.5" r="1" fill="currentColor" />
-                    </svg>
-                  }
-                />
+              <div className="mt-6 grid gap-x-10 gap-y-0 sm:grid-cols-2">
+                <SpecRow label="Año" value={String(v.year)} />
+                <SpecRow label="Kilometraje" value={km} />
+                <SpecRow label="Combustible" value={show(v.fuel)} />
+                <SpecRow label="Caja" value={show(v.transmission)} />
+                <SpecRow label="Color" value={show(v.color)} />
+                <SpecRow label="Marca / Modelo" value={`${show(v.brand)} ${show(v.model)}`.trim()} />
               </div>
             </section>
           </Reveal>
@@ -261,20 +176,20 @@ export default async function PublicVehiclePage({ params }: Props) {
           {/* HIGHLIGHTS ============================================== */}
           {v.highlights.length ? (
             <Reveal variant="left" delay={120}>
-              <section className="mt-8 sm:mt-10">
+              <section className="mt-12 sm:mt-16">
                 <div className="flex items-end justify-between">
-                  <h2 className="rv-mobile-title text-2xl font-semibold tracking-tight sm:text-3xl">
+                  <h2 className="rv-display text-2xl font-bold tracking-tight sm:text-3xl">
                     Lo más destacado
                   </h2>
                   <span className="rv-chip">Highlights</span>
                 </div>
-                <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                   {v.highlights.map((h, i) => (
                     <Reveal key={h} variant="up" delay={i * 70}>
-                      <li className="rv-glow-ring relative flex items-start gap-3 rounded-2xl border border-rv-border bg-rv-surface/70 px-4 py-3.5 text-sm font-medium leading-relaxed text-rv-text shadow-[0_8px_24px_rgba(2,6,23,0.4)]">
+                      <li className="relative flex items-start gap-3 rounded-2xl border border-rv-border bg-rv-surface/40 px-5 py-4 text-sm font-medium leading-relaxed text-rv-text">
                         <span
                           aria-hidden
-                          className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-rv-accent to-rv-glow text-[10px] font-bold text-white shadow-sm"
+                          className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-rv-accent/20 text-[10px] font-bold text-rv-accent-2 ring-1 ring-rv-accent/30"
                         >
                           ✓
                         </span>
@@ -287,23 +202,23 @@ export default async function PublicVehiclePage({ params }: Props) {
             </Reveal>
           ) : null}
 
-          {/* EQUIPAMIENTO ============================================ */}
+          {/* EQUIPAMIENTO — pills semicuadrados ====================== */}
           {v.features && v.features.length ? (
             <Reveal variant="right" delay={120}>
-              <section className="mt-8 sm:mt-10">
+              <section className="mt-12 sm:mt-16">
                 <div className="flex items-end justify-between">
-                  <h2 className="rv-mobile-title text-2xl font-semibold tracking-tight sm:text-3xl">
+                  <h2 className="rv-display text-2xl font-bold tracking-tight sm:text-3xl">
                     Equipamiento
                   </h2>
                   <span className="rv-chip">Confort</span>
                 </div>
-                <ul className="mt-5 flex flex-wrap gap-2">
+                <ul className="mt-6 flex flex-wrap gap-2">
                   {v.features.map((f) => (
                     <li
                       key={f}
-                      className="rv-glow-ring inline-flex items-center gap-1.5 rounded-full border border-rv-border bg-rv-surface/70 px-3 py-1.5 text-xs font-semibold text-rv-text shadow-sm transition hover:-translate-y-0.5 hover:bg-rv-surface sm:text-sm"
+                      className="inline-flex items-center gap-1.5 rounded-md border border-rv-border bg-rv-surface/50 px-3 py-1.5 text-xs font-medium text-rv-text/90 transition hover:border-white/15 hover:bg-rv-surface sm:text-sm"
                     >
-                      <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-rv-accent" />
+                      <span aria-hidden className="inline-block h-1 w-1 rounded-full bg-rv-muted" />
                       {f}
                     </li>
                   ))}
@@ -315,19 +230,13 @@ export default async function PublicVehiclePage({ params }: Props) {
           {/* DESCRIPCIÓN ============================================= */}
           {v.description ? (
             <Reveal variant="zoom" delay={120}>
-              <section className="mt-8 sm:mt-10">
+              <section className="mt-12 sm:mt-16">
                 <div className="flex items-end justify-between">
-                  <h2 className="rv-mobile-title text-2xl font-semibold tracking-tight sm:text-3xl">
-                    Descripción
-                  </h2>
+                  <h2 className="rv-display text-2xl font-bold tracking-tight sm:text-3xl">Descripción</h2>
                   <span className="rv-chip">Detalle</span>
                 </div>
-                <div className="rv-glow-ring relative mt-5 overflow-hidden rounded-3xl border border-rv-border bg-rv-surface/70 p-5 shadow-[0_12px_36px_rgba(2,6,23,0.45)] sm:p-6">
-                  <span
-                    className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-rv-accent/15 blur-3xl"
-                    aria-hidden
-                  />
-                  <p className="relative whitespace-pre-wrap text-base leading-[1.75] text-rv-text">
+                <div className="relative mt-6 overflow-hidden rounded-3xl border border-rv-border bg-rv-surface/40 p-6 sm:p-8">
+                  <p className="whitespace-pre-wrap text-base leading-[1.75] text-rv-text/95">
                     {v.description}
                   </p>
                 </div>
@@ -337,13 +246,13 @@ export default async function PublicVehiclePage({ params }: Props) {
 
           {/* CHECKLIST DE CONFIANZA ================================== */}
           <Reveal variant="up" delay={140}>
-            <section className="mt-8 sm:mt-10">
-              <div className="rv-glass relative overflow-hidden rounded-3xl p-5 sm:p-6">
+            <section className="mt-12 sm:mt-16">
+              <div className="rv-glass relative overflow-hidden rounded-3xl p-6 sm:p-8">
                 <span className="rv-chip">Confianza</span>
-                <h2 className="rv-mobile-title mt-3 text-xl font-semibold tracking-tight sm:text-2xl">
+                <h2 className="rv-display mt-3 text-xl font-bold tracking-tight sm:text-2xl">
                   Cómo trabajamos en RV Automóviles
                 </h2>
-                <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
                   {TRUST_CHECKLIST.map((item) => (
                     <li
                       key={item}
@@ -366,21 +275,19 @@ export default async function PublicVehiclePage({ params }: Props) {
           {/* DOCUMENTOS ============================================== */}
           {v.documents.length ? (
             <Reveal variant="up" delay={140}>
-              <section className="mt-8 sm:mt-10">
+              <section className="mt-12 sm:mt-16">
                 <div className="flex items-end justify-between">
-                  <h2 className="rv-mobile-title text-2xl font-semibold tracking-tight sm:text-3xl">
-                    Documentación
-                  </h2>
+                  <h2 className="rv-display text-2xl font-bold tracking-tight sm:text-3xl">Documentación</h2>
                   <span className="rv-chip">PDF</span>
                 </div>
-                <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                   {v.documents.map((d) => (
                     <li key={d.url}>
                       <a
                         href={d.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="rv-glow-ring group flex w-full items-center justify-between gap-3 rounded-2xl border border-rv-border bg-rv-surface/70 px-4 py-3.5 text-sm font-bold text-rv-accent-2 transition hover:-translate-y-0.5 hover:bg-rv-surface hover:shadow-[0_14px_30px_rgba(59,130,246,0.32)]"
+                        className="group flex w-full items-center justify-between gap-3 rounded-2xl border border-rv-border bg-rv-surface/40 px-5 py-4 text-sm font-bold text-rv-accent-2 transition hover:-translate-y-0.5 hover:border-white/15 hover:bg-rv-surface"
                       >
                         <span className="flex items-center gap-2">
                           <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
@@ -410,7 +317,7 @@ export default async function PublicVehiclePage({ params }: Props) {
             <VehicleVisitCtaBelowContent listingAbsoluteUrl={listingAbsoluteUrl} />
           </Reveal>
 
-          <p className="mt-8 text-center text-sm font-medium text-rv-muted">
+          <p className="mt-10 text-center text-sm font-medium text-rv-muted">
             RV Automóviles · consultas por este usado
           </p>
         </main>
@@ -421,15 +328,11 @@ export default async function PublicVehiclePage({ params }: Props) {
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="rv-glow-ring flex items-center justify-between gap-3 rounded-2xl border border-rv-border bg-rv-bg2/95 p-3 shadow-[0_18px_50px_rgba(2,6,23,0.7)] backdrop-blur"
+            className="flex items-center justify-between gap-3 rounded-2xl border border-rv-border bg-rv-bg2/95 p-3 shadow-[0_18px_50px_rgba(2,6,23,0.6)] backdrop-blur"
           >
             <div className="min-w-0">
-              <p className="truncate text-[11px] font-bold uppercase tracking-[0.18em] text-rv-accent-2">
-                {priceLabel}
-              </p>
-              <p className="truncate text-sm font-semibold text-rv-text">
-                {v.brand} {v.model} · {v.year}
-              </p>
+              <p className="rv-eyebrow text-rv-muted">{v.brand}</p>
+              <p className="rv-price truncate text-base">{priceLabel}</p>
             </div>
             <span className="rv-btn-primary !px-3 !py-2 !text-xs">
               <svg viewBox="0 0 24 24" fill="none" className="mr-1 h-4 w-4">
