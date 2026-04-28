@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LatestIngresosWidget } from "@/components/latest-ingresos-widget";
+import { MiautoPopupButton } from "@/components/miauto-popup-button";
 import { PublicChrome } from "@/components/public-chrome";
 import { listVehicles } from "@/lib/vehicle-store";
 
@@ -138,16 +139,9 @@ export default async function HomePage() {
                     ))}
                   </div>
                   <div className="mt-7">
-                    <a
-                      href="https://www.miauto.com.uy/simulador/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rv-btn-primary inline-flex w-full justify-center sm:w-auto"
-                    >
-                      Simular préstamo
-                    </a>
+                    <MiautoPopupButton />
                     <p className="mt-2 text-xs text-slate-300">
-                      Este botón abre el simulador oficial de MiAuto Santander.
+                      Este botón abre en popup el simulador oficial de MiAuto Santander.
                     </p>
                   </div>
                 </div>
