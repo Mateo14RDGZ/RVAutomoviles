@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { LatestIngresosWidget } from "@/components/latest-ingresos-widget";
-import { MiautoPopupButton } from "@/components/miauto-popup-button";
-import { PublicChrome } from "@/components/public-chrome";
-import { Reveal } from "@/components/reveal";
+import { LatestIngresosWidget } from "../components/latest-ingresos-widget";
+import { MiautoPopupButton } from "../components/miauto-popup-button";
+import { PublicChrome } from "../components/public-chrome";
+import { Reveal } from "../components/reveal";
 import { listVehicles } from "@/lib/vehicle-store";
 import { buildWhatsappUrl } from "@/lib/whatsapp-visit";
 
