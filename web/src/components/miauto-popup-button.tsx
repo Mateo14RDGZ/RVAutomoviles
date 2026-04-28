@@ -14,18 +14,17 @@ function popupFeatures(width: number, height: number): string {
 
 export function MiautoPopupButton() {
   return (
-    <a
-      href={SIMULATOR_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+    <button
+      type="button"
       className="rv-btn-primary inline-flex w-full justify-center sm:w-auto"
-      onClick={(event) => {
-        event.preventDefault();
+      onClick={() => {
         const popup = window.open(SIMULATOR_URL, "miauto-simulador", popupFeatures(1180, 860));
-        if (!popup) window.open(SIMULATOR_URL, "_blank", "noopener,noreferrer");
+        if (!popup) {
+          window.alert("Tu navegador bloqueó el popup. Permití popups para este sitio e intentá nuevamente.");
+        }
       }}
     >
       Simular préstamo
-    </a>
+    </button>
   );
 }
