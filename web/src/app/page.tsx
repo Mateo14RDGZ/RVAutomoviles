@@ -122,6 +122,20 @@ export default async function HomePage() {
                     En RV Automóviles trabajamos con Santander y también con todos los bancos para encontrar la mejor
                     opción para cada cliente.
                   </p>
+                  <div className="mt-4 grid gap-2 sm:grid-cols-3">
+                    <div className="rounded-xl border border-white/20 bg-white/10 p-3">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-sky-200">Producto</p>
+                      <p className="mt-1 text-sm font-semibold text-white">Crédito Convencional</p>
+                    </div>
+                    <div className="rounded-xl border border-white/20 bg-white/10 p-3">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-sky-200">Producto</p>
+                      <p className="mt-1 text-sm font-semibold text-white">Cuota Aguinaldo</p>
+                    </div>
+                    <div className="rounded-xl border border-white/20 bg-white/10 p-3">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-sky-200">Producto</p>
+                      <p className="mt-1 text-sm font-semibold text-white">Compra Inteligente</p>
+                    </div>
+                  </div>
                   <div className="mt-4 grid gap-2 text-xs text-slate-300 sm:grid-cols-3 sm:text-sm">
                     <span className="rounded-xl border border-white/20 bg-white/5 px-3 py-2">Simulación fácil y sin compromiso</span>
                     <span className="rounded-xl border border-white/20 bg-white/5 px-3 py-2">Asesoramiento de punta a punta</span>
@@ -140,7 +154,25 @@ export default async function HomePage() {
                   <div className="mt-7">
                     <MiautoPopupButton />
                     <p className="mt-2 text-xs text-slate-300">
-                      Este botón abre en popup el simulador oficial de MiAuto Santander.
+                      Este botón abre en popup el simulador oficial de MiAuto Santander en la sección de simulación.
+                    </p>
+                  </div>
+                  <div className="mt-4 rounded-xl border border-white/20 bg-white/5 p-3 text-xs text-slate-200 sm:text-sm">
+                    <p>
+                      Contacto MiAuto: WhatsApp{" "}
+                      <a
+                        href="https://wa.me/59892333309"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-sky-200 underline underline-offset-2"
+                      >
+                        092 333 309
+                      </a>{" "}
+                      · Tel{" "}
+                      <a href="tel:+59827051865" className="font-semibold text-sky-200 underline underline-offset-2">
+                        2705 1865
+                      </a>
+                      .
                     </p>
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 "use client";
 
-const SIMULATOR_URL = "https://www.miauto.com.uy/simulador/";
+const SIMULATOR_URL = "https://www.miauto.com.uy/#simulador";
 
 function popupFeatures(width: number, height: number): string {
   const dualScreenLeft = window.screenLeft ?? window.screenX ?? 0;
