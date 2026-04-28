@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Reveal } from "@/components/reveal";
+import { Reveal } from "./reveal";
 import type { Vehicle } from "@/lib/vehicle-types";
 
 type Props = {
@@ -110,3 +110,4 @@ export function LatestIngresosWidget({ vehicles }: Props) {
     </section>
   );
 }
+
