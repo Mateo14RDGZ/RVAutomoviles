@@ -33,10 +33,15 @@ export default async function CatalogoPage() {
   return (
     <PublicChrome>
       <div className="min-h-dvh animate-fade-in bg-gradient-to-b from-slate-50 to-white text-slate-900">
-        <header className="border-b border-rv-accent/12 bg-white/90 px-4 py-7 shadow-sm backdrop-blur-sm sm:py-8">
-          <div className="mx-auto max-w-6xl">
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Autos en venta</h1>
-            <p className="mt-2 max-w-2xl border-l-4 border-rv-accent bg-rv-accent/[0.06] py-2.5 pl-3 pr-2 text-sm leading-relaxed text-slate-700">
+        <header className="relative overflow-hidden border-b border-rv-accent/12 bg-white/90 px-4 py-9 shadow-sm backdrop-blur-sm sm:py-10">
+          <div className="rv-aurora opacity-60" aria-hidden />
+          <div className="rv-grid-bg pointer-events-none absolute inset-0 opacity-60" aria-hidden />
+          <div className="relative mx-auto max-w-6xl">
+            <span className="rv-chip">Catálogo</span>
+            <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              <span className="rv-text-gradient-anim">Autos en venta</span>
+            </h1>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
               Elegí una unidad para ver ficha completa, galería y documentación.
             </p>
           </div>
@@ -62,7 +67,7 @@ export default async function CatalogoPage() {
                   <li key={v.id} className="min-w-0">
                     <Link
                       href={`/v/${v.urlSlug}`}
-                      className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-[0_8px_30px_rgba(15,23,42,0.06)] ring-1 ring-slate-200/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(30,166,247,0.18)] hover:ring-rv-accent/35"
+                      className="rv-glow-ring group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-[0_8px_30px_rgba(15,23,42,0.06)] ring-1 ring-slate-200/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(30,166,247,0.22)] hover:ring-rv-accent/45"
                     >
                       <div className="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
                         {thumb ? (

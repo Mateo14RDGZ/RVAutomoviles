@@ -89,11 +89,11 @@ export default async function PublicVehiclePage({ params }: Props) {
           </div>
 
           {/* Cabecera llamativa */}
-          <header className="relative mt-5 overflow-hidden rounded-3xl border-2 border-rv-accent/20 bg-gradient-to-br from-white via-rv-accent/[0.07] to-white p-5 shadow-[0_12px_48px_rgba(30,166,247,0.12)] sm:mt-6 sm:p-7">
-            <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-rv-accent/15 blur-2xl" />
-            <p className="relative text-[11px] font-bold uppercase tracking-[0.28em] text-rv-accent">En venta</p>
-            <h1 className="relative mt-2 text-3xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-4xl">
-              {v.brand} {v.model}
+          <header className="rv-glow-ring relative mt-5 overflow-hidden rounded-3xl border border-rv-accent/20 bg-gradient-to-br from-white via-rv-accent/[0.07] to-white p-5 shadow-[0_12px_48px_rgba(30,166,247,0.14)] sm:mt-6 sm:p-7">
+            <div className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full bg-rv-accent/18 blur-3xl" aria-hidden />
+            <span className="rv-chip">En venta</span>
+            <h1 className="relative mt-3 text-3xl font-extrabold leading-[1.05] tracking-tight sm:text-4xl">
+              <span className="rv-text-gradient-anim">{v.brand} {v.model}</span>
             </h1>
             <div className="relative mt-4 flex flex-wrap items-center gap-2">
               <span className="inline-flex rounded-xl bg-slate-900 px-3 py-1.5 text-sm font-bold text-white">

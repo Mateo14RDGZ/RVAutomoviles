@@ -3,46 +3,86 @@ import { BrandLogo } from "@/components/brand-logo";
 
 export function PublicFooter() {
   return (
-    <footer className="mt-12 border-t border-rv-accent/20 bg-white">
-      <div className="rv-mobile-enter rv-mobile-enter-6 mx-auto grid max-w-6xl gap-6 px-4 py-8 text-sm text-slate-600 md:grid-cols-2">
+    <footer className="relative mt-12 overflow-hidden border-t border-rv-accent/20 bg-white">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-rv-accent/55 to-transparent"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -left-24 top-0 h-40 w-40 rounded-full bg-rv-accent/10 blur-3xl"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -right-24 bottom-0 h-40 w-40 rounded-full bg-sky-300/12 blur-3xl"
+        aria-hidden
+      />
+
+      <div className="relative mx-auto grid max-w-6xl gap-6 px-4 py-10 text-sm text-slate-600 md:grid-cols-2">
         <div>
           <BrandLogo className="inline-flex" />
           <p className="mt-3 max-w-md leading-relaxed">
-            Tu proximo auto con informacion clara, fotos reales y documentacion disponible.
+            Tu próximo auto con información clara, fotos reales y documentación disponible.
           </p>
-          <p className="mt-2 text-xs text-slate-500">Atención: Lun a Vie 8:00 a 18:00 · Sáb 8:00 a 12:00.</p>
+          <p className="mt-2 text-xs text-slate-500">
+            Atención: Lunes a Viernes 8:00 a 18:00 · Sábados 8:00 a 12:00.
+          </p>
         </div>
 
-        <div className="space-y-2 md:justify-self-end md:text-right">
+        <div className="space-y-3 md:justify-self-end md:text-right">
           <p className="font-semibold text-rv-accent">Contacto</p>
+
           <div className="grid grid-cols-1 gap-2 sm:hidden">
             <a
               href={buildWhatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="rv-mobile-card inline-flex items-center justify-center gap-2 rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
+              className="rv-glow-ring rv-mobile-card inline-flex items-center justify-center gap-2 rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
             >
-              <span aria-hidden>💬</span>
+              <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+                <path
+                  d="M20.5 3.5A11 11 0 003.5 18.6L2 22l3.5-1.4A11 11 0 1020.5 3.5z"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
               <span>WhatsApp</span>
             </a>
             <a
               href="https://www.instagram.com/rv__automoviles/"
               target="_blank"
               rel="noopener noreferrer"
-              className="rv-mobile-card inline-flex items-center justify-center gap-2 rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
+              className="rv-glow-ring rv-mobile-card inline-flex items-center justify-center gap-2 rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
             >
-              <span aria-hidden>📷</span>
+              <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+              </svg>
               <span>Instagram</span>
             </a>
           </div>
+
           <div className="hidden gap-2 sm:grid sm:min-w-[300px]">
             <a
               href={buildWhatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-between rounded-xl border border-rv-accent/25 bg-white px-3 py-2 text-sm text-slate-700 transition hover:bg-rv-accent/[0.06] md:justify-end md:gap-2"
+              className="rv-glow-ring inline-flex items-center justify-between gap-3 rounded-xl border border-rv-accent/25 bg-white px-3 py-2 text-sm text-slate-700 transition hover:bg-rv-accent/[0.06] md:gap-2"
             >
-              <span className="font-medium">WhatsApp</span>
+              <span className="flex items-center gap-2 font-medium">
+                <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 text-rv-accent">
+                  <path
+                    d="M20.5 3.5A11 11 0 003.5 18.6L2 22l3.5-1.4A11 11 0 1020.5 3.5z"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                WhatsApp
+              </span>
               <span className="font-semibold text-rv-accent underline decoration-rv-accent/40 underline-offset-2">
                 099 744 203
               </span>
@@ -51,13 +91,21 @@ export function PublicFooter() {
               href="https://www.instagram.com/rv__automoviles/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-between rounded-xl border border-rv-accent/25 bg-white px-3 py-2 text-sm text-slate-700 transition hover:bg-rv-accent/[0.06] md:justify-end md:gap-2"
+              className="rv-glow-ring inline-flex items-center justify-between gap-3 rounded-xl border border-rv-accent/25 bg-white px-3 py-2 text-sm text-slate-700 transition hover:bg-rv-accent/[0.06] md:gap-2"
             >
-              <span className="font-medium">Instagram</span>
+              <span className="flex items-center gap-2 font-medium">
+                <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 text-rv-accent">
+                  <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                </svg>
+                Instagram
+              </span>
               <span className="font-semibold text-rv-accent">@rv__automoviles</span>
             </a>
           </div>
-          <div className="mt-3 flex flex-wrap gap-3 text-xs md:justify-end">
+
+          <div className="mt-2 flex flex-wrap gap-3 text-xs md:justify-end">
             <a href="/privacidad" className="text-slate-500 underline-offset-2 hover:text-rv-accent hover:underline">
               Privacidad
             </a>

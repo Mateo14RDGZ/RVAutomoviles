@@ -28,7 +28,7 @@ export function MiautoPopupButton() {
   return (
     <button
       type="button"
-      className="rv-btn-primary inline-flex w-full justify-center sm:w-auto"
+      className="rv-btn-primary group inline-flex w-full items-center justify-center gap-2 sm:w-auto"
       onClick={() => {
         // Abrir primero una ventana en blanco mejora la chance de popup real (no tab).
         const popup = window.open("", "miauto-simulador", popupFeatures(1180, 860));
@@ -41,6 +41,15 @@ export function MiautoPopupButton() {
         popup.focus();
       }}
     >
+      <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+        <path
+          d="M5 12h14M13 6l6 6-6 6"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
       Simular préstamo
     </button>
   );
