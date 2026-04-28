@@ -28,8 +28,8 @@ export function PublicHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-rv-accent/20 backdrop-blur-xl">
-      <div className="absolute inset-0 bg-white/85" aria-hidden />
+    <header className="sticky top-0 z-40 border-b border-rv-border backdrop-blur-xl">
+      <div className="absolute inset-0 bg-rv-deep/85" aria-hidden />
       <div
         className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-rv-accent/55 to-transparent"
         aria-hidden
@@ -38,12 +38,12 @@ export function PublicHeader() {
         <div className="flex items-center justify-center gap-2 sm:justify-start">
           <BrandLogo className="text-center sm:text-left" />
           <span
-            className="hidden items-center gap-1 rounded-full border border-emerald-300/60 bg-emerald-50 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em] text-emerald-700 sm:inline-flex"
+            className="hidden items-center gap-1 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em] text-emerald-300 sm:inline-flex"
             title="Catálogo activo"
           >
             <span className="relative inline-flex h-1 w-1 items-center justify-center">
               <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/70" aria-hidden />
-              <span className="relative h-1 w-1 rounded-full bg-emerald-500" aria-hidden />
+              <span className="relative h-1 w-1 rounded-full bg-emerald-400" aria-hidden />
             </span>
             Online
           </span>
@@ -61,8 +61,8 @@ export function PublicHeader() {
                     onClick={(event) => handleInPageNavigation(event, href)}
                     className={`relative inline-flex justify-center overflow-hidden whitespace-nowrap rounded-xl px-3.5 py-2 text-[13px] font-semibold transition-all duration-300 sm:px-4 sm:py-2 sm:text-sm ${
                       active
-                        ? "bg-rv-accent/12 text-rv-accent shadow-[inset_0_0_0_1px_rgba(0,115,230,0.45)]"
-                        : "text-slate-600 hover:bg-rv-accent/[0.08] hover:text-slate-900"
+                        ? "bg-rv-accent/15 text-white shadow-[inset_0_0_0_1px_rgba(59,130,246,0.55)]"
+                        : "text-rv-muted hover:bg-rv-accent/[0.1] hover:text-white"
                     }`}
                   >
                     <span className="relative z-10">{label}</span>

@@ -44,7 +44,7 @@ export function VehiclePhotoCarousel({ photos, alt, className = "" }: Props) {
       aria-label={n > 1 ? `${alt}, galería de ${n} fotos` : alt}
       tabIndex={0}
       onKeyDown={onKeyDown}
-      className={`relative overflow-hidden border border-rv-accent/15 bg-slate-100 shadow-[0_18px_48px_rgba(0,115,230,0.12)] outline-none ring-rv-accent/30 focus-visible:ring-2 ${className}`}
+      className={`relative overflow-hidden border border-rv-border bg-rv-bg2 shadow-[0_18px_48px_rgba(2,6,23,0.55)] outline-none ring-rv-accent/40 focus-visible:ring-2 ${className}`}
       onTouchStart={(e) => {
         touchStartX.current = e.touches[0].clientX;
       }}

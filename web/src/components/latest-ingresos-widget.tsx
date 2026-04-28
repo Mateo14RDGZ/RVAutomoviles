@@ -14,7 +14,7 @@ export function LatestIngresosWidget({ vehicles }: Props) {
 
   return (
     <section
-      className="relative overflow-hidden border-y border-rv-accent/20 bg-white py-12 sm:py-16"
+      className="relative overflow-hidden border-y border-rv-border bg-rv-bg2 py-12 sm:py-16"
       aria-labelledby="ultimos-ingresos-heading"
     >
       <div
@@ -22,11 +22,11 @@ export function LatestIngresosWidget({ vehicles }: Props) {
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -left-16 top-10 h-32 w-32 rounded-full bg-rv-accent/12 blur-3xl"
+        className="pointer-events-none absolute -left-16 top-10 h-32 w-32 rounded-full bg-rv-accent/15 blur-3xl"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -right-16 bottom-10 h-40 w-40 rounded-full bg-sky-300/15 blur-3xl"
+        className="pointer-events-none absolute -right-16 bottom-10 h-40 w-40 rounded-full bg-rv-glow/15 blur-3xl"
         aria-hidden
       />
 
@@ -41,7 +41,7 @@ export function LatestIngresosWidget({ vehicles }: Props) {
               >
                 Recién sumados al catálogo
               </h2>
-              <p className="rv-mobile-muted mt-2 text-sm sm:text-base">
+              <p className="mt-2 text-sm text-rv-muted sm:text-base">
                 Tres unidades recientes para que veas qué entró. Tocá una y abrís la ficha con fotos y datos.
               </p>
             </div>
@@ -66,9 +66,9 @@ export function LatestIngresosWidget({ vehicles }: Props) {
                 <Reveal variant="zoom" delay={index * 130}>
                   <Link
                     href={`/v/${v.urlSlug}`}
-                    className="rv-mobile-card rv-glow-ring group flex h-full flex-col overflow-hidden rounded-2xl border border-rv-accent/20 bg-white shadow-[0_12px_32px_rgba(0,115,230,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-rv-accent/45 hover:shadow-[0_20px_44px_rgba(0,115,230,0.22)]"
+                    className="rv-mobile-card rv-glow-ring group flex h-full flex-col overflow-hidden rounded-2xl border border-rv-border bg-rv-surface/70 shadow-[0_12px_32px_rgba(2,6,23,0.5)] transition-all duration-300 hover:-translate-y-1 hover:border-rv-accent/55 hover:shadow-[0_20px_44px_rgba(59,130,246,0.32)]"
                   >
-                    <div className="relative aspect-[5/4] w-full overflow-hidden bg-slate-100">
+                    <div className="relative aspect-[5/4] w-full overflow-hidden bg-rv-bg2">
                       {thumb ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
@@ -77,27 +77,27 @@ export function LatestIngresosWidget({ vehicles }: Props) {
                           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                         />
                       ) : (
-                        <div className="flex h-full items-center justify-center bg-slate-100 text-xs font-medium text-slate-400">
+                        <div className="flex h-full items-center justify-center bg-rv-bg2 text-xs font-medium text-rv-muted">
                           Sin foto
                         </div>
                       )}
                       <div
-                        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-80"
+                        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-rv-deep/60 via-transparent to-transparent opacity-90"
                         aria-hidden
                       />
                       {index === 0 ? (
-                        <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full border border-rv-accent/30 bg-white/95 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-rv-accent shadow-sm backdrop-blur">
+                        <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full border border-rv-accent/40 bg-rv-deep/90 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-rv-accent-2 shadow-sm backdrop-blur">
                           <span className="inline-block h-1.5 w-1.5 rounded-full bg-rv-accent" aria-hidden />
                           Último ingreso
                         </span>
                       ) : null}
                     </div>
                     <div className="flex flex-1 flex-col p-4">
-                      <p className="line-clamp-2 text-base font-semibold leading-snug text-slate-900 transition-colors group-hover:text-rv-accent">
+                      <p className="line-clamp-2 text-base font-semibold leading-snug text-rv-text transition-colors group-hover:text-rv-accent-2">
                         {title}
                       </p>
-                      <p className="mt-1 text-sm text-slate-500">{v.year}</p>
-                      <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-rv-accent transition-transform group-hover:translate-x-0.5">
+                      <p className="mt-1 text-sm text-rv-muted">{v.year}</p>
+                      <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-rv-accent-2 transition-transform group-hover:translate-x-0.5">
                         Ver ficha
                         <span aria-hidden>→</span>
                       </span>
@@ -112,4 +112,3 @@ export function LatestIngresosWidget({ vehicles }: Props) {
     </section>
   );
 }
-

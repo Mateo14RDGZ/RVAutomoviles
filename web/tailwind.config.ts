@@ -12,12 +12,22 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         rv: {
-          accent: "#0073E6",
-          "accent-2": "#38BDF8",
+          // Acentos
+          accent: "#3B82F6",
+          "accent-2": "#60A5FA",
           glow: "#22D3EE",
-          deep: "#050B1F",
           violet: "#6366F1",
           amber: "#F59E0B",
+          success: "#10B981",
+          // Dark surfaces (Midnight Showroom)
+          deep: "#070B17",
+          bg2: "#0B1226",
+          surface: "#101935",
+          "surface-2": "#1A2347",
+          border: "#1F2A4F",
+          // Texto
+          text: "#E6ECFF",
+          muted: "#8A95B9",
         },
       },
       fontFeatureSettings: {

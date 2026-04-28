@@ -3,21 +3,27 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
-  --background: #ffffff;
-  --foreground: #050b1f;
-  --rv-accent: #0073e6;
-  --rv-accent-2: #38bdf8;
+  color-scheme: dark;
+  --background: #070b17;
+  --foreground: #e6ecff;
+  --rv-accent: #3b82f6;
+  --rv-accent-2: #60a5fa;
   --rv-glow: #22d3ee;
-  --rv-deep: #050b1f;
+  --rv-deep: #070b17;
+  --rv-bg2: #0b1226;
+  --rv-surface: #101935;
+  --rv-surface-2: #1a2347;
+  --rv-border: #1f2a4f;
+  --rv-text: #e6ecff;
+  --rv-muted: #8a95b9;
   --rv-violet: #6366f1;
   --rv-amber: #f59e0b;
-  --rv-ink: #0b1226;
+  --rv-success: #10b981;
 }
 
 ::selection {
-  background: rgba(0, 115, 230, 0.18);
-  color: #050b1f;
+  background: rgba(59, 130, 246, 0.32);
+  color: #ffffff;
 }
 
 html {
@@ -38,20 +44,24 @@ body {
 
 @layer components {
   .rv-surface {
-    @apply rounded-3xl border border-rv-accent/15 bg-white/90 shadow-[0_16px_40px_rgba(0,115,230,0.12)] backdrop-blur-sm;
+    @apply rounded-3xl border border-rv-border bg-rv-surface/80 shadow-[0_16px_40px_rgba(2,6,23,0.45)] backdrop-blur-sm;
+  }
+
+  .rv-surface-2 {
+    @apply rounded-2xl border border-rv-border/80 bg-rv-surface/60 shadow-[0_10px_30px_rgba(2,6,23,0.35)] backdrop-blur-sm;
   }
 
   .rv-surface-dark {
-    @apply rounded-2xl border border-sky-200/20 bg-slate-900/55 shadow-[0_14px_35px_rgba(2,6,23,0.28)] backdrop-blur-md;
+    @apply rounded-2xl border border-rv-border bg-rv-bg2/80 shadow-[0_14px_35px_rgba(2,6,23,0.5)] backdrop-blur-md;
   }
 
   .rv-title {
-    @apply text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl;
+    @apply text-xl font-semibold tracking-tight text-rv-text sm:text-2xl;
     letter-spacing: -0.01em;
   }
 
   .rv-muted {
-    @apply text-sm text-slate-600;
+    @apply text-sm text-rv-muted;
   }
 
   .rv-btn {
@@ -62,8 +72,8 @@ body {
   .rv-btn:focus-visible {
     outline: none;
     box-shadow:
-      0 0 0 2px #fff,
-      0 0 0 4px rgba(0, 115, 230, 0.45);
+      0 0 0 2px var(--rv-deep),
+      0 0 0 4px rgba(59, 130, 246, 0.55);
   }
 
   .rv-btn:active {
@@ -72,12 +82,12 @@ body {
 
   .rv-btn-primary {
     @apply rv-btn text-white;
-    background: linear-gradient(120deg, #0073e6 0%, #0ea5e9 45%, #22d3ee 100%);
+    background: linear-gradient(120deg, #3b82f6 0%, #2563eb 45%, #22d3ee 100%);
     background-size: 220% 220%;
     background-position: 0% 50%;
     box-shadow:
-      0 14px 34px rgba(0, 115, 230, 0.32),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      0 14px 34px rgba(59, 130, 246, 0.42),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
     transition: background-position 600ms ease, transform 220ms ease, box-shadow 220ms ease;
   }
 
@@ -85,15 +95,15 @@ body {
     background-position: 100% 50%;
     transform: translateY(-1px);
     box-shadow:
-      0 18px 42px rgba(0, 115, 230, 0.42),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      0 18px 42px rgba(59, 130, 246, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
   }
 
   .rv-btn-primary::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+    background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.42) 50%, transparent 70%);
     transform: translateX(-120%);
     transition: transform 800ms ease;
     pointer-events: none;
@@ -104,162 +114,62 @@ body {
   }
 
   .rv-btn-secondary {
-    @apply rv-btn border border-rv-accent/25 bg-white/85 text-slate-700 backdrop-blur transition;
+    @apply rv-btn border border-rv-border bg-rv-surface/70 text-rv-text backdrop-blur transition;
   }
 
   .rv-btn-secondary:hover {
-    @apply border-rv-accent/55 bg-white text-slate-900;
-    box-shadow: 0 10px 26px rgba(0, 115, 230, 0.2);
+    @apply border-rv-accent/55 bg-rv-surface text-white;
+    box-shadow: 0 10px 26px rgba(59, 130, 246, 0.28);
   }
 
   .rv-input {
-    @apply mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-rv-accent focus:outline-none focus:ring-2 focus:ring-rv-accent/20;
+    @apply mt-1 w-full rounded-lg border border-rv-border bg-rv-surface px-3 py-2.5 text-sm text-rv-text placeholder:text-rv-muted/70 focus:border-rv-accent focus:outline-none focus:ring-2 focus:ring-rv-accent/35;
   }
 
   .rv-glass {
-    background: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(247, 251, 255, 0.86));
+    background: linear-gradient(160deg, rgba(26, 35, 71, 0.85), rgba(11, 18, 38, 0.85));
     backdrop-filter: blur(18px);
-    border: 1px solid rgba(0, 115, 230, 0.18);
+    border: 1px solid rgba(59, 130, 246, 0.2);
     box-shadow:
-      0 18px 40px rgba(15, 23, 42, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      0 18px 40px rgba(2, 6, 23, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
   .rv-glass-dark {
-    background: linear-gradient(150deg, rgba(11, 29, 60, 0.92), rgba(2, 6, 23, 0.92));
+    background: linear-gradient(150deg, rgba(11, 18, 38, 0.95), rgba(7, 11, 23, 0.95));
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(125, 211, 252, 0.18);
+    border: 1px solid rgba(34, 211, 238, 0.18);
     box-shadow:
-      0 30px 80px rgba(2, 6, 23, 0.32),
-      inset 0 1px 0 rgba(125, 211, 252, 0.16);
+      0 30px 80px rgba(2, 6, 23, 0.65),
+      inset 0 1px 0 rgba(34, 211, 238, 0.18);
   }
 
   .rv-chip {
-    @apply inline-flex items-center gap-2 rounded-full border border-rv-accent/30 bg-rv-accent/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-rv-accent;
+    @apply inline-flex items-center gap-2 rounded-full border border-rv-accent/35 bg-rv-accent/[0.12] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-rv-accent-2;
+  }
+
+  .rv-chip-amber {
+    @apply inline-flex items-center gap-2 rounded-full border border-amber-400/35 bg-amber-400/[0.12] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-300;
+  }
+
+  .rv-chip-success {
+    @apply inline-flex items-center gap-2 rounded-full border border-emerald-400/35 bg-emerald-400/[0.12] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-emerald-300;
   }
 
   .rv-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0, 115, 230, 0.55), transparent);
-  }
-}
-
-@layer utilities {
-  .rv-grid-bg {
-    background-image:
-      linear-gradient(rgba(0, 115, 230, 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 115, 230, 0.07) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse at top, rgba(0, 0, 0, 0.6), transparent 75%);
-    -webkit-mask-image: radial-gradient(ellipse at top, rgba(0, 0, 0, 0.6), transparent 75%);
-  }
-
-  .rv-text-gradient {
-    background: linear-gradient(90deg, #050b1f 0%, #0b3870 45%, #0073e6 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .rv-text-gradient-anim {
-    background: linear-gradient(
-      90deg,
-      #050b1f,
-      #0b3870,
-      #0073e6,
-      #22d3ee,
-      #0073e6,
-      #0b3870,
-      #050b1f
-    );
-    background-size: 300% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: rvGradientMove 11s linear infinite;
-  }
-
-  .rv-text-amber {
-    background: linear-gradient(90deg, #b45309, #f59e0b, #fbbf24);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .rv-eyebrow {
-    @apply text-[10px] font-bold uppercase tracking-[0.24em] text-rv-accent;
-    font-feature-settings: "ss01", "cv11";
-  }
-
-  .rv-caption {
-    @apply text-[11px] font-medium uppercase tracking-[0.18em] text-slate-500;
-  }
-
-  .rv-mono {
-    font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, "JetBrains Mono", monospace;
-    font-feature-settings: "tnum", "ss01";
-    letter-spacing: -0.01em;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.55), transparent);
   }
 
   .rv-divider-soft {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.08), transparent);
-  }
-
-  .rv-glow-ring {
-    position: relative;
-  }
-
-  .rv-glow-ring::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(0, 115, 230, 0.6), rgba(99, 102, 241, 0.45), rgba(56, 189, 248, 0.6));
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    opacity: 0.55;
-  }
-
-  .rv-beam {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  .rv-beam::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -10%;
-    height: 200%;
-    width: 18%;
-    background: linear-gradient(120deg, transparent 30%, rgba(0, 115, 230, 0.18) 50%, transparent 70%);
-    transform: rotate(12deg);
-    animation: rvBeamSweep 6s linear infinite;
-  }
-
-  .rv-stat-num {
-    background: linear-gradient(140deg, #0073e6 0%, #22d3ee 30%, #6366f1 70%, #0073e6 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: rvGradientMove 9s linear infinite;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.025em;
+    background: linear-gradient(90deg, transparent, rgba(230, 236, 255, 0.12), transparent);
   }
 
   .rv-neon-divider {
     position: relative;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0, 115, 230, 0.7), transparent);
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.85), transparent);
     overflow: visible;
   }
 
@@ -267,7 +177,7 @@ body {
     content: "";
     position: absolute;
     inset: -3px 0;
-    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.35), transparent);
+    background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.5), transparent);
     filter: blur(6px);
   }
 
@@ -353,7 +263,7 @@ body {
     pointer-events: none;
     background: radial-gradient(
       400px circle at var(--rv-spotlight-x, 50%) var(--rv-spotlight-y, 50%),
-      rgba(0, 115, 230, 0.18),
+      rgba(59, 130, 246, 0.22),
       transparent 60%
     );
     opacity: 0;
@@ -371,7 +281,7 @@ body {
     width: 380px;
     height: 380px;
     border-radius: 9999px;
-    background: radial-gradient(circle, rgba(0, 115, 230, 0.28), rgba(99, 102, 241, 0.16) 50%, transparent 75%);
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.32), rgba(34, 211, 238, 0.18) 50%, transparent 75%);
     filter: blur(18px);
     transform: translate3d(var(--rv-orb-x, 50%), var(--rv-orb-y, 50%), 0) translate(-50%, -50%);
     transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms ease;
@@ -382,6 +292,119 @@ body {
   .rv-cursor-orb[data-active="true"] {
     opacity: 1;
   }
+
+  .rv-beam {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .rv-beam::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -10%;
+    height: 200%;
+    width: 18%;
+    background: linear-gradient(120deg, transparent 30%, rgba(34, 211, 238, 0.18) 50%, transparent 70%);
+    transform: rotate(12deg);
+    animation: rvBeamSweep 6s linear infinite;
+  }
+
+  .rv-stat-num {
+    background: linear-gradient(140deg, #3b82f6 0%, #22d3ee 30%, #6366f1 70%, #3b82f6 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rvGradientMove 9s linear infinite;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.025em;
+  }
+
+  .rv-glow-ring {
+    position: relative;
+  }
+
+  .rv-glow-ring::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.7), rgba(34, 211, 238, 0.45), rgba(99, 102, 241, 0.55));
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .rv-eyebrow {
+    @apply text-[10px] font-bold uppercase tracking-[0.24em] text-rv-accent-2;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  .rv-caption {
+    @apply text-[11px] font-medium uppercase tracking-[0.18em] text-rv-muted;
+  }
+
+  .rv-mono {
+    font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, "JetBrains Mono", monospace;
+    font-feature-settings: "tnum", "ss01";
+    letter-spacing: -0.01em;
+  }
+
+  .rv-text-gradient {
+    background: linear-gradient(90deg, #e6ecff 0%, #93c5fd 45%, #22d3ee 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .rv-text-gradient-anim {
+    background: linear-gradient(
+      90deg,
+      #e6ecff,
+      #93c5fd,
+      #3b82f6,
+      #22d3ee,
+      #3b82f6,
+      #93c5fd,
+      #e6ecff
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rvGradientMove 11s linear infinite;
+  }
+
+  .rv-text-amber {
+    background: linear-gradient(90deg, #f59e0b, #fbbf24, #fde68a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Filtro para iframes claros (Google Maps) sobre fondo dark */
+  .rv-map-dark iframe {
+    filter: invert(0.92) hue-rotate(180deg) saturate(1.1) brightness(0.95) contrast(1.05);
+  }
+}
+
+@layer utilities {
+  .rv-grid-bg {
+    background-image:
+      linear-gradient(rgba(59, 130, 246, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.07) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at top, rgba(0, 0, 0, 0.6), transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at top, rgba(0, 0, 0, 0.6), transparent 75%);
+  }
 }
 
 @keyframes rvMarquee {
@@ -390,18 +413,6 @@ body {
   }
   to {
     transform: translateX(-50%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .rv-marquee-track {
-    animation: none;
-  }
-  .rv-stagger > * {
-    opacity: 1;
-    transform: none;
-    filter: none;
-    transition: none;
   }
 }
 
@@ -440,10 +451,10 @@ body {
 @keyframes rvPulseGlow {
   0%,
   100% {
-    box-shadow: 0 0 0 rgba(0, 115, 230, 0);
+    box-shadow: 0 0 0 rgba(34, 211, 238, 0);
   }
   50% {
-    box-shadow: 0 0 30px rgba(34, 211, 238, 0.22);
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.32);
   }
 }
 
@@ -509,13 +520,14 @@ body {
   inset: -10%;
   pointer-events: none;
   background:
-    radial-gradient(700px 280px at 10% -10%, rgba(0, 115, 230, 0.22), transparent 60%),
-    radial-gradient(600px 260px at 95% 0%, rgba(99, 102, 241, 0.18), transparent 55%),
-    radial-gradient(500px 220px at 50% 110%, rgba(56, 189, 248, 0.22), transparent 60%);
+    radial-gradient(700px 280px at 10% -10%, rgba(59, 130, 246, 0.28), transparent 60%),
+    radial-gradient(600px 260px at 95% 0%, rgba(99, 102, 241, 0.22), transparent 55%),
+    radial-gradient(500px 220px at 50% 110%, rgba(34, 211, 238, 0.22), transparent 60%);
   animation: rvAuroraShift 18s ease-in-out infinite;
   filter: blur(2px);
 }
 
+/* Reveal variants ============================================== */
 .rv-reveal,
 .rv-reveal-soft,
 .rv-reveal-left,
@@ -615,6 +627,15 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .rv-marquee-track {
+    animation: none;
+  }
+  .rv-stagger > * {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
   .rv-reveal,
   .rv-reveal-soft,
   .rv-reveal-left,
@@ -627,28 +648,18 @@ body {
     clip-path: none;
     transition: none;
   }
-
   .rv-aurora {
     animation: none;
   }
 }
 
+/* Mobile fine-tuning ============================================ */
 @media (max-width: 639px) {
-  :root {
-    --rv-mobile-bg: #ffffff;
-    --rv-mobile-surface: #ffffff;
-    --rv-mobile-surface-2: #f3f9ff;
-    --rv-mobile-text: #050b1f;
-    --rv-mobile-muted: #5b6b85;
-    --rv-mobile-accent: #0073e6;
-    --rv-mobile-accent-2: #22d3ee;
-  }
-
   body {
     background:
-      radial-gradient(circle at 12% 8%, rgba(0, 115, 230, 0.18), transparent 45%),
-      radial-gradient(circle at 88% 12%, rgba(34, 211, 238, 0.2), transparent 40%),
-      linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+      radial-gradient(circle at 12% 8%, rgba(59, 130, 246, 0.18), transparent 45%),
+      radial-gradient(circle at 88% 12%, rgba(34, 211, 238, 0.14), transparent 40%),
+      linear-gradient(180deg, #070b17 0%, #0b1226 100%);
   }
 
   .rv-mobile-enter {
@@ -657,29 +668,12 @@ body {
     animation: rvMobileEnter 720ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .rv-mobile-enter-1 {
-    animation-delay: 80ms;
-  }
-
-  .rv-mobile-enter-2 {
-    animation-delay: 180ms;
-  }
-
-  .rv-mobile-enter-3 {
-    animation-delay: 280ms;
-  }
-
-  .rv-mobile-enter-4 {
-    animation-delay: 380ms;
-  }
-
-  .rv-mobile-enter-5 {
-    animation-delay: 480ms;
-  }
-
-  .rv-mobile-enter-6 {
-    animation-delay: 580ms;
-  }
+  .rv-mobile-enter-1 { animation-delay: 80ms; }
+  .rv-mobile-enter-2 { animation-delay: 180ms; }
+  .rv-mobile-enter-3 { animation-delay: 280ms; }
+  .rv-mobile-enter-4 { animation-delay: 380ms; }
+  .rv-mobile-enter-5 { animation-delay: 480ms; }
+  .rv-mobile-enter-6 { animation-delay: 580ms; }
 
   @keyframes rvMobileEnter {
     from {
@@ -696,20 +690,20 @@ body {
 
   .rv-mobile-panel {
     border-radius: 1.25rem;
-    border: 1px solid rgba(0, 115, 230, 0.24);
-    background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(243, 249, 255, 0.95));
-    color: var(--rv-mobile-text);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: linear-gradient(160deg, rgba(26, 35, 71, 0.8), rgba(11, 18, 38, 0.9));
+    color: var(--rv-text);
     box-shadow:
-      0 18px 38px rgba(0, 115, 230, 0.16),
-      inset 0 0 0 1px rgba(0, 115, 230, 0.08);
+      0 18px 38px rgba(2, 6, 23, 0.55),
+      inset 0 0 0 1px rgba(59, 130, 246, 0.1);
     backdrop-filter: blur(10px);
   }
 
   .rv-mobile-card {
-    border: 1px solid rgba(0, 115, 230, 0.22);
-    background: linear-gradient(170deg, rgba(255, 255, 255, 0.98), rgba(245, 250, 255, 0.95));
-    color: var(--rv-mobile-text);
-    box-shadow: 0 12px 32px rgba(0, 115, 230, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.28);
+    background: linear-gradient(170deg, rgba(26, 35, 71, 0.85), rgba(11, 18, 38, 0.9));
+    color: var(--rv-text);
+    box-shadow: 0 12px 32px rgba(2, 6, 23, 0.45);
     transition:
       transform 260ms ease,
       border-color 260ms ease,
@@ -719,9 +713,9 @@ body {
 
   .rv-mobile-card:hover,
   .rv-mobile-card:active {
-    border-color: rgba(0, 115, 230, 0.55);
-    box-shadow: 0 18px 36px rgba(0, 115, 230, 0.22);
-    filter: saturate(1.08);
+    border-color: rgba(59, 130, 246, 0.65);
+    box-shadow: 0 18px 36px rgba(59, 130, 246, 0.32);
+    filter: saturate(1.1);
     transform: translateY(-2px);
   }
 
@@ -741,27 +735,62 @@ body {
     left: -40%;
     width: 40%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 115, 230, 0.24), transparent);
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
     animation: rvScanLine 2.2s linear infinite;
     pointer-events: none;
   }
 
   .rv-mobile-title {
-    background: linear-gradient(90deg, #050b1f 0%, #0b3870 45%, #0073e6 100%);
+    background: linear-gradient(90deg, #e6ecff 0%, #93c5fd 45%, #22d3ee 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
   .rv-mobile-muted {
-    color: var(--rv-mobile-muted);
+    color: var(--rv-muted);
   }
 
   .rv-btn-secondary {
-    background: rgba(255, 255, 255, 0.92);
-    color: #0f172a;
-    border-color: rgba(0, 115, 230, 0.34);
+    background: rgba(26, 35, 71, 0.7);
+    color: var(--rv-text);
+    border-color: rgba(59, 130, 246, 0.45);
   }
+}
+
+/* Admin overrides: el panel admin mantiene look claro para mejor UX */
+.admin-light {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  color-scheme: light;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.admin-light .rv-surface {
+  @apply rounded-3xl border border-sky-200/60 bg-white shadow-[0_16px_40px_rgba(15,23,42,0.08)];
+}
+
+.admin-light .rv-title {
+  @apply text-slate-900;
+}
+
+.admin-light .rv-muted {
+  @apply text-slate-600;
+}
+
+.admin-light .rv-input {
+  @apply border-slate-200 bg-white text-slate-900 placeholder:text-slate-400;
+}
+
+.admin-light .rv-btn-secondary {
+  background: white;
+  color: #0f172a;
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+.admin-light .rv-chip {
+  @apply text-rv-accent;
 }
 
 .vehicle-form input,
@@ -776,4 +805,3 @@ body {
   background: #ffffff;
   color: #0f172a;
 }
-
