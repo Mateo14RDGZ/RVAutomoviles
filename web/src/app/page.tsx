@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LatestIngresosWidget } from "@/components/latest-ingresos-widget";
-import { MiautoPopupButton } from "@/components/miauto-popup-button";
 import { PublicChrome } from "@/components/public-chrome";
 import { listVehicles } from "@/lib/vehicle-store";
 
@@ -139,7 +138,37 @@ export default async function HomePage() {
                     ))}
                   </div>
                   <div className="mt-7">
-                    <MiautoPopupButton />
+                    <a
+                      href="https://www.miauto.com.uy/simulador/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rv-btn-primary inline-flex w-full justify-center sm:w-auto"
+                      onClick={(event) => {
+                        // Intentamos abrir popup centrado; si el navegador lo bloquea, se abre en nueva pestaña.
+                        event.preventDefault();
+                        if (typeof window === "undefined") return;
+                        const width = 1180;
+                        const height = 860;
+                        const dualScreenLeft = window.screenLeft ?? window.screenX ?? 0;
+                        const dualScreenTop = window.screenTop ?? window.screenY ?? 0;
+                        const viewportWidth =
+                          window.innerWidth || document.documentElement.clientWidth || screen.width;
+                        const viewportHeight =
+                          window.innerHeight || document.documentElement.clientHeight || screen.height;
+                        const left = Math.max(0, dualScreenLeft + (viewportWidth - width) / 2);
+                        const top = Math.max(0, dualScreenTop + (viewportHeight - height) / 2);
+                        const popup = window.open(
+                          "https://www.miauto.com.uy/simulador/",
+                          "miauto-simulador",
+                          `popup=yes,width=${width},height=${height},left=${Math.round(left)},top=${Math.round(top)},noopener,noreferrer`
+                        );
+                        if (!popup) {
+                          window.open("https://www.miauto.com.uy/simulador/", "_blank", "noopener,noreferrer");
+                        }
+                      }}
+                    >
+                      Simular préstamo
+                    </a>
                     <p className="mt-2 text-xs text-slate-300">
                       Este botón abre en popup el simulador oficial de MiAuto Santander.
                     </p>
