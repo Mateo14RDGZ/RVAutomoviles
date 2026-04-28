@@ -10,7 +10,7 @@ export function PublicFooter() {
           <p className="mt-3 max-w-md leading-relaxed">
             Tu proximo auto con informacion clara, fotos reales y documentacion disponible.
           </p>
-          <p className="mt-2 text-xs text-slate-500">Atención: Lun a Sáb · Respuesta dentro del día.</p>
+          <p className="mt-2 text-xs text-slate-500">Atención: Lun a Vie 8:00 a 18:00 · Sáb 8:00 a 12:00.</p>
         </div>
 
         <div className="space-y-2 md:justify-self-end md:text-right">
@@ -20,7 +20,7 @@ export function PublicFooter() {
               href={buildWhatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-50 px-3 py-2.5 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100"
+              className="rv-mobile-card inline-flex items-center justify-center gap-2 rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
             >
               <span aria-hidden>💬</span>
               <span>WhatsApp</span>
@@ -29,7 +29,7 @@ export function PublicFooter() {
               href="https://www.instagram.com/rv__automoviles/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-fuchsia-500/30 bg-fuchsia-50 px-3 py-2.5 text-sm font-semibold text-fuchsia-700 transition hover:bg-fuchsia-100"
+              className="rv-mobile-card inline-flex items-center justify-center gap-2 rounded-xl border border-rv-accent/25 bg-white px-3 py-2.5 text-sm font-semibold text-rv-accent transition hover:bg-rv-accent/[0.06]"
             >
               <span aria-hidden>📷</span>
               <span>Instagram</span>
@@ -40,19 +40,21 @@ export function PublicFooter() {
               href={buildWhatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-between rounded-xl border border-emerald-500/25 bg-emerald-50/80 px-3 py-2 text-sm text-emerald-800 transition hover:bg-emerald-100 md:justify-end md:gap-2"
+              className="inline-flex items-center justify-between rounded-xl border border-rv-accent/25 bg-white px-3 py-2 text-sm text-slate-700 transition hover:bg-rv-accent/[0.06] md:justify-end md:gap-2"
             >
               <span className="font-medium">WhatsApp</span>
-              <span className="font-semibold underline decoration-emerald-700/40 underline-offset-2">099 744 203</span>
+              <span className="font-semibold text-rv-accent underline decoration-rv-accent/40 underline-offset-2">
+                099 744 203
+              </span>
             </a>
             <a
               href="https://www.instagram.com/rv__automoviles/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-between rounded-xl border border-fuchsia-500/25 bg-fuchsia-50/80 px-3 py-2 text-sm text-fuchsia-800 transition hover:bg-fuchsia-100 md:justify-end md:gap-2"
+              className="inline-flex items-center justify-between rounded-xl border border-rv-accent/25 bg-white px-3 py-2 text-sm text-slate-700 transition hover:bg-rv-accent/[0.06] md:justify-end md:gap-2"
             >
               <span className="font-medium">Instagram</span>
-              <span className="font-semibold">@rv__automoviles</span>
+              <span className="font-semibold text-rv-accent">@rv__automoviles</span>
             </a>
           </div>
           <div className="mt-3 flex flex-wrap gap-3 text-xs md:justify-end">

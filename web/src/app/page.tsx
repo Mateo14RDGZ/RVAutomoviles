@@ -242,7 +242,7 @@ export default async function HomePage() {
 
         <section id="contacto" className="rv-mobile-enter rv-mobile-enter-6 border-b border-rv-accent/10 bg-white py-10 sm:py-16">
           <div className="mx-auto max-w-5xl px-3 sm:px-6">
-            <div className="rv-mobile-card rounded-3xl border border-rv-accent/20 bg-gradient-to-br from-white via-sky-50/40 to-cyan-50/40 p-6 sm:p-8">
+            <div className="rv-mobile-card rounded-3xl border border-rv-accent/20 bg-white p-6 sm:p-8">
               <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-rv-accent">Contacto</h2>
               <p className="rv-mobile-title mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
                 Hablemos y coordinamos tu próxima visita
@@ -256,23 +256,24 @@ export default async function HomePage() {
                   href={buildWhatsappUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-between rounded-2xl border border-emerald-500/25 bg-emerald-50 px-4 py-3 transition hover:bg-emerald-100"
+                  className="inline-flex items-center justify-between rounded-2xl border border-rv-accent/25 bg-white px-4 py-3 transition hover:bg-rv-accent/[0.06]"
                 >
-                  <span className="font-semibold text-emerald-800">WhatsApp</span>
-                  <span className="text-sm font-medium text-emerald-700">099 744 203</span>
+                  <span className="font-semibold text-rv-accent">WhatsApp</span>
+                  <span className="text-sm font-medium text-slate-700">099 744 203</span>
                 </a>
                 <a
                   href="https://www.instagram.com/rv__automoviles/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-between rounded-2xl border border-fuchsia-500/25 bg-fuchsia-50 px-4 py-3 transition hover:bg-fuchsia-100"
+                  className="inline-flex items-center justify-between rounded-2xl border border-rv-accent/25 bg-white px-4 py-3 transition hover:bg-rv-accent/[0.06]"
                 >
-                  <span className="font-semibold text-fuchsia-800">Instagram</span>
-                  <span className="text-sm font-medium text-fuchsia-700">@rv__automoviles</span>
+                  <span className="font-semibold text-rv-accent">Instagram</span>
+                  <span className="text-sm font-medium text-slate-700">@rv__automoviles</span>
                 </a>
                 <div className="rounded-2xl border border-rv-accent/20 bg-white px-4 py-3 sm:col-span-2 lg:col-span-1">
                   <p className="text-sm font-semibold text-rv-accent">Horarios</p>
-                  <p className="mt-1 text-sm text-slate-600">Lun a Sáb · Respuesta dentro del día</p>
+                  <p className="mt-1 text-sm text-slate-600">Lunes a Viernes de 8:00 a 18:00</p>
+                  <p className="text-sm text-slate-600">Sábados de 8:00 a 12:00</p>
                 </div>
               </div>
             </div>

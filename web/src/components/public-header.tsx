@@ -14,6 +14,18 @@ const links = [
 
 export function PublicHeader() {
   const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  const handleInPageNavigation = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!isHome) return;
+    if (!href.startsWith("/#")) return;
+    const id = href.replace("/#", "");
+    const el = document.getElementById(id);
+    if (!el) return;
+    event.preventDefault();
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.replaceState(null, "", `/#${id}`);
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-rv-accent/20 bg-white/90 shadow-[0_8px_26px_rgba(30,166,247,0.08)] backdrop-blur-xl">
@@ -28,6 +40,7 @@ export function PublicHeader() {
                 <li key={href}>
                   <Link
                     href={href}
+                    onClick={(event) => handleInPageNavigation(event, href)}
                     className={`inline-flex w-full justify-center rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 sm:py-2 ${
                       active
                         ? "bg-rv-accent/12 text-rv-accent shadow-[inset_0_0_0_1px_rgba(30,166,247,0.45)]"
