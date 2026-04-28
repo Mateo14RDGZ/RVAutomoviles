@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { LatestIngresosWidget } from "@/components/latest-ingresos-widget";
 import { PublicChrome } from "@/components/public-chrome";
@@ -100,33 +101,66 @@ export default async function HomePage() {
 
         <section
           id="financiacion-bancaria"
-          className="rv-mobile-enter rv-mobile-enter-4 border-b border-rv-accent/15 bg-gradient-to-br from-rv-accent/[0.08] via-white to-rv-accent/[0.03] py-10 sm:py-16"
+          className="rv-mobile-enter rv-mobile-enter-4 border-b border-rv-accent/20 bg-slate-950 py-10 text-white sm:py-16"
         >
           <div className="mx-auto max-w-5xl px-3 sm:px-6">
-            <div className="rv-mobile-card rv-mobile-glow rounded-3xl border border-rv-accent/20 bg-white p-6 sm:p-8">
-              <p className="inline-flex rounded-full border border-rv-accent/30 bg-rv-accent/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-rv-accent">
-                Financiación bancaria
-              </p>
-              <h2 className="rv-mobile-title mt-4 max-w-3xl text-2xl font-bold tracking-tight sm:text-3xl">
-                Tu próximo auto puede salir hoy, con crédito de bancos líderes en Uruguay
-              </h2>
-              <p className="rv-mobile-muted mt-3 max-w-3xl text-sm leading-relaxed sm:text-base">
-                Te ayudamos a comparar cuotas y plazos con respaldo bancario real, para una compra segura.
-              </p>
-              <div className="mt-6 grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap">
-                {["BROU", "Santander", "BBVA", "Scotiabank", "Itaú", "HSBC", "Banco República"].map((bank) => (
-                  <span
-                    key={bank}
-                    className="rounded-full border border-rv-accent/25 bg-white px-3 py-1.5 text-center text-xs font-semibold text-slate-700 shadow-sm sm:text-sm"
-                  >
-                    {bank}
-                  </span>
-                ))}
-              </div>
-              <div className="mt-7">
-                <Link href="/catalogo" className="rv-btn-primary inline-flex w-full justify-center sm:w-auto">
-                  Quiero financiar mi auto
-                </Link>
+            <div className="overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-br from-slate-900 via-slate-950 to-rv-accent/25 p-6 shadow-[0_24px_80px_rgba(5,15,40,0.45)] sm:p-8">
+              <div className="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-center">
+                <div>
+                  <p className="inline-flex rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-white">
+                    Financiación destacada
+                  </p>
+                  <h2 className="mt-4 max-w-3xl text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                    Santander + Crédito MiAuto: la campaña principal para sacar tu auto en cuotas
+                  </h2>
+                  <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200 sm:text-base">
+                    Lanzamos una propuesta especial de aprobación ágil y plazos flexibles para que tengas una
+                    financiación clara desde el primer contacto.
+                  </p>
+                  <p className="mt-4 text-sm font-medium text-slate-100 sm:text-base">
+                    En RV Automóviles trabajamos con Santander y también con todos los bancos para encontrar la mejor
+                    opción para cada cliente.
+                  </p>
+                  <div className="mt-6 grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap">
+                    {["BROU", "Santander", "BBVA", "Scotiabank", "Itaú", "HSBC", "Banco República"].map((bank) => (
+                      <span
+                        key={bank}
+                        className="rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-center text-xs font-semibold text-white shadow-sm backdrop-blur sm:text-sm"
+                      >
+                        {bank}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-7">
+                    <Link href="/catalogo" className="rv-btn-primary inline-flex w-full justify-center sm:w-auto">
+                      Quiero mi Crédito MiAuto
+                    </Link>
+                  </div>
+                </div>
+                <div className="grid gap-3">
+                  <div className="rounded-2xl border border-white/15 bg-white p-4">
+                    <Image
+                      src="/financiacion/santander-logo.svg"
+                      alt="Banco Santander"
+                      width={360}
+                      height={90}
+                      className="h-14 w-auto object-contain"
+                    />
+                  </div>
+                  <div className="relative overflow-hidden rounded-2xl border border-white/20">
+                    <Image
+                      src="/financiacion/credito-miauto.jpg"
+                      alt="Crédito MiAuto para financiación automotriz"
+                      width={1600}
+                      height={1067}
+                      className="h-52 w-full object-cover sm:h-64"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
+                    <p className="absolute bottom-3 left-3 right-3 text-sm font-semibold text-white sm:text-base">
+                      Crédito MiAuto: financiá tu próximo vehículo con respaldo real.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
