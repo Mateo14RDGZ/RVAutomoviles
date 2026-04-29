@@ -35,6 +35,13 @@ const TRUST_CHECKLIST = [
   "Coordinación de visita y prueba de manejo",
 ] as const;
 
+/** Checklist de equipamiento estándar que se setea en el alta del vehículo. */
+const STANDARD_EQUIPMENT = [
+  { key: "Aire", label: "Aire acondicionado" },
+  { key: "Vidrios electricos", label: "Vidrios eléctricos" },
+  { key: "Direccion", label: "Dirección asistida" },
+] as const;
+
 /** Fila editorial estilo tabla key/value, sin íconos coloridos. */
 function SpecRow({ label, value }: { label: string; value: string }) {
   return (
@@ -60,6 +67,10 @@ export default async function PublicVehiclePage({ params }: Props) {
       : "Consultar precio";
 
   const km = v.mileageKm != null ? `${v.mileageKm.toLocaleString("es-AR")} km` : "No informado";
+
+  const featuresArr = v.features ?? [];
+  const standardKeys = STANDARD_EQUIPMENT.map((it) => it.key.toLowerCase());
+  const extraFeatures = featuresArr.filter((f) => !standardKeys.includes(f.toLowerCase()));
 
   return (
     <PublicChrome>
@@ -202,30 +213,88 @@ export default async function PublicVehiclePage({ params }: Props) {
             </Reveal>
           ) : null}
 
-          {/* EQUIPAMIENTO — pills semicuadrados ====================== */}
-          {v.features && v.features.length ? (
-            <Reveal variant="right" delay={120}>
-              <section className="mt-12 sm:mt-16">
-                <div className="flex items-end justify-between">
-                  <h2 className="rv-display text-2xl font-bold tracking-tight sm:text-3xl">
-                    Equipamiento
-                  </h2>
-                  <span className="rv-chip">Confort</span>
-                </div>
-                <ul className="mt-6 flex flex-wrap gap-2">
-                  {v.features.map((f) => (
+          {/* EQUIPAMIENTO — checklist estándar + extras ================== */}
+          <Reveal variant="right" delay={120}>
+            <section className="mt-12 sm:mt-16">
+              <div className="flex items-end justify-between">
+                <h2 className="rv-display text-2xl font-bold tracking-tight sm:text-3xl">
+                  Equipamiento
+                </h2>
+                <span className="rv-chip">Confort</span>
+              </div>
+
+              {/* Checklist estándar: siempre se muestran los 3 ítems con estado */}
+              <ul className="mt-6 grid gap-3 sm:grid-cols-3">
+                {STANDARD_EQUIPMENT.map((item) => {
+                  const has = featuresArr.some((f) => f.toLowerCase() === item.key.toLowerCase());
+                  return (
                     <li
-                      key={f}
-                      className="inline-flex items-center gap-1.5 rounded-md border border-rv-border bg-rv-surface/50 px-3 py-1.5 text-xs font-medium text-rv-text/90 transition hover:border-white/15 hover:bg-rv-surface sm:text-sm"
+                      key={item.key}
+                      className={
+                        has
+                          ? "flex items-center gap-3 rounded-2xl border border-emerald-400/30 bg-emerald-500/[0.08] px-4 py-3 text-sm font-medium text-rv-text"
+                          : "flex items-center gap-3 rounded-2xl border border-rv-border bg-rv-surface/30 px-4 py-3 text-sm font-medium text-rv-muted/80"
+                      }
                     >
-                      <span aria-hidden className="inline-block h-1 w-1 rounded-full bg-rv-muted" />
-                      {f}
+                      <span
+                        aria-hidden
+                        className={
+                          has
+                            ? "inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-300 ring-1 ring-emerald-400/40"
+                            : "inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-rv-surface/70 text-rv-muted ring-1 ring-rv-border"
+                        }
+                      >
+                        {has ? (
+                          <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+                            <path
+                              d="M5 13l4 4L19 7"
+                              stroke="currentColor"
+                              strokeWidth="2.2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        ) : (
+                          <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+                            <path
+                              d="M6 12h12"
+                              stroke="currentColor"
+                              strokeWidth="2.2"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        )}
+                      </span>
+                      <span className="flex flex-col">
+                        <span>{item.label}</span>
+                        <span className="text-[11px] font-normal text-rv-muted">
+                          {has ? "Incluido" : "No informado"}
+                        </span>
+                      </span>
                     </li>
-                  ))}
-                </ul>
-              </section>
-            </Reveal>
-          ) : null}
+                  );
+                })}
+              </ul>
+
+              {/* Extras cargadas a mano (si las hay) */}
+              {extraFeatures.length ? (
+                <div className="mt-6">
+                  <p className="rv-eyebrow mb-3 text-rv-muted">Equipamiento adicional</p>
+                  <ul className="flex flex-wrap gap-2">
+                    {extraFeatures.map((f) => (
+                      <li
+                        key={f}
+                        className="inline-flex items-center gap-1.5 rounded-md border border-rv-border bg-rv-surface/50 px-3 py-1.5 text-xs font-medium text-rv-text/90 transition hover:border-white/15 hover:bg-rv-surface sm:text-sm"
+                      >
+                        <span aria-hidden className="inline-block h-1 w-1 rounded-full bg-rv-muted" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </section>
+          </Reveal>
 
           {/* DESCRIPCIÓN ============================================= */}
           {v.description ? (
