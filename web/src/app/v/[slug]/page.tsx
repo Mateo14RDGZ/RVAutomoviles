@@ -78,7 +78,7 @@ export default async function PublicVehiclePage({ params }: Props) {
       <div className="relative min-h-dvh bg-rv-deep text-rv-text">
         <div className="rv-aurora opacity-50" aria-hidden />
 
-        <main className="relative mx-auto max-w-3xl px-3 pb-32 pt-3 sm:px-5 sm:pt-5 md:max-w-4xl md:pb-16">
+        <main className="relative mx-auto max-w-3xl px-3 pb-12 pt-3 sm:px-5 sm:pt-5 md:max-w-4xl md:pb-16">
           <nav className="mb-4 flex items-center gap-2 text-sm">
             <Link
               href="/catalogo"
@@ -384,24 +384,6 @@ export default async function PublicVehiclePage({ params }: Props) {
           </p>
         </main>
 
-        {/* STICKY MOBILE CTA ======================================== */}
-        <div className="fixed inset-x-0 bottom-0 z-30 px-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] sm:hidden">
-          <a
-            href={whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-between gap-3 rounded-2xl border border-rv-border bg-rv-bg2/95 p-3 shadow-[0_18px_50px_rgba(2,6,23,0.6)] backdrop-blur"
-          >
-            <div className="min-w-0">
-              <p className="rv-eyebrow text-rv-muted">{v.brand}</p>
-              <p className="rv-price truncate text-base">{priceLabel}</p>
-            </div>
-            <span className="rv-btn-primary !px-3 !py-2 !text-xs">
-              <WhatsappIcon className="mr-1 h-4 w-4" />
-              Consultar
-            </span>
-          </a>
-        </div>
       </div>
     </PublicChrome>
   );
