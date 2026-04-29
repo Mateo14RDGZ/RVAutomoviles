@@ -5,7 +5,7 @@ import { PublicChrome } from "@/components/public-chrome";
 import { Reveal } from "../../../components/reveal";
 import { VehiclePhotoCarousel } from "@/components/vehicle-photo-carousel";
 import { VehicleVisitCtaBelowContent } from "@/components/vehicle-visit-cta";
-import { WhatsappIcon } from "@/components/icons/whatsapp-icon";
+import { WhatsappIcon } from "../../../components/icons/whatsapp-icon";
 import { getRequestOrigin } from "@/lib/request-origin";
 import { getVehicleBySlug } from "@/lib/vehicle-store";
 import { buildWhatsappVisitUrl } from "@/lib/whatsapp-visit";

@@ -1,5 +1,5 @@
 import { buildWhatsappVisitMessage, buildWhatsappVisitUrl } from "@/lib/whatsapp-visit";
-import { WhatsappIcon } from "@/components/icons/whatsapp-icon";
+import { WhatsappIcon } from "./icons/whatsapp-icon";
 
 type VehicleVisitCtaProps = {
   /** URL absoluta de la ficha (se incluye en el mensaje de WhatsApp). */

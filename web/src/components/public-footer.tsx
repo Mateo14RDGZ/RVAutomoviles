@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { buildWhatsappUrl } from "@/lib/whatsapp-visit";
 import { BrandLogo } from "@/components/brand-logo";
-import { WhatsappIcon } from "@/components/icons/whatsapp-icon";
+import { WhatsappIcon } from "./icons/whatsapp-icon";
 
 const MAPS_SHORT_URL = "https://maps.app.goo.gl/XHWmX8T1a47y4VPP9";
 
