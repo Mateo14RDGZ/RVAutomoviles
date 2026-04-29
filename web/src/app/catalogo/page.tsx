@@ -47,7 +47,7 @@ export default async function CatalogoPage() {
             <p className="rv-caption mt-4 inline-flex items-center gap-2 normal-case tracking-normal text-rv-muted">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden />
               {vehicles.length === 0
-                ? "Próximamente publicamos unidades"
+                ? "Nuevas unidades en preparación"
                 : `${vehicles.length} ${vehicles.length === 1 ? "unidad publicada" : "unidades publicadas"}`}
             </p>
           </div>
@@ -57,7 +57,7 @@ export default async function CatalogoPage() {
           {vehicles.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-rv-border bg-rv-surface/60 px-4 py-16 text-center shadow-[0_12px_36px_rgba(2,6,23,0.45)]">
               <p className="text-sm text-rv-muted">
-                Todavía no hay autos publicados. Cuando carguemos unidades, aparecerán acá.
+                En este momento no hay unidades publicadas. Estamos preparando nuevos ingresos.
               </p>
             </div>
           ) : (

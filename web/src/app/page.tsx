@@ -8,6 +8,7 @@ import { MiautoPopupButton } from "../components/miauto-popup-button";
 import { PublicChrome } from "../components/public-chrome";
 import { Reveal } from "../components/reveal";
 import { StaggerText } from "../components/stagger-text";
+import { WhatsappIcon } from "../components/icons/whatsapp-icon";
 import { listVehicles } from "@/lib/vehicle-store";
 import { buildWhatsappUrl } from "@/lib/whatsapp-visit";
 
@@ -572,18 +573,12 @@ export default async function HomePage() {
                       href={buildWhatsappUrl()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative flex h-full items-center justify-between gap-3 overflow-hidden rounded-2xl border border-rv-border bg-rv-surface/60 px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-rv-surface"
+                      className="group relative flex h-full items-center justify-between gap-3 overflow-hidden rounded-2xl border border-rv-border bg-rv-surface/60 px-4 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-rv-surface sm:px-5"
                     >
                       <span className="flex items-center gap-3">
-                        <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5 text-rv-accent-2">
-                          <path
-                            d="M20.5 3.5A11 11 0 003.5 18.6L2 22l3.5-1.4A11 11 0 1020.5 3.5z"
-                            stroke="currentColor"
-                            strokeWidth="1.6"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
+                        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-rv-accent/15 text-rv-accent-2 ring-1 ring-rv-accent/30">
+                          <WhatsappIcon className="h-4 w-4" />
+                        </span>
                         <div>
                           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rv-muted">
                             WhatsApp
@@ -602,19 +597,21 @@ export default async function HomePage() {
                       href="https://www.instagram.com/rv__automoviles/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative flex h-full items-center justify-between gap-3 overflow-hidden rounded-2xl border border-rv-border bg-rv-surface/60 px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-rv-surface"
+                      className="group relative flex h-full items-center justify-between gap-3 overflow-hidden rounded-2xl border border-rv-border bg-rv-surface/60 px-4 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-rv-surface sm:px-5"
                     >
                       <span className="flex items-center gap-3">
-                        <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5 text-rv-accent-2">
-                          <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
-                          <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
-                          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-                        </svg>
+                        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-rv-accent/15 text-rv-accent-2 ring-1 ring-rv-accent/30">
+                          <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden>
+                            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
+                            <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                          </svg>
+                        </span>
                         <div>
                           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rv-muted">
                             Instagram
                           </p>
-                          <p className="text-base font-semibold text-rv-text">@rv__automoviles</p>
+                          <p className="text-base font-semibold text-rv-text">Seguinos en Instagram</p>
                         </div>
                       </span>
                       <span aria-hidden className="text-rv-accent-2 transition-transform group-hover:translate-x-0.5">

@@ -14,7 +14,7 @@ export function PublicVehicleGallery({ photos, alt }: Props) {
   if (!hasPhotos) {
     return (
       <div className="mt-3 flex aspect-[4/3] items-center justify-center rounded-3xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
-        Fotos proximamente
+        Galería en actualización
       </div>
     );
   }

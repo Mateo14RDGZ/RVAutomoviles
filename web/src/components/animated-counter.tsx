@@ -22,16 +22,20 @@ export function AnimatedCounter({ value, duration = 1400, suffix = "", prefix = 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    let instantFrame = 0;
+    const setInstantValue = () => {
+      instantFrame = window.requestAnimationFrame(() => setDisplay(value));
+    };
 
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
-      setDisplay(value);
-      return;
+      setInstantValue();
+      return () => window.cancelAnimationFrame(instantFrame);
     }
 
     if (typeof IntersectionObserver === "undefined") {
-      setDisplay(value);
-      return;
+      setInstantValue();
+      return () => window.cancelAnimationFrame(instantFrame);
     }
 
     const observer = new IntersectionObserver(

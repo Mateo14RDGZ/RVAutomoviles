@@ -5,6 +5,7 @@ import { PublicChrome } from "@/components/public-chrome";
 import { Reveal } from "../../../components/reveal";
 import { VehiclePhotoCarousel } from "@/components/vehicle-photo-carousel";
 import { VehicleVisitCtaBelowContent } from "@/components/vehicle-visit-cta";
+import { WhatsappIcon } from "@/components/icons/whatsapp-icon";
 import { getRequestOrigin } from "@/lib/request-origin";
 import { getVehicleBySlug } from "@/lib/vehicle-store";
 import { buildWhatsappVisitUrl } from "@/lib/whatsapp-visit";
@@ -102,7 +103,7 @@ export default async function PublicVehiclePage({ params }: Props) {
                   />
                 ) : (
                   <div className="flex aspect-[4/3] items-center justify-center bg-rv-bg2 text-base font-medium text-rv-muted">
-                    Fotos próximamente
+                    Galería en actualización
                   </div>
                 )}
                 <div
@@ -149,15 +150,7 @@ export default async function PublicVehiclePage({ params }: Props) {
                   rel="noopener noreferrer"
                   className="rv-btn-primary inline-flex w-full items-center justify-center gap-2 sm:w-auto"
                 >
-                  <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
-                    <path
-                      d="M20.5 3.5A11 11 0 003.5 18.6L2 22l3.5-1.4A11 11 0 1020.5 3.5z"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <WhatsappIcon className="h-4 w-4" />
                   Consultar por WhatsApp
                 </a>
               </div>
@@ -392,7 +385,7 @@ export default async function PublicVehiclePage({ params }: Props) {
         </main>
 
         {/* STICKY MOBILE CTA ======================================== */}
-        <div className="fixed inset-x-0 bottom-0 z-30 px-3 pb-3 sm:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-30 px-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] sm:hidden">
           <a
             href={whatsappHref}
             target="_blank"
@@ -404,15 +397,7 @@ export default async function PublicVehiclePage({ params }: Props) {
               <p className="rv-price truncate text-base">{priceLabel}</p>
             </div>
             <span className="rv-btn-primary !px-3 !py-2 !text-xs">
-              <svg viewBox="0 0 24 24" fill="none" className="mr-1 h-4 w-4">
-                <path
-                  d="M20.5 3.5A11 11 0 003.5 18.6L2 22l3.5-1.4A11 11 0 1020.5 3.5z"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <WhatsappIcon className="mr-1 h-4 w-4" />
               Consultar
             </span>
           </a>
