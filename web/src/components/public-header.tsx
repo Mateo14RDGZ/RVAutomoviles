@@ -49,17 +49,17 @@ export function PublicHeader() {
           </span>
         </div>
 
-        <nav aria-label="Principal" className="-mx-3 w-[calc(100%+1.5rem)] sm:mx-0 sm:w-auto">
-          <ul className="rv-glass mx-3 flex items-center gap-1 overflow-x-auto rounded-2xl p-1.5 sm:mx-0 sm:flex-wrap sm:overflow-x-visible sm:justify-end">
+        <nav aria-label="Principal" className="w-full sm:w-auto">
+          <ul className="rv-glass grid grid-cols-2 gap-1 rounded-2xl p-1.5 min-[460px]:grid-cols-3 sm:flex sm:flex-wrap sm:justify-end">
             {links.map(({ href, label }) => {
               const active =
                 href === "/" ? pathname === "/" : href === "/catalogo" && pathname.startsWith("/catalogo");
               return (
-                <li key={href} className="shrink-0">
+                <li key={href} className="min-w-0">
                   <Link
                     href={href}
                     onClick={(event) => handleInPageNavigation(event, href)}
-                    className={`relative inline-flex justify-center overflow-hidden whitespace-nowrap rounded-xl px-3.5 py-2 text-[13px] font-semibold transition-all duration-300 sm:px-4 sm:py-2 sm:text-sm ${
+                    className={`relative inline-flex w-full justify-center overflow-hidden whitespace-nowrap rounded-xl px-3 py-2 text-[13px] font-semibold transition-all duration-300 sm:w-auto sm:px-4 sm:py-2 sm:text-sm ${
                       active
                         ? "bg-rv-accent/15 text-white shadow-[inset_0_0_0_1px_rgba(59,130,246,0.55)]"
                         : "text-rv-muted hover:bg-rv-accent/[0.1] hover:text-white"

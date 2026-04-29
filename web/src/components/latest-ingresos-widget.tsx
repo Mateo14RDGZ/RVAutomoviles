@@ -57,12 +57,12 @@ export function LatestIngresosWidget({ vehicles }: Props) {
           </Reveal>
         </div>
 
-        <ul className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 sm:mt-10 sm:grid sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:pb-0">
+        <ul className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-5">
           {vehicles.map((v, index) => {
             const thumb = v.photos[0];
             const title = `${v.brand} ${v.model}`.trim();
             return (
-              <li key={v.id} className="min-w-[78%] snap-start sm:min-w-0">
+              <li key={v.id} className="min-w-0">
                 <Reveal variant="zoom" delay={index * 130}>
                   <Link
                     href={`/v/${v.urlSlug}`}
