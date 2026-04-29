@@ -40,7 +40,7 @@ function emptyForm() {
     features: [] as string[],
     photos: [] as string[],
     documents: [] as { name: string; url: string }[],
-    published: true,
+    published: false,
     urlSlug: "",
   };
 }
@@ -481,14 +481,40 @@ export function VehicleAdminForm(props: Props) {
           </span>
           </label>
 
-          <label className="flex items-center gap-2 text-sm text-slate-800">
-          <input
-            type="checkbox"
-            checked={form.published}
-            onChange={(e) => setForm((f) => ({ ...f, published: e.target.checked }))}
-          />
-          Publicado (visible para clientes)
-          </label>
+          <fieldset className="rounded-xl border border-slate-200 bg-slate-50/70 p-3">
+            <legend className="px-1 text-xs font-semibold uppercase tracking-wide text-slate-700">
+              Estado de publicación
+            </legend>
+            <p className="mt-1 text-xs text-slate-600">
+              Elegí si querés guardarlo como borrador o mostrarlo en el sitio público.
+            </p>
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => setForm((f) => ({ ...f, published: false }))}
+                className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${
+                  !form.published
+                    ? "border-amber-300 bg-amber-50 text-amber-800"
+                    : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                }`}
+                aria-pressed={!form.published}
+              >
+                Borrador
+              </button>
+              <button
+                type="button"
+                onClick={() => setForm((f) => ({ ...f, published: true }))}
+                className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${
+                  form.published
+                    ? "border-emerald-300 bg-emerald-50 text-emerald-800"
+                    : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                }`}
+                aria-pressed={form.published}
+              >
+                Publicado
+              </button>
+            </div>
+          </fieldset>
 
           <label className="block text-xs font-medium text-slate-700">
           Descripción
